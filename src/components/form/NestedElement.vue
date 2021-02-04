@@ -7,7 +7,7 @@
     handle=".element-moving-handle"
   >
     <div v-for="el in realValue" :key="el.rowId">
-      <FormElement :formElement="el" />
+      <FormElement :formElement="el" :parentElement="realValue" />
     </div>
   </Draggable>
 </template>
@@ -24,6 +24,11 @@ export default {
   methods: {
     emitter(value) {
       this.$emit("input", value);
+    },
+  },
+  watch: {
+    list() {
+      this.$store.dispatch("customizerModule/cloneElement");
     },
   },
   computed: {

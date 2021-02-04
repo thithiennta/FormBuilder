@@ -77,7 +77,7 @@ export default {
 
 <style scoped>
 button {
-  cursor: pointer;
+  pointer-events: none;
   outline: none;
   overflow-wrap: anywhere;
   min-width: min-content;

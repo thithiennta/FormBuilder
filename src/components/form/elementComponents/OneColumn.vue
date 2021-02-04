@@ -1,7 +1,9 @@
 <template>
-  <div class="form-element-wrapper">
-    <p v-if="isEmpty">Drag content here</p>
-    <NestedElement :list="nestedElements" />
+  <div class="column-wrapper" :class="{ 'empty-nested-wrapper': isEmpty }">
+    <NestedElement
+      :list="nestedElements"
+      :class="{ 'empty-nested': isEmpty }"
+    />
   </div>
 </template>
 <script>
@@ -26,9 +28,25 @@ export default {
 </script>
 
 <style scoped>
-.form-element-wrapper {
+.column-wrapper.empty-nested-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100px;
   border: 1px dashed rgb(64, 186, 248);
   background-color: rgb(176, 231, 254);
+}
+.empty-nested:empty::after {
+  content: "Drag content here";
+  position: relative;
+}
+.column-wrapper.empty-nested-wrapper p {
+  text-align: center;
+}
+.empty-nested {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  text-align: center;
 }
 </style>

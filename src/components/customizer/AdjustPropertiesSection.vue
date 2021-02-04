@@ -18,6 +18,7 @@ import SpacingProperties from "./propertyComponents/SpacingProperties";
 import TextProperties from "./propertyComponents/TextProperties";
 import BorderProperties from "./propertyComponents/BorderProperties";
 import BoxProperties from "./propertyComponents/BoxProperties";
+import GeneralProperties from "./propertyComponents/GeneralProperties";
 export default {
   components: {
     SpacingProperties,
@@ -25,6 +26,7 @@ export default {
     vuescroll,
     BorderProperties,
     BoxProperties,
+    GeneralProperties,
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
@@ -101,5 +103,10 @@ export default {
 }
 .customizer-input-number {
   width: 60px !important;
+}
+.customizer-sub-sub-title {
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: rgb(138, 137, 137);
 }
 </style>

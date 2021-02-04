@@ -8,4 +8,5 @@ export default {
   UPDATE_ELEMENT(state, payload) {
     state.activeElement = payload;
   },
+  REFRESH_STATE() {},
 };

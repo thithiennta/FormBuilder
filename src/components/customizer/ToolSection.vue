@@ -41,7 +41,9 @@ export default {
           icon: "highlight",
           type: "Title",
           properties: {
-            backgroundColor: "white",
+            general: {
+              backgroundColor: "white",
+            },
             text: {
               value: "SAMPLE FORM",
               color: "black",
@@ -55,14 +57,16 @@ export default {
               height: 50,
             },
           },
-          settings: ["spacing", "text"],
+          settings: ["general", "spacing", "text"],
         },
         {
           name: "Button",
           icon: "plus",
           type: "Button",
           properties: {
-            backgroundColor: "white",
+            general: {
+              backgroundColor: "white",
+            },
             fullPadding: false,
             border: {
               fullWidth: false,
@@ -73,7 +77,7 @@ export default {
               leftWidth: 1,
               style: "solid",
               color: "black",
-              radius: 50,
+              radius: 5,
             },
             text: {
               value: "Click me",
@@ -96,15 +100,16 @@ export default {
               leftPadding: 0,
             },
           },
-          settings: ["spacing", "text", "border"],
+          settings: ["general", "spacing", "text", "border"],
         },
         {
           name: "Input",
           icon: "font-colors",
           type: "Input",
           properties: {
-            backgroundColor: "white",
-            fullPadding: false,
+            general: {
+              backgroundColor: "white",
+            },
             border: {
               fullWidth: false,
               allSidesWidth: 1,
@@ -138,15 +143,16 @@ export default {
               leftPadding: 0,
             },
           },
-          settings: ["spacing", "text", "border"],
+          settings: ["general", "spacing", "text", "border"],
         },
         {
           name: "Text Area",
           type: "TextArea",
           icon: "bold",
           properties: {
-            backgroundColor: "white",
-            fullPadding: false,
+            general: {
+              backgroundColor: "white",
+            },
             border: {
               fullWidth: false,
               allSidesWidth: 1,
@@ -180,15 +186,16 @@ export default {
               leftPadding: 0,
             },
           },
-          settings: ["spacing", "text", "border"],
+          settings: ["general", "spacing", "text", "border"],
         },
         {
           name: "Check Box",
           type: "CheckBox",
           icon: "check-square",
           properties: {
-            backgroundColor: "white",
-            fullPadding: false,
+            general: {
+              backgroundColor: "white",
+            },
             text: {
               value: "Check Box",
               name: "",
@@ -213,8 +220,9 @@ export default {
           type: "RadioButton",
           icon: "check-circle",
           properties: {
-            backgroundColor: "white",
-            fullPadding: false,
+            general: {
+              backgroundColor: "white",
+            },
             text: {
               value: "Radio Value",
               name: "",
@@ -250,7 +258,6 @@ export default {
         settings,
       };
       const cloneItem = JSON.parse(JSON.stringify(targetItem));
-
       return cloneItem;
     },
   },

@@ -1,8 +1,13 @@
 <template>
   <div
     @click="handleShowOptions"
+    @mouseover="handleOver"
+    @mouseout="handleOut"
     class="element-big-wrapper"
-    :class="{ 'active-element': isActive }"
+    :class="{
+      'active-element': isActive,
+      'hover-element': isHover && !isActive,
+    }"
     ref="element"
     :id="formElement.rowId"
   >
@@ -36,8 +41,16 @@
         <a-menu-item key="0">
           <a-icon type="copy" />Dupplicate this element
         </a-menu-item>
-        <a-menu-item key="1">
+        <a-menu-item key="1" @click="showDeleteModal">
           <a-icon type="delete" />Delete this element
+          <a-modal
+            title="Do you want to delete this element?"
+            :visible="deleteVisible"
+            :confirm-loading="confirmLoading"
+            @ok="handleOk"
+            @cancel="handleCancel"
+          >
+          </a-modal>
         </a-menu-item>
       </a-menu>
     </a-dropdown>
@@ -76,6 +89,10 @@ export default {
       required: true,
       type: Object,
     },
+    parentElement: {
+      required: false,
+      type: Array,
+    },
   },
   computed: {
     ...mapState("customizerModule", ["haveActiveElement", "activeElement"]),
@@ -83,6 +100,9 @@ export default {
   data() {
     return {
       isActive: false,
+      isHover: false,
+      deleteVisible: false,
+      confirmLoading: false,
     };
   },
   watch: {
@@ -98,8 +118,20 @@ export default {
         );
       }
     },
+    activeElement() {
+      if (this.formElement.rowId !== this.activeElement.rowId)
+        this.isActive = false;
+    },
   },
+  beforeDestroy() {},
   methods: {
+    deleteElement() {
+      this.removeClickOutSideEvent();
+      this.$store.dispatch("formModule/deleteElement", {
+        parent: this.parentElement,
+        element: this.formElement,
+      });
+    },
     addClickOutSideEvent() {
       var formSide = document.getElementById("form-side");
       formSide.addEventListener("click", this.handleClickOutSide);
@@ -118,9 +150,33 @@ export default {
         }
       }
     },
-    handleShowOptions() {
+    handleShowOptions(e) {
+      e.stopPropagation();
       this.addClickOutSideEvent();
       this.isActive = true;
+    },
+    handleOver(e) {
+      e.stopPropagation();
+      this.isHover = true;
+    },
+    handleOut(e) {
+      e.stopPropagation();
+      this.isHover = false;
+    },
+    showDeleteModal() {
+      this.deleteVisible = true;
+    },
+    handleOk() {
+      this.confirmLoading = true;
+      setTimeout(() => {
+        this.deleteVisible = false;
+        this.confirmLoading = false;
+        this.$store.dispatch("customizerModule/unselectElement");
+        this.deleteElement();
+      }, 1000);
+    },
+    handleCancel() {
+      this.deleteVisible = false;
     },
   },
 };
@@ -130,6 +186,11 @@ export default {
 .element-big-wrapper {
   position: relative;
   transition: all 0.2s ease-in-out;
+}
+.element-big-wrapper.hover-element {
+  z-index: 999;
+  transition: border 0s !important;
+  outline: 3px solid rgb(113, 203, 244);
 }
 .element-more-options {
   position: absolute;

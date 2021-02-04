@@ -44,35 +44,82 @@ export default {
           name: "One Column",
           icon: "line",
           type: "OneColumn",
-          properties: {},
-          settings: [],
+          properties: {
+            general: {
+              backgroundColor: "white",
+            },
+          },
+          settings: ["general", "spacing"],
+          elements: [],
         },
         {
           name: "Two Column",
           icon: "pause",
           type: "TwoColumn",
-          properties: {},
-          settings: [],
+          properties: {
+            general: {
+              backgroundColor: "white",
+            },
+            spacing: {
+              column1Width: 50,
+              column2Width: 50,
+            },
+          },
+          settings: ["general", "spacing"],
+          elements: [[], []],
         },
         {
           name: "Three Column",
           icon: "menu",
           type: "ThreeColumn",
-          properties: {},
+          properties: {
+            general: {
+              backgroundColor: "white",
+            },
+            spacing: {
+              column1Width: 33.3,
+              column2Width: 33.3,
+              column3Width: 33.3,
+            },
+          },
+          settings: ["general", "spacing"],
+          elements: [[], [], []],
         },
         {
           name: "Four Column",
           icon: "menu",
           type: "FourColumn",
-          properties: {},
-          settings: [],
+          properties: {
+            general: {
+              backgroundColor: "white",
+            },
+            spacing: {
+              column1Width: 25,
+              column2Width: 25,
+              column3Width: 25,
+              column4Width: 25,
+            },
+          },
+          settings: ["general", "spacing"],
+          elements: [[], [], [], []],
         },
         {
-          name: "Divide",
+          name: "Divider",
           icon: "small-dash",
-          type: "Divide",
-          properties: {},
-          settings: [],
+          type: "Divider",
+          properties: {
+            general: {
+              backgroundColor: "white",
+              size: 1,
+              color: "black",
+              style: "solid",
+            },
+            spacing: {
+              width: 100,
+              align: "center",
+            },
+          },
+          settings: ["general", "spacing"],
         },
       ],
     };
@@ -82,14 +129,17 @@ export default {
     CustomizerElement,
   },
   methods: {
-    handleClone({ type, properties, settings }) {
-      return {
+    handleClone({ type, properties, settings, elements }) {
+      const targetItem = {
         rowId: uuid(),
         type,
         properties,
         settings,
-        elements: [],
+        elements,
       };
+      const cloneItem = JSON.parse(JSON.stringify(targetItem));
+
+      return cloneItem;
     },
   },
 };

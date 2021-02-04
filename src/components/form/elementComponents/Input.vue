@@ -79,5 +79,6 @@ export default {
 input {
   outline: none;
   min-width: min-content;
+  pointer-events: none;
 }
 </style>

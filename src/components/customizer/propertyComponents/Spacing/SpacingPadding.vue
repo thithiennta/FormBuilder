@@ -119,11 +119,6 @@ export default {
   position: relative;
   margin-bottom: 10px;
 }
-.customizer-sub-sub-title {
-  margin-bottom: 5px;
-  font-weight: 500;
-  color: rgb(138, 137, 137);
-}
 .setting-switch {
   position: absolute;
   top: 50%;

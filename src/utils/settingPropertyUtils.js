@@ -13,6 +13,9 @@ const parseNameToElement = function(name) {
     case "box":
       result = "BoxProperties";
       break;
+    case "general":
+      result = "GeneralProperties";
+      break;
     default:
       break;
   }

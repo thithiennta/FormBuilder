@@ -1,6 +1,25 @@
 const getElementsByName = function(name, type) {
   var result = "";
   switch (name) {
+    case "general":
+      switch (type) {
+        case "Title":
+        case "Button":
+          result = ["BackgroundColor"];
+          break;
+        case "OneColumn":
+        case "TwoColumn":
+        case "ThreeColumn":
+        case "FourColumn":
+          result = ["BackgroundColor"];
+          break;
+        case "Divider":
+          result = ["DividerSize", "DividerColor", "DividerStyle"];
+          break;
+        default:
+          break;
+      }
+      break;
     case "spacing":
       switch (type) {
         case "Title":
@@ -20,6 +39,17 @@ const getElementsByName = function(name, type) {
         case "CheckBox":
         case "RadioButton":
           result = ["SpacingAlign"];
+          break;
+        case "OneColumn":
+          result = [""];
+          break;
+        case "TwoColumn":
+        case "ThreeColumn":
+        case "FourColumn":
+          result = ["ColumnsWidth"];
+          break;
+        case "Divider":
+          result = ["Width", "SpacingAlign"];
           break;
         default:
           break;

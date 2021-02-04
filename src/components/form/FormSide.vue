@@ -43,7 +43,7 @@ export default {
   height: 80%;
   max-width: 700px;
   width: 90%;
-  background-color: rgb(231, 231, 231);
+  background-color: white;
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
@@ -51,5 +51,8 @@ export default {
 .form-element-container {
   max-width: 600px;
   margin: auto;
+}
+.empty-nested:empty::after {
+  text-align: center;
 }
 </style>

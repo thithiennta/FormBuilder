@@ -16,6 +16,10 @@ import {
   Select,
   Collapse,
   Tooltip,
+  Modal,
+  Button,
+  Popconfirm,
+  message,
 } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 
@@ -34,6 +38,10 @@ Vue.use(Switch);
 Vue.use(Select);
 Vue.use(Collapse);
 Vue.use(Tooltip);
+Vue.use(Modal);
+Vue.use(Button);
+Vue.use(Popconfirm);
+Vue.use(message);
 
 new Vue({
   store,

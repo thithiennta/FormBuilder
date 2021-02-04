@@ -1,4 +1,7 @@
 export default {
+  cloneElement({ commit }) {
+    commit("REFRESH_STATE");
+  },
   selectElement({ commit }, payload) {
     commit("SET_ACTIVE_ELEMENT", payload);
     commit("SET_ACTIVE_ELEMENT_STATUS", true);

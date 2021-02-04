@@ -80,5 +80,6 @@ export default {
 textarea {
   outline: none;
   min-width: min-content;
+  pointer-events: none;
 }
 </style>

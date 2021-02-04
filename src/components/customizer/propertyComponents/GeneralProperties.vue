@@ -5,7 +5,7 @@
     expand-icon-position="right"
     class="property-wrapper"
   >
-    <a-collapse-panel key="1" header="SPACING" class="customizer-container">
+    <a-collapse-panel key="1" header="GENERAL" class="customizer-container">
       <component
         v-for="(property, index) in propertiesArray"
         :key="index"
@@ -18,20 +18,16 @@
 <script>
 import { getElementsByType } from "../../../utils/settingSubPropertyUtils";
 import { mapState } from "vuex";
-import Width from "./Spacing/Width";
-import Height from "./Spacing/Height";
-import SpacingAlign from "./Spacing/SpacingAlign";
-import SpacingPadding from "./Spacing/SpacingPadding";
-import ElementBackgroundColor from "./Spacing/ElementBackgroundColor";
-import ColumnsWidth from "./Spacing/ColumnsWidth";
+import BackgroundColor from "./General/BackgroundColor";
+import DividerColor from "./General/DividerColor";
+import DividerSize from "./General/DividerSize";
+import DividerStyle from "./General/DividerStyle";
 export default {
   components: {
-    Width,
-    Height,
-    SpacingAlign,
-    SpacingPadding,
-    ElementBackgroundColor,
-    ColumnsWidth,
+    BackgroundColor,
+    DividerColor,
+    DividerSize,
+    DividerStyle,
   },
   data() {
     return {
@@ -51,12 +47,11 @@ export default {
   },
   methods: {
     getElementsByType() {
-      return getElementsByType("spacing", this.activeElement.type);
+      return getElementsByType("general", this.activeElement.type);
     },
   },
 };
 </script>
-
 <style scoped>
 .customizer-container {
   margin-bottom: 10px !important;
