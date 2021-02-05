@@ -13,74 +13,78 @@
         </a-switch>
       </div>
     </div>
-    <div
-      class="all-slides-wrapper"
-      v-if="!activeElement.properties.spacing.fullPadding"
-    >
-      <div class="customizer-sub-sub-title">All Sides</div>
-      <div class="property-adjust-wrapper">
-        <a-input-number
-          :min="0"
-          :max="100"
-          v-model="activeElement.properties.spacing.allSidesPadding"
-          class="customizer-input-number"
-          @change="handleChange"
-        />
-      </div>
-    </div>
-    <div
-      class="full-width-wrapper"
-      v-if="activeElement.properties.spacing.fullPadding"
-    >
-      <div class="padding-item">
-        <div class="customizer-sub-sub-title">Top</div>
+    <transition name="fade">
+      <div
+        class="all-slides-wrapper"
+        v-if="!activeElement.properties.spacing.fullPadding"
+      >
+        <div class="customizer-sub-sub-title">All Sides</div>
         <div class="property-adjust-wrapper">
           <a-input-number
             :min="0"
             :max="100"
-            v-model="activeElement.properties.spacing.topPadding"
+            v-model="activeElement.properties.spacing.allSidesPadding"
             class="customizer-input-number"
             @change="handleChange"
           />
         </div>
       </div>
-      <div class="padding-item">
-        <div class="customizer-sub-sub-title">Left</div>
-        <div class="property-adjust-wrapper">
-          <a-input-number
-            :min="0"
-            :max="100"
-            v-model="activeElement.properties.spacing.leftPadding"
-            class="customizer-input-number"
-            @change="handleChange"
-          />
+    </transition>
+    <transition name="fade">
+      <div
+        class="full-width-wrapper"
+        v-if="activeElement.properties.spacing.fullPadding"
+      >
+        <div class="padding-item">
+          <div class="customizer-sub-sub-title">Top</div>
+          <div class="property-adjust-wrapper">
+            <a-input-number
+              :min="0"
+              :max="100"
+              v-model="activeElement.properties.spacing.topPadding"
+              class="customizer-input-number"
+              @change="handleChange"
+            />
+          </div>
+        </div>
+        <div class="padding-item">
+          <div class="customizer-sub-sub-title">Left</div>
+          <div class="property-adjust-wrapper">
+            <a-input-number
+              :min="0"
+              :max="100"
+              v-model="activeElement.properties.spacing.leftPadding"
+              class="customizer-input-number"
+              @change="handleChange"
+            />
+          </div>
+        </div>
+        <div class="padding-item">
+          <div class="customizer-sub-sub-title">Bottom</div>
+          <div class="property-adjust-wrapper">
+            <a-input-number
+              :min="0"
+              :max="100"
+              v-model="activeElement.properties.spacing.bottomPadding"
+              class="customizer-input-number"
+              @change="handleChange"
+            />
+          </div>
+        </div>
+        <div class="padding-item">
+          <div class="customizer-sub-sub-title">Right</div>
+          <div class="property-adjust-wrapper">
+            <a-input-number
+              :min="0"
+              :max="100"
+              v-model="activeElement.properties.spacing.rightPadding"
+              class="customizer-input-number"
+              @change="handleChange"
+            />
+          </div>
         </div>
       </div>
-      <div class="padding-item">
-        <div class="customizer-sub-sub-title">Bottom</div>
-        <div class="property-adjust-wrapper">
-          <a-input-number
-            :min="0"
-            :max="100"
-            v-model="activeElement.properties.spacing.bottomPadding"
-            class="customizer-input-number"
-            @change="handleChange"
-          />
-        </div>
-      </div>
-      <div class="padding-item">
-        <div class="customizer-sub-sub-title">Right</div>
-        <div class="property-adjust-wrapper">
-          <a-input-number
-            :min="0"
-            :max="100"
-            v-model="activeElement.properties.spacing.rightPadding"
-            class="customizer-input-number"
-            @change="handleChange"
-          />
-        </div>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 

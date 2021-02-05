@@ -14,6 +14,7 @@
           'font-size': properties.text.size + 'px',
           color: properties.text.color,
           'font-weight': properties.text.weight,
+          'font-family': properties.general.fontFamily,
         }"
         >{{ properties.text.value }}</label
       >

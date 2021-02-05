@@ -1,5 +1,5 @@
 <template>
-  <Draggable
+  <draggable
     v-bind="dragOptions"
     :list="list"
     :value="value"
@@ -9,7 +9,7 @@
     <div v-for="el in realValue" :key="el.rowId">
       <FormElement :formElement="el" :parentElement="realValue" />
     </div>
-  </Draggable>
+  </draggable>
 </template>
 
 <script>
@@ -23,13 +23,14 @@ export default {
   },
   methods: {
     emitter(value) {
+      // console.log("emit");
       this.$emit("input", value);
     },
-  },
-  watch: {
-    list() {
-      this.$store.dispatch("customizerModule/cloneElement");
-    },
+    // handleChange() {
+    //   if (this.list) {
+    //     this.$store.dispatch("customizerModule/cloneElement");
+    //   }
+    // },
   },
   computed: {
     dragOptions() {

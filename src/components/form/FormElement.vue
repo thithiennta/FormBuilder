@@ -65,6 +65,7 @@ import TextArea from "./elementComponents/TextArea";
 import CheckBox from "./elementComponents/CheckBox";
 import RadioButton from "./elementComponents/RadioButton";
 import Title from "./elementComponents/Title";
+import CustomText from "./elementComponents/CustomText";
 import OneColumn from "./elementComponents/OneColumn";
 import TwoColumn from "./elementComponents/TwoColumn";
 import ThreeColumn from "./elementComponents/ThreeColumn";
@@ -83,6 +84,7 @@ export default {
     ThreeColumn,
     FourColumn,
     Divider,
+    CustomText,
   },
   props: {
     formElement: {
@@ -123,7 +125,6 @@ export default {
         this.isActive = false;
     },
   },
-  beforeDestroy() {},
   methods: {
     deleteElement() {
       this.removeClickOutSideEvent();

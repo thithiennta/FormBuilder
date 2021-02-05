@@ -16,6 +16,7 @@
         ...padding,
         'text-align': properties.text.align,
         'font-weight': properties.text.weight,
+        'font-family': properties.general.fontFamily,
       }"
       :placeholder="properties.text.placeholder"
       :name="properties.text.name"

@@ -81,7 +81,8 @@ export default {
 <style>
 .property-wrapper {
   padding: 10px 0;
-  background-color: rgb(35, 35, 35) !important;
+  /* background-color: rgb(35, 35, 35) !important; */
+  background-color: transparent !important;
 }
 .customizer-container {
   border: 0 !important;
@@ -108,5 +109,11 @@ export default {
   margin-bottom: 5px;
   font-weight: 500;
   color: rgb(138, 137, 137);
+}
+.fade-enter-active {
+  transition: transform 0.5s;
+}
+.fade-enter {
+  transform: translateX(70px);
 }
 </style>

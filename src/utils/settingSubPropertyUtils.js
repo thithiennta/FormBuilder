@@ -4,14 +4,21 @@ const getElementsByName = function(name, type) {
     case "general":
       switch (type) {
         case "Title":
+        case "CustomText":
         case "Button":
-          result = ["BackgroundColor"];
+          result = ["BackgroundColor", "FontFamily"];
+          break;
+        case "Input":
+        case "TextArea":
+        case "CheckBox":
+        case "RadioButton":
+          result = ["FontFamily"];
           break;
         case "OneColumn":
         case "TwoColumn":
         case "ThreeColumn":
         case "FourColumn":
-          result = ["BackgroundColor"];
+          result = [];
           break;
         case "Divider":
           result = ["DividerSize", "DividerColor", "DividerStyle"];
@@ -23,6 +30,7 @@ const getElementsByName = function(name, type) {
     case "spacing":
       switch (type) {
         case "Title":
+        case "CustomText":
           result = ["SpacingAlign"];
           break;
         case "Input":
@@ -58,6 +66,7 @@ const getElementsByName = function(name, type) {
     case "text":
       switch (type) {
         case "Title":
+        case "CustomText":
           result = [
             "TextValue",
             "FontSize",

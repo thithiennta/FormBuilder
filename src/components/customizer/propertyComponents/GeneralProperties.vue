@@ -22,12 +22,14 @@ import BackgroundColor from "./General/BackgroundColor";
 import DividerColor from "./General/DividerColor";
 import DividerSize from "./General/DividerSize";
 import DividerStyle from "./General/DividerStyle";
+import FontFamily from "./General/FontFamily";
 export default {
   components: {
     BackgroundColor,
     DividerColor,
     DividerSize,
     DividerStyle,
+    FontFamily,
   },
   data() {
     return {

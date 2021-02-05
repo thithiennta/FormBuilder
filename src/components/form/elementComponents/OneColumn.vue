@@ -1,5 +1,9 @@
 <template>
-  <div class="column-wrapper" :class="{ 'empty-nested-wrapper': isEmpty }">
+  <div
+    class="column-wrapper"
+    :class="{ 'empty-nested-wrapper': isEmpty }"
+    :style="{ 'background-color': properties.general.backgroundColor }"
+  >
     <NestedElement
       :list="nestedElements"
       :class="{ 'empty-nested': isEmpty }"
@@ -14,9 +18,8 @@ export default {
       type: Object,
     },
     nestedElements: {
-      required: false,
+      required: true,
       type: Array,
-      default: null,
     },
   },
   computed: {

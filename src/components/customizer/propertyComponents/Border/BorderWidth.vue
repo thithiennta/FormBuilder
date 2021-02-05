@@ -13,74 +13,78 @@
         </a-switch>
       </div>
     </div>
-    <div
-      class="all-slides-wrapper"
-      v-if="!activeElement.properties.border.fullWidth"
-    >
-      <div class="customizer-sub-sub-title">All Sides</div>
-      <div class="property-adjust-wrapper">
-        <a-input-number
-          :min="1"
-          :max="100"
-          v-model="activeElement.properties.border.allSidesWidth"
-          class="customizer-input-number"
-          @change="handleChange"
-        />
-      </div>
-    </div>
-    <div
-      class="full-width-wrapper"
-      v-if="activeElement.properties.border.fullWidth"
-    >
-      <div class="width-item">
-        <div class="customizer-sub-sub-title">Top</div>
+    <transition name="fade">
+      <div
+        class="all-slides-wrapper"
+        v-if="!activeElement.properties.border.fullWidth"
+      >
+        <div class="customizer-sub-sub-title">All Sides</div>
         <div class="property-adjust-wrapper">
           <a-input-number
             :min="1"
             :max="100"
-            v-model="activeElement.properties.border.topWidth"
+            v-model="activeElement.properties.border.allSidesWidth"
             class="customizer-input-number"
             @change="handleChange"
           />
         </div>
       </div>
-      <div class="width-item">
-        <div class="customizer-sub-sub-title">Left</div>
-        <div class="property-adjust-wrapper">
-          <a-input-number
-            :min="1"
-            :max="100"
-            v-model="activeElement.properties.border.leftWidth"
-            class="customizer-input-number"
-            @change="handleChange"
-          />
+    </transition>
+    <transition name="fade">
+      <div
+        class="full-width-wrapper"
+        v-if="activeElement.properties.border.fullWidth"
+      >
+        <div class="width-item">
+          <div class="customizer-sub-sub-title">Top</div>
+          <div class="property-adjust-wrapper">
+            <a-input-number
+              :min="1"
+              :max="100"
+              v-model="activeElement.properties.border.topWidth"
+              class="customizer-input-number"
+              @change="handleChange"
+            />
+          </div>
+        </div>
+        <div class="width-item">
+          <div class="customizer-sub-sub-title">Left</div>
+          <div class="property-adjust-wrapper">
+            <a-input-number
+              :min="1"
+              :max="100"
+              v-model="activeElement.properties.border.leftWidth"
+              class="customizer-input-number"
+              @change="handleChange"
+            />
+          </div>
+        </div>
+        <div class="width-item">
+          <div class="customizer-sub-sub-title">Bottom</div>
+          <div class="property-adjust-wrapper">
+            <a-input-number
+              :min="1"
+              :max="100"
+              v-model="activeElement.properties.border.bottomWidth"
+              class="customizer-input-number"
+              @change="handleChange"
+            />
+          </div>
+        </div>
+        <div class="width-item">
+          <div class="customizer-sub-sub-title">Right</div>
+          <div class="property-adjust-wrapper">
+            <a-input-number
+              :min="1"
+              :max="100"
+              v-model="activeElement.properties.border.rightWidth"
+              class="customizer-input-number"
+              @change="handleChange"
+            />
+          </div>
         </div>
       </div>
-      <div class="width-item">
-        <div class="customizer-sub-sub-title">Bottom</div>
-        <div class="property-adjust-wrapper">
-          <a-input-number
-            :min="1"
-            :max="100"
-            v-model="activeElement.properties.border.bottomWidth"
-            class="customizer-input-number"
-            @change="handleChange"
-          />
-        </div>
-      </div>
-      <div class="width-item">
-        <div class="customizer-sub-sub-title">Right</div>
-        <div class="property-adjust-wrapper">
-          <a-input-number
-            :min="1"
-            :max="100"
-            v-model="activeElement.properties.border.rightWidth"
-            class="customizer-input-number"
-            @change="handleChange"
-          />
-        </div>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 

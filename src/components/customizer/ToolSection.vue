@@ -43,6 +43,7 @@ export default {
           properties: {
             general: {
               backgroundColor: "white",
+              fontFamily: "inherit",
             },
             text: {
               value: "SAMPLE FORM",
@@ -53,8 +54,28 @@ export default {
             },
             spacing: {
               align: "center",
-              width: 50,
-              height: 50,
+            },
+          },
+          settings: ["general", "spacing", "text"],
+        },
+        {
+          name: "Text",
+          icon: "edit",
+          type: "CustomText",
+          properties: {
+            general: {
+              backgroundColor: "white",
+              fontFamily: "inherit",
+            },
+            text: {
+              value: "Sample Text",
+              color: "black",
+              size: 16,
+              weight: 500,
+              style: "normal",
+            },
+            spacing: {
+              align: "center",
             },
           },
           settings: ["general", "spacing", "text"],
@@ -66,6 +87,7 @@ export default {
           properties: {
             general: {
               backgroundColor: "white",
+              fontFamily: "inherit",
             },
             fullPadding: false,
             border: {
@@ -109,6 +131,7 @@ export default {
           properties: {
             general: {
               backgroundColor: "white",
+              fontFamily: "inherit",
             },
             border: {
               fullWidth: false,
@@ -152,6 +175,7 @@ export default {
           properties: {
             general: {
               backgroundColor: "white",
+              fontFamily: "inherit",
             },
             border: {
               fullWidth: false,
@@ -195,6 +219,7 @@ export default {
           properties: {
             general: {
               backgroundColor: "white",
+              fontFamily: "inherit",
             },
             text: {
               value: "Check Box",
@@ -222,6 +247,7 @@ export default {
           properties: {
             general: {
               backgroundColor: "white",
+              fontFamily: "inherit",
             },
             text: {
               value: "Radio Value",

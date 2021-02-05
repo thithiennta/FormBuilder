@@ -1,5 +1,8 @@
 <template>
-  <div class="four-column-wrapper">
+  <div
+    class="four-column-wrapper"
+    :style="{ 'background-color': properties.general.backgroundColor }"
+  >
     <div
       class="column-wrapper"
       :class="{ 'empty-nested-wrapper': isColumnEmpty(nestedElement) }"

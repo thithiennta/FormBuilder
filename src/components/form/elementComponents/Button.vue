@@ -1,7 +1,10 @@
 <template>
   <div
     class="form-element-wrapper"
-    :style="{ 'text-align': properties.spacing.align }"
+    :style="{
+      'text-align': properties.spacing.align,
+      'background-color': properties.general.backgroundColor,
+    }"
   >
     <button
       :style="{
@@ -15,6 +18,7 @@
         width: properties.spacing.width + '%',
         height: properties.spacing.height + 'px',
         ...padding,
+        'font-family': properties.general.fontFamily,
       }"
     >
       {{ properties.text.value }}
