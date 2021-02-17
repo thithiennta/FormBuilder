@@ -2,22 +2,17 @@
   <div class="property-wrapper">
     <div class="customizer-sub-title">Background Color</div>
     <div class="property-adjust-wrapper">
-      <div
-        class="show-color-wrapper"
-        @click="handleShowSketch"
-        ref="chooseColor"
-      >
+      <div class="show-color-wrapper" @click="handleShowSketch">
         <div
           class="color-block"
           :style="{
-            'background-color':
-              activeElement.properties.general.backgroundColor,
+            'background-color': color,
           }"
         ></div>
         <div class="text-block">Choose Color</div>
       </div>
       <Sketch
-        id="border-sketch"
+        id="general-background-sketch"
         v-model="color"
         v-show="showSketch"
         class="sketch-wrapper"
@@ -28,6 +23,7 @@
 </template>
 
 <script>
+import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
 import { Sketch } from "vue-color";
 export default {
@@ -36,21 +32,36 @@ export default {
   },
   data() {
     return {
-      color: "",
+      color: null,
       showSketch: false,
     };
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
   },
+  created() {
+    this.color = this.activeElement.properties.general.backgroundColor;
+  },
   mounted() {
     document.addEventListener("click", (e) => {
-      var colorPicker = document.getElementById("border-sketch");
+      var colorPicker = document.getElementById("general-background-sketch");
       if (colorPicker === null) return;
       if (!colorPicker.contains(e.target)) {
         this.showSketch = false;
       }
     });
+  },
+  watch: {
+    color: _debounce(function(newValue, oldValue) {
+      if (oldValue === null) return;
+      // This to ADD PREVIOUS STATE and CLONE STATE
+      this.$store.dispatch("formModule/updateProperty");
+      // This to UPDATE PROPERTY
+      this.$store.dispatch(
+        "customizerModule/changePropertyValue",
+        this.activeElement
+      );
+    }, 200),
   },
   methods: {
     handleShowSketch(e) {
@@ -61,12 +72,9 @@ export default {
       });
       this.showSketch = !this.showSketch;
     },
-    updateValue(value) {
-      this.activeElement.properties.general.backgroundColor = value.hex;
-      this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
-      );
+    updateValue({ rgba }) {
+      this.color = `rgba(${rgba.r},${rgba.g}, ${rgba.b}, ${rgba.a})`;
+      this.activeElement.properties.general.backgroundColor = this.color;
     },
   },
 };

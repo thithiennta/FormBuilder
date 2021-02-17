@@ -42,7 +42,7 @@ export default {
           type: "Title",
           properties: {
             general: {
-              backgroundColor: "white",
+              backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
             },
             text: {
@@ -64,7 +64,7 @@ export default {
           type: "CustomText",
           properties: {
             general: {
-              backgroundColor: "white",
+              backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
             },
             text: {
@@ -86,7 +86,7 @@ export default {
           type: "Button",
           properties: {
             general: {
-              backgroundColor: "white",
+              backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
             },
             fullPadding: false,
@@ -130,7 +130,7 @@ export default {
           type: "Input",
           properties: {
             general: {
-              backgroundColor: "white",
+              backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
             },
             border: {
@@ -174,7 +174,7 @@ export default {
           icon: "bold",
           properties: {
             general: {
-              backgroundColor: "white",
+              backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
             },
             border: {
@@ -218,7 +218,7 @@ export default {
           icon: "check-square",
           properties: {
             general: {
-              backgroundColor: "white",
+              backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
             },
             text: {
@@ -246,7 +246,7 @@ export default {
           icon: "check-circle",
           properties: {
             general: {
-              backgroundColor: "white",
+              backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
             },
             text: {

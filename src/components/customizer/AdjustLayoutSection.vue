@@ -1,43 +1,32 @@
 <template>
   <div class="adjust-section-wrapper">
     <vuescroll :ops="options" class="customizer-body-scroll">
-      <component
-        v-for="(property, index) in propertiesArray"
-        :key="index"
-        :is="property"
-      ></component>
+      <div class="property-wrapper">
+        <div class="layout-customizer-container">
+          <BackgroundColor />
+          <FontFamily />
+          <FontSize />
+          <TextColor />
+        </div>
+      </div>
     </vuescroll>
   </div>
 </template>
 
 <script>
-import propertyUtils from "../../utils/settingPropertyUtils";
-import { mapState } from "vuex";
+import BackgroundColor from "./propertyComponents/Layout/BackgroundColor";
+import FontFamily from "./propertyComponents/Layout/FontFamily";
+import FontSize from "./propertyComponents/Layout/FontSize";
+import TextColor from "./propertyComponents/Layout/TextColor";
+// import { mapState } from "vuex";
 import vuescroll from "vuescroll";
-import SpacingProperties from "./propertyComponents/SpacingProperties";
-import TextProperties from "./propertyComponents/TextProperties";
-import BorderProperties from "./propertyComponents/BorderProperties";
-import BoxProperties from "./propertyComponents/BoxProperties";
-import GeneralProperties from "./propertyComponents/GeneralProperties";
 export default {
   components: {
-    SpacingProperties,
-    TextProperties,
     vuescroll,
-    BorderProperties,
-    BoxProperties,
-    GeneralProperties,
-  },
-  computed: {
-    ...mapState("customizerModule", ["activeElement"]),
-  },
-  created() {
-    this.propertiesArray = this.getElementsByNames();
-  },
-  watch: {
-    activeElement() {
-      this.propertiesArray = this.getElementsByNames();
-    },
+    BackgroundColor,
+    FontFamily,
+    FontSize,
+    TextColor,
   },
   data() {
     return {
@@ -61,11 +50,6 @@ export default {
       propertiesArray: [],
     };
   },
-  methods: {
-    getElementsByNames() {
-      return propertyUtils.getElementsByNames(this.activeElement.settings);
-    },
-  },
 };
 </script>
 
@@ -77,16 +61,17 @@ export default {
 .customizer-body-scroll {
   width: 100%;
 }
+.layout-customizer-container {
+  margin: auto;
+  border: 0 !important;
+  width: 90% !important;
+}
 </style>
 <style>
 .property-wrapper {
   padding: 10px 0;
   /* background-color: rgb(35, 35, 35) !important; */
   background-color: transparent !important;
-}
-.customizer-container {
-  border: 0 !important;
-  width: 100% !important;
 }
 
 .ant-collapse-header {
@@ -96,12 +81,6 @@ export default {
   margin-bottom: 5px;
   font-weight: 700;
   color: rgb(179, 176, 176);
-}
-.ant-collapse-header {
-  font-weight: 700 !important;
-}
-.ant-switch-checked {
-  background-color: green !important;
 }
 .customizer-input-number {
   width: 60px !important;

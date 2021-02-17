@@ -9,4 +9,7 @@ export default {
     state.activeElement = payload;
   },
   REFRESH_STATE() {},
+  CHANGE_ELEMENT_ACTIVE_TAB(state, payload) {
+    state.isElementTabActive = payload;
+  },
 };

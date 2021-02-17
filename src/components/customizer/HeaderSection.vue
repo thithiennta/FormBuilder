@@ -22,15 +22,14 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
-  data() {
-    return {
-      isElementTabActive: true,
-    };
+  computed: {
+    ...mapState("customizerModule", ["isElementTabActive"]),
   },
   methods: {
     onChangeTab(value) {
-      this.isElementTabActive = value;
+      this.$store.dispatch("customizerModule/switchActiveTab", value);
     },
   },
 };

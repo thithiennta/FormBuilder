@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import store from "./store/index";
-import NestedElement from "./components/form/NestedElement";
+import NestedElement from "./components/form/NestedElement.vue";
 import {
   Row,
   Col,

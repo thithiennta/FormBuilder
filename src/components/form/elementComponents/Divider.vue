@@ -1,5 +1,8 @@
 <template>
-  <div class="form-element-wrapper">
+  <div
+    class="form-element-wrapper"
+    :style="{ 'background-color': properties.general.backgroundColor }"
+  >
     <hr
       :style="{
         'border-top-width': properties.general.size + 'px',

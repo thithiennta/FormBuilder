@@ -1,18 +1,13 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">Background Color</div>
+    <div class="customizer-sub-title">Text Color</div>
     <div class="property-adjust-wrapper">
       <div class="show-color-wrapper" @click="handleShowSketch">
-        <div
-          class="color-block"
-          :style="{
-            'background-color': color,
-          }"
-        ></div>
+        <div class="color-block" :style="{ 'background-color': color }"></div>
         <div class="text-block">Choose Color</div>
       </div>
       <Sketch
-        id="element-background-sketch"
+        id="text-sketch"
         v-model="color"
         v-show="showSketch"
         class="sketch-wrapper"
@@ -37,14 +32,14 @@ export default {
     };
   },
   computed: {
-    ...mapState("customizerModule", ["activeElement"]),
+    ...mapState("formModule", ["layoutSettings"]),
   },
   created() {
-    this.color = this.activeElement.properties.spacing.backgroundColor;
+    this.color = this.layoutSettings.color;
   },
   mounted() {
     document.addEventListener("click", (e) => {
-      var colorPicker = document.getElementById("element-background-sketch");
+      var colorPicker = document.getElementById("text-sketch");
       if (colorPicker === null) return;
       if (!colorPicker.contains(e.target)) {
         this.showSketch = false;
@@ -58,8 +53,8 @@ export default {
       this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
       this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
+        "formModule/changeLayoutProperty",
+        this.layoutSettings
       );
     }, 200),
   },
@@ -74,7 +69,7 @@ export default {
     },
     updateValue(value) {
       this.color = value.hex;
-      this.activeElement.properties.spacing.backgroundColor = this.color;
+      this.layoutSettings.color = this.color;
     },
   },
 };
@@ -100,8 +95,8 @@ export default {
   padding: 0 15px 0 5px;
 }
 .sketch-wrapper {
-  margin-top: 5px;
   position: absolute;
+  margin-top: 5px;
   z-index: 999;
 }
 </style>

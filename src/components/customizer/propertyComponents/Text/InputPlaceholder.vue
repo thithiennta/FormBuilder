@@ -4,7 +4,7 @@
     <div class="property-adjust-wrapper">
       <a-input
         ref="inputPlaceholder"
-        v-model="activeElement.properties.text.placeholder"
+        v-model="value"
         :placeholder="'Sample ' + activeElement.type + ' Placeholder'"
       >
         <a-icon slot="prefix" type="edit" />
@@ -20,13 +20,32 @@
 </template>
 
 <script>
+import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      value: null,
+    };
+  },
+  created() {
+    this.value = this.activeElement.properties.text.placeholder;
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
+  },
+  watch: {
+    value: _debounce(function(newValue, oldValue) {
+      if (oldValue === null) return;
+      this.activeElement.properties.text.placeholder = this.value;
+      // This to ADD PREVIOUS STATE and CLONE STATE
+      this.$store.dispatch("formModule/updateProperty");
+      // This to UPDATE PROPERTY
+      this.$store.dispatch(
+        "customizerModule/changePropertyValue",
+        this.activeElement
+      );
+    }, 300),
   },
   methods: {
     emitEmpty() {

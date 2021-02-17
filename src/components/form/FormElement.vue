@@ -11,6 +11,9 @@
     ref="element"
     :id="formElement.rowId"
   >
+    <div class="detect-element">
+      {{ formElement.type.indexOf("Column") !== -1 ? "Row" : "Content" }}
+    </div>
     <div class="element-moving-options" v-if="isActive">
       <a-icon type="caret-up" />
       <a-icon type="drag" class="element-moving-handle" />
@@ -43,14 +46,6 @@
         </a-menu-item>
         <a-menu-item key="1" @click="showDeleteModal">
           <a-icon type="delete" />Delete this element
-          <a-modal
-            title="Do you want to delete this element?"
-            :visible="deleteVisible"
-            :confirm-loading="confirmLoading"
-            @ok="handleOk"
-            @cancel="handleCancel"
-          >
-          </a-modal>
         </a-menu-item>
       </a-menu>
     </a-dropdown>
@@ -71,6 +66,7 @@ import TwoColumn from "./elementComponents/TwoColumn";
 import ThreeColumn from "./elementComponents/ThreeColumn";
 import FourColumn from "./elementComponents/FourColumn";
 import Divider from "./elementComponents/Divider";
+import { Modal, message } from "ant-design-vue";
 export default {
   components: {
     Button,
@@ -125,9 +121,11 @@ export default {
         this.isActive = false;
     },
   },
+  beforeDestroy() {
+    this.removeClickOutSideEvent();
+  },
   methods: {
     deleteElement() {
-      this.removeClickOutSideEvent();
       this.$store.dispatch("formModule/deleteElement", {
         parent: this.parentElement,
         element: this.formElement,
@@ -154,6 +152,7 @@ export default {
     handleShowOptions(e) {
       e.stopPropagation();
       this.addClickOutSideEvent();
+      this.$store.dispatch("customizerModule/switchActiveTab", true);
       this.isActive = true;
     },
     handleOver(e) {
@@ -165,28 +164,61 @@ export default {
       this.isHover = false;
     },
     showDeleteModal() {
-      this.deleteVisible = true;
+      Modal.confirm({
+        title: "Confirmation",
+        content: "Do you want to delete this element?",
+        okText: "Delete",
+        cancelText: "Cancel",
+        onOk: this.handleOk,
+        onCancel: this.handleCancel,
+      });
     },
     handleOk() {
-      this.confirmLoading = true;
-      setTimeout(() => {
-        this.deleteVisible = false;
-        this.confirmLoading = false;
+      return new Promise((resolve) => {
+        setTimeout(resolve, 1000);
+      }).then(() => {
+        message.success({
+          content: "Element deleted successfully",
+          duration: 1,
+        });
         this.$store.dispatch("customizerModule/unselectElement");
         this.deleteElement();
-      }, 1000);
+      });
     },
-    handleCancel() {
-      this.deleteVisible = false;
-    },
+    handleCancel() {},
   },
 };
 </script>
 
 <style scoped>
+/* .sortable-chosen .element-big-wrapper {
+  height: 10px;
+}
+.sortable-chosen .element-big-wrapper .element-moving-options i:nth-child(odd) {
+  opacity: 0;
+}
+.sortable-chosen .element-big-wrapper .form-element-wrapper {
+  opacity: 0;
+}
+.sortable-chosen .element-big-wrapper .element-more-options {
+  opacity: 0;
+} */
 .element-big-wrapper {
   position: relative;
   transition: all 0.2s ease-in-out;
+}
+.detect-element {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: -3px;
+  background-color: rgb(110, 206, 248);
+  width: fit-content;
+  padding: 5px 10px;
+  z-index: 999;
+}
+.element-big-wrapper.hover-element > .detect-element {
+  display: block;
 }
 .element-big-wrapper.hover-element {
   z-index: 999;
@@ -199,8 +231,9 @@ export default {
   top: 5px;
   padding: 3px;
   border-radius: 4px;
-  font-size: 10px;
+  font-size: 13px;
   color: black;
+  z-index: 999;
 }
 .element-more-options.ant-dropdown-open {
   background-color: rgb(243, 241, 241);

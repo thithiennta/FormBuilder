@@ -1,11 +1,12 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">Height</div>
+    <div class="customizer-sub-title">Font Size</div>
     <div class="property-adjust-wrapper">
-      <div class="slider-tool-tip">{{ value }}px</div>
-      <a-slider
+      <a-input-number
+        :min="1"
+        :max="100"
         v-model="value"
-        :tooltip-visible="false"
+        class="customizer-input-number"
         @change="handleChange"
       />
     </div>
@@ -21,11 +22,11 @@ export default {
       value: null,
     };
   },
-  created() {
-    this.value = this.activeElement.properties.spacing.height;
-  },
   computed: {
-    ...mapState("customizerModule", ["activeElement"]),
+    ...mapState("formModule", ["layoutSettings"]),
+  },
+  created() {
+    this.value = this.layoutSettings.fontSize;
   },
   watch: {
     value: _debounce(function(newValue, oldValue) {
@@ -34,27 +35,17 @@ export default {
       this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
       this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
+        "formModule/changeLayoutProperty",
+        this.layoutSettings
       );
     }, 200),
   },
   methods: {
     handleChange() {
-      this.activeElement.properties.spacing.height = this.value;
+      this.layoutSettings.fontSize = this.value > 100 ? 100 : this.value;
     },
   },
 };
 </script>
 
-<style scoped>
-.property-adjust-wrapper {
-  position: relative;
-}
-.slider-tool-tip {
-  color: grey;
-  position: absolute;
-  right: 0;
-  top: -25px;
-}
-</style>
+<style></style>

@@ -4,26 +4,20 @@
       Width
       <div class="setting-switch">
         More Options
-        <a-switch
-          v-model="activeElement.properties.border.fullWidth"
-          @change="handleChange"
-        >
+        <a-switch v-model="fullWidth" @change="handleChange">
           <a-icon slot="checkedChildren" type="check" />
           <a-icon slot="unCheckedChildren" type="close" />
         </a-switch>
       </div>
     </div>
     <transition name="fade">
-      <div
-        class="all-slides-wrapper"
-        v-if="!activeElement.properties.border.fullWidth"
-      >
+      <div class="all-slides-wrapper" v-if="!fullWidth">
         <div class="customizer-sub-sub-title">All Sides</div>
         <div class="property-adjust-wrapper">
           <a-input-number
             :min="1"
-            :max="100"
-            v-model="activeElement.properties.border.allSidesWidth"
+            :max="25"
+            v-model="allSides"
             class="customizer-input-number"
             @change="handleChange"
           />
@@ -31,17 +25,14 @@
       </div>
     </transition>
     <transition name="fade">
-      <div
-        class="full-width-wrapper"
-        v-if="activeElement.properties.border.fullWidth"
-      >
+      <div class="full-width-wrapper" v-if="fullWidth">
         <div class="width-item">
           <div class="customizer-sub-sub-title">Top</div>
           <div class="property-adjust-wrapper">
             <a-input-number
               :min="1"
-              :max="100"
-              v-model="activeElement.properties.border.topWidth"
+              :max="25"
+              v-model="top"
               class="customizer-input-number"
               @change="handleChange"
             />
@@ -52,8 +43,8 @@
           <div class="property-adjust-wrapper">
             <a-input-number
               :min="1"
-              :max="100"
-              v-model="activeElement.properties.border.leftWidth"
+              :max="25"
+              v-model="left"
               class="customizer-input-number"
               @change="handleChange"
             />
@@ -64,8 +55,8 @@
           <div class="property-adjust-wrapper">
             <a-input-number
               :min="1"
-              :max="100"
-              v-model="activeElement.properties.border.bottomWidth"
+              :max="25"
+              v-model="bottom"
               class="customizer-input-number"
               @change="handleChange"
             />
@@ -76,8 +67,8 @@
           <div class="property-adjust-wrapper">
             <a-input-number
               :min="1"
-              :max="100"
-              v-model="activeElement.properties.border.rightWidth"
+              :max="25"
+              v-model="right"
               class="customizer-input-number"
               @change="handleChange"
             />
@@ -89,18 +80,72 @@
 </template>
 
 <script>
+import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
 export default {
+  data() {
+    return {
+      fullWidth: null,
+      allSides: null,
+      top: null,
+      left: null,
+      right: null,
+      bottom: null,
+    };
+  },
+  created() {
+    this.fullWidth = this.activeElement.properties.border.fullWidth;
+    this.allSides = this.activeElement.properties.border.allSidesWidth;
+    this.top = this.activeElement.properties.border.top;
+    this.left = this.activeElement.properties.border.left;
+    this.right = this.activeElement.properties.border.right;
+    this.bottom = this.activeElement.properties.border.bottom;
+  },
+  watch: {
+    fullWidth(newValue, oldValue) {
+      this.debounceFunction(newValue, oldValue);
+    },
+    allSides(newValue, oldValue) {
+      this.debounceFunction(newValue, oldValue);
+    },
+    top(newValue, oldValue) {
+      this.debounceFunction(newValue, oldValue);
+    },
+    left(newValue, oldValue) {
+      this.debounceFunction(newValue, oldValue);
+    },
+    right(newValue, oldValue) {
+      this.debounceFunction(newValue, oldValue);
+    },
+    bottom(newValue, oldValue) {
+      this.debounceFunction(newValue, oldValue);
+    },
+  },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
   },
   methods: {
     handleChange() {
+      this.activeElement.properties.border = {
+        ...this.activeElement.properties.border,
+        fullWidth: this.fullWidth > 25 ? 25 : this.fullWidth,
+        topWidth: this.top > 25 ? 25 : this.fullWidth,
+        leftWidth: this.left > 25 ? 25 : this.fullWidth,
+        rightWidth: this.right > 25 ? 25 : this.fullWidth,
+        bottomWidth: this.bottom > 25 ? 25 : this.fullWidth,
+        allSidesWidth: this.allSides > 25 ? 25 : this.fullWidth,
+      };
+    },
+    debounceFunction: _debounce(function(newValue, oldValue) {
+      if (oldValue === null) return;
+      // This to ADD PREVIOUS STATE and CLONE STATE
+      this.$store.dispatch("formModule/updateProperty");
+      // This to UPDATE PROPERTY
       this.$store.dispatch(
         "customizerModule/changePropertyValue",
         this.activeElement
       );
-    },
+    }, 200),
   },
 };
 </script>

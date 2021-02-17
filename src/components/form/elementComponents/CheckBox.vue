@@ -1,6 +1,13 @@
 <template>
-  <div class="form-element-wrapper">
-    <label :style="{ ['margin' + margin]: 'auto' }">
+  <div
+    class="form-element-wrapper"
+    :style="{ 'background-color': properties.general.backgroundColor }"
+  >
+    <label
+      :style="{
+        ['margin' + margin]: 'auto',
+      }"
+    >
       <input
         type="checkbox"
         :name="properties.text.name"

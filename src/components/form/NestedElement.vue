@@ -5,6 +5,7 @@
     :value="value"
     @input="emitter"
     handle=".element-moving-handle"
+    @change="handleChange"
   >
     <div v-for="el in realValue" :key="el.rowId">
       <FormElement :formElement="el" :parentElement="realValue" />
@@ -23,15 +24,17 @@ export default {
   },
   methods: {
     emitter(value) {
-      // console.log("emit");
       this.$emit("input", value);
     },
-    // handleChange() {
-    //   if (this.list) {
-    //     this.$store.dispatch("customizerModule/cloneElement");
-    //   }
-    // },
+    handleChange() {
+      if (this.list) {
+        this.$store.commit("formModule/ADD_PREVIOUS_STATE");
+        this.$store.dispatch("customizerModule/addColumnItem");
+        this.$store.commit("formModule/CLONE_STATE");
+      }
+    },
   },
+  watch: {},
   computed: {
     dragOptions() {
       return {
@@ -59,10 +62,12 @@ export default {
   },
 };
 </script>
+<style scoped></style>
 <style>
 .form-element-ghost {
   width: 100%;
 }
+
 .form-element-ghost .element-wrapper {
   background-color: transparent;
   padding: 0;

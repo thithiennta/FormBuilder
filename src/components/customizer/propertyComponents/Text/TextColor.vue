@@ -3,15 +3,12 @@
     <div class="customizer-sub-title">Text Color</div>
     <div class="property-adjust-wrapper">
       <div class="show-color-wrapper" @click="handleShowSketch">
-        <div
-          class="color-block"
-          :style="{ 'background-color': activeElement.properties.text.color }"
-        ></div>
+        <div class="color-block" :style="{ 'background-color': color }"></div>
         <div class="text-block">Choose Color</div>
       </div>
       <Sketch
         id="text-sketch"
-        v-model="activeElement.properties.text.color"
+        v-model="color"
         v-show="showSketch"
         class="sketch-wrapper"
         @input="updateValue"
@@ -21,6 +18,7 @@
 </template>
 
 <script>
+import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
 import { Sketch } from "vue-color";
 export default {
@@ -29,12 +27,15 @@ export default {
   },
   data() {
     return {
-      value: 14,
+      color: null,
       showSketch: false,
     };
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
+  },
+  created() {
+    this.color = this.activeElement.properties.text.color;
   },
   mounted() {
     document.addEventListener("click", (e) => {
@@ -44,6 +45,18 @@ export default {
         this.showSketch = false;
       }
     });
+  },
+  watch: {
+    color: _debounce(function(newValue, oldValue) {
+      if (oldValue === null) return;
+      // This to ADD PREVIOUS STATE and CLONE STATE
+      this.$store.dispatch("formModule/updateProperty");
+      // This to UPDATE PROPERTY
+      this.$store.dispatch(
+        "customizerModule/changePropertyValue",
+        this.activeElement
+      );
+    }, 200),
   },
   methods: {
     handleShowSketch(e) {
@@ -55,11 +68,8 @@ export default {
       this.showSketch = !this.showSketch;
     },
     updateValue(value) {
-      this.activeElement.properties.text.color = value.hex;
-      this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
-      );
+      this.color = value.hex;
+      this.activeElement.properties.text.color = this.color;
     },
   },
 };

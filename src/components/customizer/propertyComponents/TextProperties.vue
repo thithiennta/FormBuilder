@@ -24,7 +24,6 @@ import TextValue from "./Text/TextValue";
 import TextAlign from "./Text/TextAlign";
 import FontWeight from "./Text/FontWeight";
 import FontStyle from "./Text/FontStyle";
-import FontFamily from "./Text/FontFamily";
 import InputName from "./Text/InputName";
 import InputPlaceholder from "./Text/InputPlaceholder";
 export default {
@@ -34,7 +33,6 @@ export default {
     TextValue,
     TextAlign,
     FontStyle,
-    FontFamily,
     FontWeight,
     InputName,
     InputPlaceholder,

@@ -28,21 +28,45 @@
 </template>
 
 <script>
+import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
 export default {
+  data() {
+    return {
+      column1: null,
+      column2: null,
+      column3: null,
+      column4: null,
+    };
+  },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
     columnsNumber() {
       return this.activeElement.elements.length;
     },
   },
+  watch: {
+    column1(newValue, oldValue) {
+      this.debounceFunction(newValue, oldValue);
+    },
+    column2(newValue, oldValue) {
+      this.debounceFunction(newValue, oldValue);
+    },
+    column3(newValue, oldValue) {
+      this.debounceFunction(newValue, oldValue);
+    },
+    column4(newValue, oldValue) {
+      this.debounceFunction(newValue, oldValue);
+    },
+  },
   methods: {
     handleChange(column) {
       this.calculateRemainingWidth(column);
-      this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
-      );
+      for (let i = 0; i < this.columnsNumber; i++) {
+        this["column" + (i + 1)] = this.activeElement.properties.spacing[
+          "column" + (i + 1) + "Width"
+        ];
+      }
     },
     calculateRemainingWidth(column) {
       for (let i = 0; i < this.columnsNumber; i++) {
@@ -56,6 +80,16 @@ export default {
         }
       }
     },
+    debounceFunction: _debounce(function(newValue, oldValue) {
+      if (oldValue === null) return;
+      // This to ADD PREVIOUS STATE and CLONE STATE
+      this.$store.dispatch("formModule/updateProperty");
+      // This to UPDATE PROPERTY
+      this.$store.dispatch(
+        "customizerModule/changePropertyValue",
+        this.activeElement
+      );
+    }, 200),
   },
 };
 </script>

@@ -2,20 +2,13 @@
   <div class="property-wrapper">
     <div class="customizer-sub-title">Border Color</div>
     <div class="property-adjust-wrapper">
-      <div
-        class="show-color-wrapper"
-        @click="handleShowSketch"
-        ref="chooseColor"
-      >
-        <div
-          class="color-block"
-          :style="{ 'background-color': activeElement.properties.border.color }"
-        ></div>
+      <div class="show-color-wrapper" @click="handleShowSketch">
+        <div class="color-block" :style="{ 'background-color': color }"></div>
         <div class="text-block">Choose Color</div>
       </div>
       <Sketch
         id="border-sketch"
-        v-model="activeElement.properties.border.color"
+        v-model="color"
         v-show="showSketch"
         class="sketch-wrapper"
         @input="updateValue"
@@ -25,6 +18,7 @@
 </template>
 
 <script>
+import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
 import { Sketch } from "vue-color";
 export default {
@@ -33,12 +27,15 @@ export default {
   },
   data() {
     return {
-      color: "",
+      color: null,
       showSketch: false,
     };
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
+  },
+  created() {
+    this.color = this.activeElement.properties.border.color;
   },
   mounted() {
     document.addEventListener("click", (e) => {
@@ -49,6 +46,18 @@ export default {
       }
     });
   },
+  watch: {
+    color: _debounce(function(newValue, oldValue) {
+      if (oldValue === null) return;
+      // This to ADD PREVIOUS STATE and CLONE STATE
+      this.$store.dispatch("formModule/updateProperty");
+      // This to UPDATE PROPERTY
+      this.$store.dispatch(
+        "customizerModule/changePropertyValue",
+        this.activeElement
+      );
+    }, 200),
+  },
   methods: {
     handleShowSketch(e) {
       e.stopPropagation();
@@ -58,12 +67,9 @@ export default {
       });
       this.showSketch = !this.showSketch;
     },
-    updateValue(value) {
-      this.activeElement.properties.border.color = value.hex;
-      this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
-      );
+    updateValue({ rgba }) {
+      this.color = `rgba(${rgba.r},${rgba.g}, ${rgba.b}, ${rgba.a})`;
+      this.activeElement.properties.border.color = this.color;
     },
   },
 };

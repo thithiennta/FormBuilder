@@ -3,7 +3,7 @@
     <div class="customizer-sub-title">Font Family</div>
     <div class="property-adjust-wrapper">
       <a-select
-        :default-value="activeElement.properties.general.fontFamily"
+        :default-value="layoutSettings.fontFamily"
         style="width: 200px"
         @change="handleChange"
       >
@@ -25,15 +25,17 @@ export default {
     };
   },
   computed: {
-    ...mapState("customizerModule", ["activeElement"]),
+    ...mapState("formModule", ["layoutSettings"]),
   },
   methods: {
     handleChange(value) {
-      this.activeElement.properties.general.fontFamily = this.styles[value];
+      this.layoutSettings.fontFamily = this.styles[value];
+      // This to ADD PREVIOUS STATE and CLONE STATE
       this.$store.dispatch("formModule/updateProperty");
+      // This to UPDATE LAYOUT PROPERTY
       this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
+        "formModule/changeLayoutProperty",
+        this.layoutSettings
       );
     },
   },

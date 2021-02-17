@@ -1,8 +1,9 @@
 <template>
   <div class="customizer-side-wrapper">
     <HeaderSection v-if="customizerActive" />
-    <BodySection v-if="!haveActiveElement" />
-    <AdjustPropertiesSection v-if="haveActiveElement" />
+    <BodySection v-if="!haveActiveElement && isElementTabActive" />
+    <AdjustPropertiesSection v-if="haveActiveElement && isElementTabActive" />
+    <AdjustLayoutSection v-if="!isElementTabActive" />
   </div>
 </template>
 
@@ -11,12 +12,14 @@ import { mapState } from "vuex";
 import HeaderSection from "./HeaderSection";
 import BodySection from "./BodySection";
 import AdjustPropertiesSection from "./AdjustPropertiesSection";
+import AdjustLayoutSection from "./AdjustLayoutSection";
 
 export default {
   components: {
     HeaderSection,
     BodySection,
     AdjustPropertiesSection,
+    AdjustLayoutSection,
   },
   data() {
     return {
@@ -24,7 +27,11 @@ export default {
     };
   },
   computed: {
-    ...mapState("customizerModule", ["haveActiveElement", "activeElement"]),
+    ...mapState("customizerModule", [
+      "haveActiveElement",
+      "activeElement",
+      "isElementTabActive",
+    ]),
   },
 };
 </script>

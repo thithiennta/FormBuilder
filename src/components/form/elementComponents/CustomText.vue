@@ -1,5 +1,8 @@
 <template>
-  <div class="form-element-wrapper">
+  <div
+    class="form-element-wrapper"
+    :style="{ 'background-color': properties.general.backgroundColor }"
+  >
     <p
       :style="{
         'font-size': properties.text.size + 'px',

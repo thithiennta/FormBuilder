@@ -5,7 +5,7 @@
       <a-input-number
         :min="1"
         :max="100"
-        v-model="activeElement.properties.text.size"
+        v-model="value"
         class="customizer-input-number"
         @change="handleChange"
       />
@@ -14,17 +14,36 @@
 </template>
 
 <script>
+import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
 export default {
+  data() {
+    return {
+      value: null,
+    };
+  },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
   },
-  methods: {
-    handleChange() {
+  created() {
+    this.value = this.activeElement.properties.text.size;
+  },
+  watch: {
+    value: _debounce(function(newValue, oldValue) {
+      if (oldValue === null) return;
+      // This to ADD PREVIOUS STATE and CLONE STATE
+      this.$store.dispatch("formModule/updateProperty");
+      // This to UPDATE PROPERTY
       this.$store.dispatch(
         "customizerModule/changePropertyValue",
         this.activeElement
       );
+    }, 200),
+  },
+  methods: {
+    handleChange() {
+      this.activeElement.properties.text.size =
+        this.value > 100 ? 100 : this.value;
     },
   },
 };

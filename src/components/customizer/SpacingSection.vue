@@ -109,7 +109,6 @@ export default {
           type: "Divider",
           properties: {
             general: {
-              backgroundColor: "white",
               size: 1,
               color: "black",
               style: "solid",

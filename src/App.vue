@@ -23,7 +23,9 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  created() {
+    this.$store.dispatch("formModule/initForm");
+  },
 };
 </script>
 

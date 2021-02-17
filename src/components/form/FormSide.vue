@@ -40,7 +40,15 @@
     </div>
     <vuescroll :ops="options" class="customizer-body-scroll">
       <div class="form-side-container">
-        <div class="form-content">
+        <div
+          class="form-content"
+          :style="{
+            'background-color': layoutSettings.backgroundColor,
+            'font-family': layoutSettings.fontFamily,
+            'font-size': layoutSettings.fontSize + 'px',
+            color: layoutSettings.color,
+          }"
+        >
           <NestedElement v-model="elements" />
         </div>
       </div>
@@ -49,12 +57,14 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import vuescroll from "vuescroll";
 export default {
   components: {
     vuescroll,
   },
   computed: {
+    ...mapState("formModule", ["layoutSettings"]),
     elements: {
       get() {
         return this.$store.state.formModule.elements;
@@ -94,6 +104,7 @@ export default {
   methods: {
     handleUndo() {
       if (this.canUndo) {
+        this.$store.dispatch("customizerModule/unselectElement");
         this.$store.dispatch("formModule/undoAction");
       }
     },
