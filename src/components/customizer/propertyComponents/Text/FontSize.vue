@@ -8,7 +8,15 @@
         v-model="value"
         class="customizer-input-number"
         @change="handleChange"
+        :disabled="inheritCheck"
       />
+      <div class="property-inherit">
+        <a-switch
+          checked-children="Inherit"
+          un-checked-children="Inherit"
+          v-model="inheritCheck"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -20,13 +28,16 @@ export default {
   data() {
     return {
       value: null,
+      inheritCheck: null,
     };
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
+    ...mapState("formModule", ["layoutSettings"]),
   },
   created() {
     this.value = this.activeElement.properties.text.size;
+    this.inheritCheck = this.activeElement.properties.text.inheritSize;
   },
   watch: {
     value: _debounce(function(newValue, oldValue) {
@@ -39,8 +50,20 @@ export default {
         this.activeElement
       );
     }, 200),
+    inheritCheck(mewValue, oldValue) {
+      if (oldValue === null) return;
+      this.activeElement.properties.text.inheritSize = this.inheritCheck;
+      // This to ADD PREVIOUS STATE and CLONE STATE
+      this.$store.dispatch("formModule/updateProperty");
+      // This to UPDATE PROPERTY
+      this.$store.dispatch(
+        "customizerModule/changePropertyValue",
+        this.activeElement
+      );
+    },
     activeElement() {
       this.value = this.activeElement.properties.text.size;
+      this.inheritCheck = this.activeElement.properties.text.inheritSize;
     },
   },
   methods: {
@@ -52,4 +75,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.property-adjust-wrapper {
+  display: flex;
+  align-items: center;
+}
+.property-inherit {
+  margin-left: 10px;
+}
+</style>

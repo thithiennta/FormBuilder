@@ -8,9 +8,7 @@
       color: layoutSettings.color,
     }"
   >
-    <div v-for="el in elements" :key="el.rowId">
-      <OutputElement :formElement="el" />
-    </div>
+    <OutputElement :formElement="el" v-for="el in elements" :key="el.rowId" />
   </div>
 </template>
 
@@ -32,6 +30,9 @@ export default {
   max-width: 1000px;
   width: 90%;
   margin: 10px auto;
+}
+.form-content > .element-big-wrapper {
+  padding: unset !important;
 }
 </style>
 <style>

@@ -1,14 +1,18 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">Font Size</div>
+    <div class="customizer-sub-title">Action</div>
     <div class="property-adjust-wrapper">
-      <a-input-number
-        :min="1"
-        :max="100"
+      <a-input
+        ref="action"
         v-model="value"
-        class="customizer-input-number"
+        placeholder="/homepage"
         @change="handleChange"
-      />
+      >
+        <a-icon slot="prefix" type="edit" />
+        <a-tooltip slot="suffix" title="Action of your form">
+          <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
+        </a-tooltip>
+      </a-input>
     </div>
   </div>
 </template>
@@ -18,15 +22,13 @@ import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
 export default {
   data() {
-    return {
-      value: null,
-    };
+    return { value: null };
+  },
+  created() {
+    this.value = this.layoutSettings.action;
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
-  },
-  created() {
-    this.value = this.layoutSettings.fontSize;
   },
   watch: {
     value: _debounce(function(newValue, oldValue) {
@@ -38,14 +40,18 @@ export default {
         "formModule/changeLayoutProperty",
         this.layoutSettings
       );
-    }, 200),
+    }, 300),
     layoutSettings() {
-      this.value = this.layoutSettings.fontSize;
+      this.value = this.layoutSettings.action;
     },
   },
   methods: {
+    emitEmpty() {
+      this.$refs.action.focus();
+      this.layoutSettings.action = "";
+    },
     handleChange() {
-      this.layoutSettings.fontSize = this.value > 100 ? 100 : this.value;
+      this.layoutSettings.action = this.value;
     },
   },
 };

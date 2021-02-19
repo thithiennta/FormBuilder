@@ -1,7 +1,12 @@
 <template>
   <div
     class="two-column-wrapper"
-    :style="{ 'background-color': properties.general.backgroundColor }"
+    :style="{
+      'background-color':
+        properties.general.backgroundColor.indexOf('0)') !== -1
+          ? layoutSettings.backgroundColor
+          : properties.general.backgroundColor,
+    }"
   >
     <div
       class="column-wrapper"
@@ -20,6 +25,7 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     properties: {
@@ -36,6 +42,9 @@ export default {
     isColumnEmpty(column) {
       return column.length === 0;
     },
+  },
+  computed: {
+    ...mapState("formModule", ["layoutSettings"]),
   },
 };
 </script>
@@ -55,6 +64,8 @@ export default {
 .empty-nested:empty::after {
   content: "Drag content here";
   position: absolute;
+  font-size: 16px !important;
+  color: #000000 !important;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

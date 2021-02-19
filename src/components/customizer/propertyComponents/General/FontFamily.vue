@@ -2,7 +2,12 @@
   <div class="property-wrapper">
     <div class="customizer-sub-title">Font Family</div>
     <div class="property-adjust-wrapper">
-      <a-select v-model="value" style="width: 200px" @change="handleChange">
+      <a-select
+        v-model="value"
+        style="width: 200px"
+        @change="handleChange"
+        :style="{ 'font-family': value }"
+      >
         <a-select-option v-for="(style, index) in styles" :key="index">
           <span :style="{ 'font-family': style }">{{ style }}</span>
         </a-select-option>

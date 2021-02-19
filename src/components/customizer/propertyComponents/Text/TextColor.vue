@@ -2,7 +2,11 @@
   <div class="property-wrapper">
     <div class="customizer-sub-title">Text Color</div>
     <div class="property-adjust-wrapper">
-      <div class="show-color-wrapper" @click="handleShowSketch">
+      <div
+        class="show-color-wrapper"
+        @click="handleShowSketch"
+        :class="{ disable: inheritCheck }"
+      >
         <div class="color-block" :style="{ 'background-color': color }"></div>
         <div class="text-block">Choose Color</div>
       </div>
@@ -13,6 +17,13 @@
         class="sketch-wrapper"
         @input="updateValue"
       />
+      <div class="property-inherit">
+        <a-switch
+          checked-children="Inherit"
+          un-checked-children="Inherit"
+          v-model="inheritCheck"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +40,7 @@ export default {
     return {
       color: null,
       showSketch: false,
+      inheritCheck: null,
     };
   },
   computed: {
@@ -36,6 +48,7 @@ export default {
   },
   created() {
     this.color = this.activeElement.properties.text.color;
+    this.inheritCheck = this.activeElement.properties.text.inheritColor;
   },
   mounted() {
     document.addEventListener("click", (e) => {
@@ -57,8 +70,20 @@ export default {
         this.activeElement
       );
     }, 200),
+    inheritCheck(mewValue, oldValue) {
+      if (oldValue === null) return;
+      this.activeElement.properties.text.inheritColor = this.inheritCheck;
+      // This to ADD PREVIOUS STATE and CLONE STATE
+      this.$store.dispatch("formModule/updateProperty");
+      // This to UPDATE PROPERTY
+      this.$store.dispatch(
+        "customizerModule/changePropertyValue",
+        this.activeElement
+      );
+    },
     activeElement() {
       this.color = this.activeElement.properties.text.color;
+      this.inheritCheck = this.activeElement.properties.text.inheritColor;
     },
   },
   methods: {
@@ -81,6 +106,11 @@ export default {
 <style scoped>
 .property-adjust-wrapper {
 }
+.property-inherit {
+  position: relative;
+  top: -25px;
+  left: 150px;
+}
 .show-color-wrapper {
   display: flex;
   align-items: center;
@@ -88,6 +118,11 @@ export default {
   background-color: white;
   border-radius: 6px;
   cursor: pointer;
+  transition: filter 0.3s ease-in-out;
+}
+.show-color-wrapper.disable {
+  pointer-events: none;
+  filter: contrast(0.4);
 }
 .color-block {
   width: 25px;

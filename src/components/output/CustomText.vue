@@ -5,8 +5,12 @@
   >
     <p
       :style="{
-        'font-size': properties.text.size + 'px',
-        color: properties.text.color,
+        color: properties.text.inheritColor
+          ? layoutSettings.color
+          : properties.text.color,
+        'font-size': properties.text.inheritSize
+          ? layoutSettings.fontSize + 'px'
+          : properties.text.size + 'px',
         'text-align': properties.spacing.align,
         'font-weight': properties.text.weight,
         'font-family': properties.general.fontFamily,
@@ -20,12 +24,16 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     properties: {
       required: true,
       type: Object,
     },
+  },
+  computed: {
+    ...mapState("formModule", ["layoutSettings"]),
   },
 };
 </script>

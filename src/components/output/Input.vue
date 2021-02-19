@@ -4,6 +4,9 @@
     :style="{
       'text-align': properties.spacing.align,
       'background-color': properties.general.backgroundColor,
+      'font-size': properties.text.inheritSize
+        ? layoutSettings.fontSize + 'px'
+        : properties.text.size + 'px',
     }"
   >
     <input
@@ -11,8 +14,9 @@
         'background-color': properties.spacing.backgroundColor,
         ...border,
         'border-radius': properties.border.radius + 'px',
-        color: properties.text.color,
-        'font-size': properties.text.size,
+        color: properties.text.inheritColor
+          ? layoutSettings.color
+          : properties.text.color,
         width: properties.spacing.width + '%',
         height: properties.spacing.height + 'px',
         ...padding,
@@ -27,6 +31,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     properties: {
@@ -35,6 +40,7 @@ export default {
     },
   },
   computed: {
+    ...mapState("formModule", ["layoutSettings"]),
     border() {
       if (this.properties.border.fullWidth) {
         return {

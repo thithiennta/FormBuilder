@@ -6,10 +6,6 @@
       'font-size': properties.text.inheritSize
         ? layoutSettings.fontSize + 'px'
         : properties.text.size + 'px',
-      'background-color':
-        properties.general.backgroundColor.indexOf('0)') !== -1
-          ? layoutSettings.backgroundColor
-          : properties.general.backgroundColor,
     }"
   >
     <textarea
@@ -90,11 +86,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-textarea {
-  outline: none;
-  min-width: min-content;
-  pointer-events: none;
-}
-</style>

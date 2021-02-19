@@ -3,7 +3,10 @@
     class="column-wrapper"
     :class="{ 'empty-nested-wrapper': isEmpty }"
     :style="{
-      'background-color': !isEmpty ? properties.general.backgroundColor : '',
+      'background-color':
+        properties.general.backgroundColor.indexOf('0)') !== -1
+          ? layoutSettings.backgroundColor
+          : properties.general.backgroundColor,
     }"
   >
     <NestedElement
@@ -13,6 +16,7 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     properties: {
@@ -25,6 +29,7 @@ export default {
     },
   },
   computed: {
+    ...mapState("formModule", ["layoutSettings"]),
     isEmpty() {
       return this.nestedElements.length === 0;
     },
@@ -44,6 +49,10 @@ export default {
 .empty-nested:empty::after {
   content: "Drag content here";
   position: relative;
+  font-size: 16px !important;
+  color: #000000 !important;
+  font-family: "Open sans", sans-serif !important;
+  font-family: "Open sans", sans-serif !important;
 }
 .column-wrapper.empty-nested-wrapper p {
   text-align: center;

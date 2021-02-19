@@ -1,7 +1,12 @@
 <template>
   <div
     class="form-element-wrapper"
-    :style="{ 'background-color': properties.general.backgroundColor }"
+    :style="{
+      'background-color':
+        properties.general.backgroundColor.indexOf('0)') !== -1
+          ? layoutSettings.backgroundColor
+          : properties.general.backgroundColor,
+    }"
   >
     <label
       :style="{
@@ -31,6 +36,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     properties: {
@@ -39,6 +45,7 @@ export default {
     },
   },
   computed: {
+    ...mapState("formModule", ["layoutSettings"]),
     margin() {
       if (this.properties.spacing.align === "left") {
         return "-right";
@@ -58,5 +65,8 @@ export default {
 }
 .form-element-wrapper input {
   margin-right: 5px;
+}
+label {
+  pointer-events: none;
 }
 </style>

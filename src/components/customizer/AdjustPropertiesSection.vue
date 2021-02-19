@@ -117,4 +117,7 @@ export default {
 .fade-enter {
   transform: translateX(70px);
 }
+.ant-switch-checked {
+  background-color: #1890ff !important;
+}
 </style>

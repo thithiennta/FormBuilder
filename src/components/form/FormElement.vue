@@ -97,11 +97,17 @@ export default {
   },
   data() {
     return {
-      isActive: false,
+      isActive: null,
       isHover: false,
       deleteVisible: false,
       confirmLoading: false,
     };
+  },
+  created() {
+    if (this.formElement.rowId === this.activeElement.rowId) {
+      this.isActive = true;
+      this.addClickOutSideEvent();
+    } else this.isActive = false;
   },
   watch: {
     isActive(value) {
@@ -191,21 +197,20 @@ export default {
 </script>
 
 <style scoped>
-/* .sortable-chosen .element-big-wrapper {
-  height: 10px;
-}
-.sortable-chosen .element-big-wrapper .element-moving-options i:nth-child(odd) {
-  opacity: 0;
-}
-.sortable-chosen .element-big-wrapper .form-element-wrapper {
-  opacity: 0;
-}
-.sortable-chosen .element-big-wrapper .element-more-options {
-  opacity: 0;
-} */
 .element-big-wrapper {
   position: relative;
   transition: all 0.2s ease-in-out;
+  background-color: white;
+  background-image: linear-gradient(
+      45deg,
+      rgb(247, 247, 247) 25%,
+      transparent 25%
+    ),
+    linear-gradient(-45deg, rgb(247, 247, 247) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgb(247, 247, 247) 75%),
+    linear-gradient(-45deg, transparent 75%, rgb(247, 247, 247) 75%);
+  background-size: 20px 20px;
+  background-position: 0px 0px, 0px 10px, 10px -10px, -10px 0px;
 }
 .detect-element {
   display: none;
@@ -216,6 +221,9 @@ export default {
   width: fit-content;
   padding: 5px 10px;
   z-index: 999;
+  font-size: 16px !important;
+  color: #000000 !important;
+  font-family: "Open sans", sans-serif !important;
 }
 .element-big-wrapper.hover-element > .detect-element {
   display: block;

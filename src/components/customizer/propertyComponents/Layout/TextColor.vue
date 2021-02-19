@@ -57,6 +57,9 @@ export default {
         this.layoutSettings
       );
     }, 200),
+    layoutSettings() {
+      this.color = this.layoutSettings.color;
+    },
   },
   methods: {
     handleShowSketch(e) {

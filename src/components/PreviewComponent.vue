@@ -127,7 +127,7 @@ export default {
 }
 .content-layout {
   height: 90%;
-  width: 75%;
+  width: calc(100% - 250px);
   margin: auto;
   border: 1px solid rgb(150, 150, 150);
   border-radius: 5px;
@@ -141,9 +141,9 @@ export default {
   align-items: center;
 }
 .content-body {
-  width: calc(100% + 1px) !important;
+  width: 100% !important;
   height: calc(100% - 30px) !important;
-  background-color: plum;
+  background-color: rgb(246, 205, 232);
   overflow: hidden;
 }
 .content-three-dot {
