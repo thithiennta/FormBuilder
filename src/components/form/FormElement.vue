@@ -15,9 +15,9 @@
       {{ formElement.type.indexOf("Column") !== -1 ? "Row" : "Content" }}
     </div>
     <div class="element-moving-options" v-if="isActive">
-      <a-icon type="caret-up" />
+      <!-- <a-icon type="caret-up" /> -->
       <a-icon type="drag" class="element-moving-handle" />
-      <a-icon type="caret-down" />
+      <!-- <a-icon type="caret-down" /> -->
     </div>
     <component
       :is="formElement.type"
@@ -197,41 +197,49 @@ export default {
 </script>
 
 <style scoped>
+/* .sortable-chosen .element-big-wrapper {
+  height: 10px;
+}
+.sortable-chosen .element-big-wrapper .element-moving-options i:nth-child(odd) {
+  opacity: 0;
+}
+.sortable-chosen .element-big-wrapper .form-element-wrapper {
+  opacity: 0;
+}
+.sortable-chosen .element-big-wrapper .element-more-options {
+  opacity: 0;
+} */
 .element-big-wrapper {
   position: relative;
   transition: all 0.2s ease-in-out;
-  background-color: white;
-  background-image: linear-gradient(
-      45deg,
-      rgb(247, 247, 247) 25%,
-      transparent 25%
-    ),
-    linear-gradient(-45deg, rgb(247, 247, 247) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgb(247, 247, 247) 75%),
-    linear-gradient(-45deg, transparent 75%, rgb(247, 247, 247) 75%);
-  background-size: 20px 20px;
-  background-position: 0px 0px, 0px 10px, 10px -10px, -10px 0px;
+  margin: 1px;
+  margin-right: 0;
+}
+.form-content > div > div > .element-big-wrapper {
+  margin: 2px;
+  margin-right: 3px;
 }
 .detect-element {
   display: none;
   position: absolute;
   top: 100%;
-  right: -3px;
+  right: -2px;
   background-color: rgb(110, 206, 248);
   width: fit-content;
   padding: 5px 10px;
-  z-index: 999;
   font-size: 16px !important;
   color: #000000 !important;
   font-family: "Open sans", sans-serif !important;
+  z-index: 999;
 }
 .element-big-wrapper.hover-element > .detect-element {
   display: block;
+  background-color: rgb(111, 156, 177);
 }
 .element-big-wrapper.hover-element {
-  z-index: 999;
   transition: border 0s !important;
-  outline: 3px solid rgb(113, 203, 244);
+  outline: 3px solid rgb(111, 156, 177);
+  z-index: 997;
 }
 .element-more-options {
   position: absolute;
@@ -248,28 +256,30 @@ export default {
 }
 .element-moving-options {
   position: absolute;
-  top: 0;
-  left: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: calc(100% + 5px);
   display: flex;
   flex-direction: column;
   border-radius: 4px;
   overflow: hidden;
+  z-index: 999;
 }
 .element-moving-options i {
-  background-color: rgb(237, 236, 236);
+  background-color: rgb(110, 206, 248);
   padding: 4px;
   font-size: 10px;
-  color: rgb(181, 180, 180);
+  color: white;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 .element-moving-options i:hover {
-  color: black;
-  background-color: rgb(229, 229, 229);
+  /* color: black;
+  background-color: rgb(229, 229, 229); */
 }
 .active-element {
-  margin: 5px 0;
-  box-shadow: 2px 3px 6px 2px rgb(205, 201, 201);
+  outline: 3px solid rgb(113, 203, 244);
+  z-index: 997;
 }
 .form-element-wrapper {
   padding: 10px;

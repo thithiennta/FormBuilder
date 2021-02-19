@@ -46,7 +46,7 @@ export default {
           type: "OneColumn",
           properties: {
             general: {
-              backgroundColor: "white",
+              backgroundColor: "rgba(0,0,0,0)",
             },
           },
           settings: ["general", "spacing"],
@@ -58,7 +58,7 @@ export default {
           type: "TwoColumn",
           properties: {
             general: {
-              backgroundColor: "white",
+              backgroundColor: "rgba(0,0,0,0)",
             },
             spacing: {
               column1Width: 50,
@@ -74,7 +74,7 @@ export default {
           type: "ThreeColumn",
           properties: {
             general: {
-              backgroundColor: "white",
+              backgroundColor: "rgba(0,0,0,0)",
             },
             spacing: {
               column1Width: 33.3,
@@ -91,7 +91,7 @@ export default {
           type: "FourColumn",
           properties: {
             general: {
-              backgroundColor: "white",
+              backgroundColor: "rgba(0,0,0,0)",
             },
             spacing: {
               column1Width: 25,
@@ -112,6 +112,7 @@ export default {
               size: 1,
               color: "black",
               style: "solid",
+              backgroundColor: "rgba(0,0,0,0)",
             },
             spacing: {
               width: 100,

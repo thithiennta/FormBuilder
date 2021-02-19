@@ -43,6 +43,7 @@
         <div
           class="form-content"
           :style="{
+            'background-color': layoutSettings.backgroundColor,
             'font-family': layoutSettings.fontFamily,
             'font-size': layoutSettings.fontSize + 'px',
             color: layoutSettings.color,
@@ -219,6 +220,6 @@ export default {
   text-align: center;
 }
 .form-content > div > div > .element-big-wrapper {
-  padding: 0 15px;
+  /* padding: 0 15px; */
 }
 </style>
