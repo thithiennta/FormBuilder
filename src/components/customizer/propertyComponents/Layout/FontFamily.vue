@@ -8,7 +8,7 @@
         @change="handleChange"
       >
         <a-select-option v-for="(style, index) in styles" :key="index">
-          {{ style }}
+          <span :style="{ 'font-family': style }">{{ style }}</span>
         </a-select-option>
       </a-select>
     </div>

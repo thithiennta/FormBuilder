@@ -1,0 +1,63 @@
+<template>
+  <div
+    class="form-content"
+    :style="{
+      'background-color': layoutSettings.backgroundColor,
+      'font-family': layoutSettings.fontFamily,
+      'font-size': layoutSettings.fontSize + 'px',
+      color: layoutSettings.color,
+    }"
+  >
+    <div v-for="el in elements" :key="el.rowId">
+      <OutputElement :formElement="el" />
+    </div>
+  </div>
+</template>
+
+<script>
+import OutputElement from "./OutputElement";
+import { mapState } from "vuex";
+export default {
+  components: {
+    OutputElement,
+  },
+  computed: {
+    ...mapState("formModule", ["layoutSettings", "elements"]),
+  },
+};
+</script>
+
+<style scoped>
+.form-content {
+  max-width: 1000px;
+  width: 90%;
+  margin: 10px auto;
+}
+</style>
+<style>
+.two-column-wrapper,
+.three-column-wrapper,
+.four-column-wrapper {
+  display: flex;
+}
+.form-element-wrapper {
+  padding: 10px;
+  background-color: white;
+}
+button {
+  cursor: pointer;
+}
+button,
+input,
+textarea {
+  outline: none;
+}
+.form-element-wrapper > label {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+.form-element-wrapper input {
+  margin-right: 5px;
+}
+</style>

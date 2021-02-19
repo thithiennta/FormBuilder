@@ -5,26 +5,39 @@
         <CustomizerSide />
       </a-col>
       <a-col flex="1">
-        <FormSide />
+        <FormSide @showPreview="handleShowPreview" />
       </a-col>
     </a-row>
+    <PreviewComponent v-if="showPreview" @closePreview="handleClosePreview" />
   </div>
 </template>
 
 <script>
 import CustomizerSide from "./components/customizer/CustomizerSide";
 import FormSide from "./components/form/FormSide";
+import PreviewComponent from "./components/PreviewComponent";
 export default {
   name: "App",
   components: {
     CustomizerSide,
     FormSide,
+    PreviewComponent,
   },
   data() {
-    return {};
+    return {
+      showPreview: false,
+    };
   },
   created() {
     this.$store.dispatch("formModule/initForm");
+  },
+  methods: {
+    handleShowPreview() {
+      this.showPreview = true;
+    },
+    handleClosePreview() {
+      this.showPreview = false;
+    },
   },
 };
 </script>
@@ -34,6 +47,9 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Reggae+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -55,3 +71,4 @@ body {
   margin: unset !important;
 }
 </style>
+<style scoped></style>

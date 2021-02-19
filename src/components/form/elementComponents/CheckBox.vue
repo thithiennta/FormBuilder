@@ -15,15 +15,16 @@
           width: properties.box.size + 'px',
           height: properties.box.size + 'px',
         }"
+        :value="properties.text.value"
       />
-      <label
+      <span
         :style="{
           'font-size': properties.text.size + 'px',
           color: properties.text.color,
           'font-weight': properties.text.weight,
           'font-family': properties.general.fontFamily,
         }"
-        >{{ properties.text.value }}</label
+        >{{ properties.text.value }}</span
       >
     </label>
   </div>

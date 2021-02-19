@@ -57,6 +57,9 @@ export default {
         this.activeElement
       );
     }, 200),
+    activeElement() {
+      this.color = this.activeElement.properties.text.color;
+    },
   },
   methods: {
     handleShowSketch(e) {

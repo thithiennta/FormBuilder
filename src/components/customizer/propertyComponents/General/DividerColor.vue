@@ -66,6 +66,9 @@ export default {
         this.activeElement
       );
     }, 200),
+    activeElement() {
+      this.color = this.activeElement.properties.general.color;
+    },
   },
   methods: {
     handleShowSketch(e) {

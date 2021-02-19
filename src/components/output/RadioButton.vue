@@ -42,14 +42,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.form-element-wrapper > label {
-  display: flex;
-  align-items: center;
-  width: fit-content;
-}
-.form-element-wrapper input {
-  margin-right: 5px;
-}
-</style>

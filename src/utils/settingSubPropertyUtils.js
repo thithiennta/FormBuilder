@@ -18,7 +18,7 @@ const getElementsByName = function(name, type) {
         case "TwoColumn":
         case "ThreeColumn":
         case "FourColumn":
-          result = [];
+          result = ["ChangeColumn"];
           break;
         case "Divider":
           result = ["DividerSize", "DividerColor", "DividerStyle"];
@@ -71,8 +71,8 @@ const getElementsByName = function(name, type) {
             "TextValue",
             "FontSize",
             "FontWeight",
-            "TextColor",
             "FontStyle",
+            "TextColor",
           ];
           break;
         case "Button":
@@ -93,7 +93,6 @@ const getElementsByName = function(name, type) {
             "FontSize",
             "FontWeight",
             "TextAlign",
-            "FontStyle",
             "TextColor",
           ];
           break;
@@ -105,7 +104,6 @@ const getElementsByName = function(name, type) {
             "FontSize",
             "FontWeight",
             "TextColor",
-            "FontStyle",
           ];
           break;
         default:

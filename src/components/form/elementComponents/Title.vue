@@ -10,6 +10,8 @@
         'text-align': properties.spacing.align,
         'font-weight': properties.text.weight,
         'font-family': properties.general.fontFamily,
+        'font-style': properties.text.style,
+        'text-decoration': properties.text.decoration,
       }"
     >
       {{ properties.text.value }}

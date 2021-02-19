@@ -75,6 +75,12 @@ export default {
 .form-element-ghost .element-wrapper i {
   color: black;
 }
+.form-element-ghost .column-wrapper {
+  border: 1px solid rgb(162, 162, 162) !important;
+  height: 40px;
+  margin: auto;
+  width: calc(100% - 15px);
+}
 .form-element-ghost .element-wrapper p {
   display: none;
 }

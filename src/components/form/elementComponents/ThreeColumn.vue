@@ -66,5 +66,9 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
 }
 </style>

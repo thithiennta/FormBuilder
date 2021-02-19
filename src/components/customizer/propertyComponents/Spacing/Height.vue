@@ -38,6 +38,9 @@ export default {
         this.activeElement
       );
     }, 200),
+    activeElement() {
+      this.value = this.activeElement.properties.spacing.height;
+    },
   },
   methods: {
     handleChange() {

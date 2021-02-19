@@ -81,11 +81,4 @@ export default {
 };
 </script>
 
-<style scoped>
-button {
-  pointer-events: none;
-  outline: none;
-  overflow-wrap: anywhere;
-  min-width: min-content;
-}
-</style>
+<style scoped></style>

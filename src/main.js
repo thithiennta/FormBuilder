@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import store from "./store/index";
 import NestedElement from "./components/form/NestedElement.vue";
+import OutputElement from "./components/output/OutputElement.vue";
 import {
   Row,
   Col,
@@ -25,6 +26,7 @@ import "ant-design-vue/dist/antd.css";
 
 Vue.config.productionTip = false;
 Vue.component("NestedElement", NestedElement);
+Vue.component("OutputElement", OutputElement);
 Vue.use(Row);
 Vue.use(Col);
 Vue.use(Icon);
@@ -42,7 +44,6 @@ Vue.use(Modal);
 Vue.use(Button);
 Vue.use(Popconfirm);
 Vue.use(message);
-
 new Vue({
   store,
   render: (h) => h(App),

@@ -6,6 +6,7 @@
         ref="inputName"
         v-model="value"
         :placeholder="'Sample ' + activeElement.type + ' Name'"
+        @change="handleChange"
       >
         <a-icon slot="prefix" type="edit" />
         <a-tooltip
@@ -46,12 +47,16 @@ export default {
         this.activeElement
       );
     }, 300),
+    activeElement() {
+      this.value = this.activeElement.properties.text.name;
+    },
   },
   methods: {
     emitEmpty() {
       this.$refs.inputName.focus();
       this.activeElement.properties.text.name = "";
     },
+    handleChange() {},
   },
 };
 </script>

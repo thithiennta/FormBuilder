@@ -6,6 +6,7 @@
         ref="inputPlaceholder"
         v-model="value"
         :placeholder="'Sample ' + activeElement.type + ' Placeholder'"
+        @change="handleChange"
       >
         <a-icon slot="prefix" type="edit" />
         <a-tooltip
@@ -37,7 +38,6 @@ export default {
   watch: {
     value: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
-      this.activeElement.properties.text.placeholder = this.value;
       // This to ADD PREVIOUS STATE and CLONE STATE
       this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
@@ -46,11 +46,17 @@ export default {
         this.activeElement
       );
     }, 300),
+    activeElement() {
+      this.value = this.activeElement.properties.text.placeholder;
+    },
   },
   methods: {
     emitEmpty() {
       this.$refs.inputPlaceholder.focus();
       this.activeElement.properties.text.placeholder = "";
+    },
+    handleChange() {
+      this.activeElement.properties.text.placeholder = this.value;
     },
   },
 };

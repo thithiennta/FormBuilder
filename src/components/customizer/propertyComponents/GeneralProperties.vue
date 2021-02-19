@@ -23,6 +23,7 @@ import DividerColor from "./General/DividerColor";
 import DividerSize from "./General/DividerSize";
 import DividerStyle from "./General/DividerStyle";
 import FontFamily from "./General/FontFamily";
+import ChangeColumn from "./General/ChangeColumn";
 export default {
   components: {
     BackgroundColor,
@@ -30,6 +31,7 @@ export default {
     DividerSize,
     DividerStyle,
     FontFamily,
+    ChangeColumn,
   },
   data() {
     return {

@@ -6,25 +6,23 @@
       'background-color': properties.general.backgroundColor,
     }"
   >
-    <button
+    <input
       :style="{
         'background-color': properties.spacing.backgroundColor,
         ...border,
         'border-radius': properties.border.radius + 'px',
         color: properties.text.color,
-        'font-size': properties.text.size + 'px',
-        'font-weight': properties.text.weight,
-        'text-align': properties.text.align,
+        'font-size': properties.text.size,
         width: properties.spacing.width + '%',
         height: properties.spacing.height + 'px',
         ...padding,
+        'text-align': properties.text.align,
+        'font-weight': properties.text.weight,
         'font-family': properties.general.fontFamily,
-        'font-style': properties.text.style,
-        'text-decoration': properties.text.decoration,
       }"
-    >
-      {{ properties.text.value }}
-    </button>
+      :placeholder="properties.text.placeholder"
+      :name="properties.text.name"
+    />
   </div>
 </template>
 
@@ -80,12 +78,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-button {
-  pointer-events: none;
-  outline: none;
-  overflow-wrap: anywhere;
-  min-width: min-content;
-}
-</style>

@@ -2,7 +2,9 @@
   <div
     class="column-wrapper"
     :class="{ 'empty-nested-wrapper': isEmpty }"
-    :style="{ 'background-color': properties.general.backgroundColor }"
+    :style="{
+      'background-color': !isEmpty ? properties.general.backgroundColor : '',
+    }"
   >
     <NestedElement
       :list="nestedElements"

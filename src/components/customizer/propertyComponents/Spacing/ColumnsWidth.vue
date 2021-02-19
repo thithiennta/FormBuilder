@@ -5,7 +5,7 @@
       <div
         class="column-wrapper"
         :style="{
-          width: 100 / columnsNumber + '%',
+          width: propertyWidth,
         }"
         v-for="(item, index) in columnsNumber"
         :key="index"
@@ -43,6 +43,10 @@ export default {
     ...mapState("customizerModule", ["activeElement"]),
     columnsNumber() {
       return this.activeElement.elements.length;
+    },
+    propertyWidth() {
+      if (this.columnsNumber === 4) return "50%";
+      else return 100 / this.columnsNumber + "%";
     },
   },
   watch: {
@@ -111,5 +115,6 @@ export default {
 }
 .column-wrapper {
   text-align: center;
+  margin-bottom: 5px;
 }
 </style>

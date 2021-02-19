@@ -1,8 +1,15 @@
 <template>
-  <div class="form-element-wrapper">
-    <label :style="{ ['margin' + margin]: 'auto' }">
+  <div
+    class="form-element-wrapper"
+    :style="{ 'background-color': properties.general.backgroundColor }"
+  >
+    <label
+      :style="{
+        ['margin' + margin]: 'auto',
+      }"
+    >
       <input
-        type="radio"
+        type="checkbox"
         :name="properties.text.name"
         :style="{
           width: properties.box.size + 'px',
@@ -42,14 +49,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.form-element-wrapper > label {
-  display: flex;
-  align-items: center;
-  width: fit-content;
-}
-.form-element-wrapper input {
-  margin-right: 5px;
-}
-</style>

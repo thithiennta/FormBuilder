@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="preview-control form-control-item">
-        <div class="item-wrapper">
+        <div class="item-wrapper" @click="handlePreview">
           <div class="item-tooltip">
             Preview
           </div>
@@ -112,6 +112,9 @@ export default {
       if (this.canRedo) {
         this.$store.dispatch("formModule/redoAction");
       }
+    },
+    handlePreview() {
+      this.$emit("showPreview");
     },
   },
 };
@@ -215,5 +218,8 @@ export default {
 }
 .empty-nested:empty::after {
   text-align: center;
+}
+.element-big-wrapper {
+  padding: 0 15px;
 }
 </style>

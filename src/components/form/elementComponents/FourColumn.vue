@@ -8,6 +8,9 @@
       :class="{ 'empty-nested-wrapper': isColumnEmpty(nestedElement) }"
       v-for="(nestedElement, index) in nestedElements"
       :key="index"
+      :style="{
+        width: properties.spacing['column' + (index + 1) + 'Width'] + '%',
+      }"
     >
       <NestedElement
         :list="nestedElement"
@@ -66,5 +69,9 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
 }
 </style>
