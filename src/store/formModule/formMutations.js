@@ -1,4 +1,4 @@
-const MAX_UNDO_REDO = 10;
+const MAX_UNDO_REDO = 20;
 export default {
   UPDATE_ELEMENTS(state, payload) {
     state.elements = payload;
