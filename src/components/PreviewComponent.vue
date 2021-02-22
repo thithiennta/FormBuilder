@@ -150,8 +150,8 @@ export default {
   display: flex;
 }
 .content-dot {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   border-radius: 50px;
   margin-right: 5px;
 }

@@ -16,7 +16,6 @@ export default {
       {
         rowId: uuid(),
         name: "Title",
-        icon: "highlight",
         type: "Title",
         properties: {
           general: { backgroundColor: "rgba(0,0,0,0)", fontFamily: "Inherit" },

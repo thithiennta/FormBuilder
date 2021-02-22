@@ -41,7 +41,7 @@
         <a-icon type="more" />
       </a>
       <a-menu slot="overlay">
-        <a-menu-item key="0">
+        <a-menu-item key="0" @click="showDupModal">
           <a-icon type="copy" />Dupplicate this element
         </a-menu-item>
         <a-menu-item key="1" @click="showDeleteModal">
@@ -107,6 +107,7 @@ export default {
     if (this.formElement.rowId === this.activeElement.rowId) {
       this.isActive = true;
       this.addClickOutSideEvent();
+      this.$store.commit("formModule/CLONE_STATE");
     } else this.isActive = false;
   },
   watch: {
@@ -133,6 +134,12 @@ export default {
   methods: {
     deleteElement() {
       this.$store.dispatch("formModule/deleteElement", {
+        parent: this.parentElement,
+        element: this.formElement,
+      });
+    },
+    dupplicateElement() {
+      this.$store.dispatch("formModule/dupplicateElement", {
         parent: this.parentElement,
         element: this.formElement,
       });
@@ -192,6 +199,33 @@ export default {
       });
     },
     handleCancel() {},
+    showDupModal() {
+      Modal.confirm({
+        title: "Confirmation",
+        content: () => (
+          <div>
+            <div>Do you want to dupplicate this element?</div>
+            <div>New element will be created at bottom of this!</div>
+          </div>
+        ),
+        okText: "Ok",
+        cancelText: "Cancel",
+        onOk: this.handleDupOk,
+        onCancel: this.handleCancel,
+      });
+    },
+    handleDupOk() {
+      return new Promise((resolve) => {
+        setTimeout(resolve, 1000);
+      }).then(() => {
+        message.success({
+          content: "Element dupplicated successfully",
+          duration: 1,
+        });
+        this.$store.dispatch("customizerModule/unselectElement");
+        this.dupplicateElement();
+      });
+    },
   },
 };
 </script>

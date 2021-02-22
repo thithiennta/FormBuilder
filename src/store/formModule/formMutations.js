@@ -1,3 +1,4 @@
+import { v4 as uuid } from "uuid";
 const MAX_UNDO_REDO = 20;
 export default {
   UPDATE_ELEMENTS(state, payload) {
@@ -20,6 +21,12 @@ export default {
   DELETE_ELEMENT(state, payload) {
     const position = payload.parent.indexOf(payload.element);
     payload.parent.splice(position, 1);
+  },
+  DUPPLICATE_ELEMENT(state, payload) {
+    const position = payload.parent.indexOf(payload.element);
+    var dupElement = JSON.parse(JSON.stringify(payload.element));
+    dupElement.rowId = uuid();
+    payload.parent.splice(position, 0, dupElement);
   },
   LOAD_PREVIOUS_STATE(state) {
     const prevState = JSON.parse(JSON.stringify(state.previousStates[0]));

@@ -4,6 +4,11 @@ export default {
     commit("DELETE_ELEMENT", payload);
     commit("CLONE_STATE");
   },
+  dupplicateElement({ commit }, payload) {
+    commit("ADD_PREVIOUS_STATE");
+    commit("DUPPLICATE_ELEMENT", payload);
+    commit("CLONE_STATE");
+  },
   updateElements({ commit }, payload) {
     commit("ADD_PREVIOUS_STATE");
     commit("UPDATE_ELEMENTS", payload);
