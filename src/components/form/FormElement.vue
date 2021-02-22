@@ -219,7 +219,7 @@ export default {
   display: none;
   position: absolute;
   top: 100%;
-  right: -2px;
+  right: -3px;
   background-color: rgb(110, 206, 248);
   width: fit-content;
   padding: 5px 10px;
