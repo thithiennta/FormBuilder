@@ -1,6 +1,6 @@
 <template>
   <div
-    class="two-column-wrapper"
+    class="columns-wrapper"
     :style="{
       'background-color':
         properties.general.backgroundColor.indexOf('0)') !== -1
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style scoped>
-.two-column-wrapper {
+.columns-wrapper {
   display: flex;
 }
 .column-wrapper.empty-nested-wrapper {

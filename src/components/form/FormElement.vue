@@ -197,13 +197,22 @@ export default {
 </script>
 
 <style scoped>
-/* .sortable-chosen .element-big-wrapper {
+.sortable-chosen .element-big-wrapper {
 }
-.sortable-chosen.form-element-ghost .element-big-wrapper {
+.sortable-chosen.form-element-ghost .element-big-wrapper .form-element-wrapper {
+  opacity: 0;
+  height: 40px;
+}
+.sortable-chosen.form-element-ghost
+  .element-big-wrapper
+  .columns-wrapper
+  .column-wrapper {
+  opacity: 0;
+  height: 40px;
 }
 .sortable-chosen .element-big-wrapper .element-more-options {
   opacity: 0;
-} */
+}
 .element-big-wrapper {
   border: 3px solid transparent;
   position: relative;
