@@ -44,7 +44,17 @@ export default {
   align-items: center;
   min-height: 100px;
   border: 1px dashed rgb(64, 186, 248);
-  background-color: rgb(176, 231, 254);
+  background-color: rgb(176, 231, 254) !important;
+}
+.column-wrapper.empty-nested-wrapper p {
+  text-align: center;
+}
+.column-wrapper > div {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-family: "Open sans", sans-serif !important;
 }
 .empty-nested:empty::after {
   content: "Drag content here";
@@ -54,13 +64,11 @@ export default {
   font-family: "Open sans", sans-serif !important;
   font-family: "Open sans", sans-serif !important;
 }
-.column-wrapper.empty-nested-wrapper p {
-  text-align: center;
-}
 .empty-nested {
   position: relative;
   height: 100%;
   width: 100%;
   text-align: center;
+  font-family: "Open sans", sans-serif !important;
 }
 </style>

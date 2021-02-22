@@ -198,26 +198,22 @@ export default {
 
 <style scoped>
 /* .sortable-chosen .element-big-wrapper {
-  height: 10px;
 }
-.sortable-chosen .element-big-wrapper .element-moving-options i:nth-child(odd) {
-  opacity: 0;
-}
-.sortable-chosen .element-big-wrapper .form-element-wrapper {
-  opacity: 0;
+.sortable-chosen.form-element-ghost .element-big-wrapper {
 }
 .sortable-chosen .element-big-wrapper .element-more-options {
   opacity: 0;
 } */
 .element-big-wrapper {
+  border: 3px solid transparent;
   position: relative;
-  transition: all 0.2s ease-in-out;
-  margin: 1px;
-  margin-right: 0;
+  /* transition: all 0.2s ease-in-out; */
+  /* margin: 1px;
+  margin-right: 0; */
 }
 .form-content > div > div > .element-big-wrapper {
-  margin: 2px;
-  margin-right: 3px;
+  /* margin: 2px;
+  margin-right: 3px; */
 }
 .detect-element {
   display: none;
@@ -237,9 +233,9 @@ export default {
   background-color: rgb(111, 156, 177);
 }
 .element-big-wrapper.hover-element {
-  transition: border 0s !important;
-  outline: 3px solid rgb(111, 156, 177);
-  z-index: 997;
+  /* outline: 3px solid rgb(111, 156, 177);
+  z-index: 997; */
+  border: 3px solid rgb(111, 156, 177);
 }
 .element-more-options {
   position: absolute;
@@ -273,13 +269,10 @@ export default {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.element-moving-options i:hover {
-  /* color: black;
-  background-color: rgb(229, 229, 229); */
-}
 .active-element {
-  outline: 3px solid rgb(113, 203, 244);
-  z-index: 997;
+  /* outline: 3px solid rgb(113, 203, 244);
+  z-index: 996; */
+  border: 3px solid rgb(113, 203, 244);
 }
 .form-element-wrapper {
   padding: 10px;

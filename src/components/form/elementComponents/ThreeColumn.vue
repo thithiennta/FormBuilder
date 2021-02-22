@@ -82,5 +82,13 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 100px;
+  font-family: "Open sans", sans-serif !important;
+}
+.column-wrapper > div {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-family: "Open sans", sans-serif !important;
 }
 </style>

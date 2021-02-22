@@ -2,40 +2,44 @@
   <div id="form-side" class="form-side-wrapper">
     <div class="form-control">
       <div class="undo-redo-control form-control-item">
-        <div class="item-wrapper" @click="handleUndo">
-          <div class="item-tooltip">
-            Undo
-          </div>
+        <a-tooltip placement="bottom" class="item-wrapper" @click="handleUndo">
+          <template slot="title">
+            <span>Undo</span>
+          </template>
           <a-icon type="undo" />
-        </div>
-        <div class="item-wrapper" @click="handleRedo">
-          <div class="item-tooltip">
-            Redo
-          </div>
+        </a-tooltip>
+        <a-tooltip placement="bottom" class="item-wrapper" @click="handleRedo">
+          <template slot="title">
+            <span>Redo</span>
+          </template>
           <a-icon type="redo" />
-        </div>
+        </a-tooltip>
       </div>
       <div class="preview-control form-control-item">
-        <div class="item-wrapper" @click="handlePreview">
-          <div class="item-tooltip">
-            Preview
-          </div>
+        <a-tooltip
+          placement="bottom"
+          class="item-wrapper"
+          @click="handlePreview"
+        >
+          <template slot="title">
+            <span>Preview</span>
+          </template>
           <a-icon type="eye" />
-        </div>
+        </a-tooltip>
       </div>
       <div class="viewport-control form-control-item">
-        <div class="item-wrapper">
-          <div class="item-tooltip">
-            Desktop
-          </div>
-          <a-icon type="desktop" class="active" />
-        </div>
-        <div class="item-wrapper">
-          <div class="item-tooltip">
-            Mobile
-          </div>
+        <a-tooltip placement="bottom" class="item-wrapper active">
+          <template slot="title">
+            <span>Desktop</span>
+          </template>
+          <a-icon type="desktop" />
+        </a-tooltip>
+        <a-tooltip placement="bottom" class="item-wrapper">
+          <template slot="title">
+            <span>Mobile</span>
+          </template>
           <a-icon type="tablet" />
-        </div>
+        </a-tooltip>
       </div>
     </div>
     <vuescroll :ops="options" class="customizer-body-scroll">
@@ -116,6 +120,9 @@ export default {
     handlePreview() {
       this.$emit("showPreview");
     },
+    handleStopPro(e) {
+      e.stopPropagation();
+    },
   },
 };
 </script>
@@ -140,10 +147,10 @@ export default {
 .form-control-item i.active {
   color: rgb(234, 232, 232);
 }
-.undo-redo-control .item-wrapper:first-child i {
+.undo-redo-control .item-wrapper:first-child {
   transform: rotate(90deg);
 }
-.undo-redo-control .item-wrapper:nth-child(2) i {
+.undo-redo-control .item-wrapper:nth-child(2) {
   transform: rotate(-90deg);
 }
 .form-control-item .item-wrapper {
@@ -164,9 +171,6 @@ export default {
 .item-wrapper {
   position: relative;
 }
-.item-wrapper:hover .item-tooltip {
-  opacity: 1;
-}
 .item-tooltip {
   opacity: 0;
   position: absolute;
@@ -178,6 +182,9 @@ export default {
   border-radius: 4px;
   z-index: 999;
   transition: opacity 0.3s ease-in;
+}
+.item-tooltip.show {
+  opacity: 1;
 }
 .customizer-body-scroll {
   position: relative !important;

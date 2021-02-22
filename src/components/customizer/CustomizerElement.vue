@@ -82,7 +82,7 @@ export default {
 }
 .column-wrapper {
   width: 90%;
-  height: 25px;
+  min-height: 25px;
   background-color: white;
   margin-bottom: 10px;
   border-radius: 4px;

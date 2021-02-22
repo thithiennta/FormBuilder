@@ -11,6 +11,9 @@
     <hr
       :style="{
         'border-top-width': properties.general.size + 'px',
+        'border-bottom': 0,
+        'border-left': 0,
+        'border-right': 0,
         'border-top-style': properties.general.style,
         'border-top-color': properties.general.color,
         width: properties.spacing.width + '%',

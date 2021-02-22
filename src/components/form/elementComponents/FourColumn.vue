@@ -69,7 +69,6 @@ export default {
   position: absolute;
   font-size: 16px !important;
   color: #000000 !important;
-  font-family: "Open sans", sans-serif !important;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -85,5 +84,13 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 100px;
+  font-family: "Open sans", sans-serif !important;
+}
+.column-wrapper > div {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-family: "Open sans", sans-serif !important;
 }
 </style>
