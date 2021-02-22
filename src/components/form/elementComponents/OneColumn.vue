@@ -49,7 +49,7 @@ export default {
 .column-wrapper.empty-nested-wrapper p {
   text-align: center;
 }
-.column-wrapper > div {
+.column-wrapper > div.empty-nested {
   position: relative;
   height: 100%;
   width: 100%;

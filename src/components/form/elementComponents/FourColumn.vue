@@ -86,7 +86,7 @@ export default {
   min-height: 100px;
   font-family: "Open sans", sans-serif !important;
 }
-.column-wrapper > div {
+.column-wrapper > div.empty-nested {
   position: relative;
   height: 100%;
   width: 100%;

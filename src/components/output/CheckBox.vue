@@ -19,8 +19,12 @@
       />
       <span
         :style="{
-          'font-size': properties.text.size + 'px',
-          color: properties.text.color,
+          color: properties.text.inheritColor
+            ? layoutSettings.color
+            : properties.text.color,
+          'font-size': properties.text.inheritSize
+            ? layoutSettings.fontSize + 'px'
+            : properties.text.size + 'px',
           'font-weight': properties.text.weight,
           'font-family': properties.general.fontFamily,
         }"
@@ -31,6 +35,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     properties: {
@@ -39,6 +44,8 @@ export default {
     },
   },
   computed: {
+    ...mapState("formModule", ["layoutSettings"]),
+
     margin() {
       if (this.properties.spacing.align === "left") {
         return "-right";
