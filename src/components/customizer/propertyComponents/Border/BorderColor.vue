@@ -57,6 +57,9 @@ export default {
         this.activeElement
       );
     }, 200),
+    activeElement() {
+      this.color = this.activeElement.properties.border.color;
+    },
   },
   methods: {
     handleShowSketch(e) {

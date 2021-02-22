@@ -1,14 +1,38 @@
 <template>
   <div class="adjust-section-wrapper">
     <vuescroll :ops="options" class="customizer-body-scroll">
-      <div class="property-wrapper">
-        <div class="layout-customizer-container">
+      <a-collapse
+        default-active-key="1"
+        :bordered="false"
+        expand-icon-position="right"
+        class="property-wrapper"
+      >
+        <a-collapse-panel
+          key="1"
+          header="LAYOUT STYLES"
+          class="customizer-container"
+        >
           <BackgroundColor />
           <FontFamily />
           <FontSize />
           <TextColor />
-        </div>
-      </div>
+        </a-collapse-panel>
+      </a-collapse>
+      <a-collapse
+        default-active-key="1"
+        :bordered="false"
+        expand-icon-position="right"
+        class="property-wrapper"
+      >
+        <a-collapse-panel
+          key="1"
+          header="FORM SETTINGS"
+          class="customizer-container"
+        >
+          <Action />
+          <Method />
+        </a-collapse-panel>
+      </a-collapse>
     </vuescroll>
   </div>
 </template>
@@ -18,6 +42,8 @@ import BackgroundColor from "./propertyComponents/Layout/BackgroundColor";
 import FontFamily from "./propertyComponents/Layout/FontFamily";
 import FontSize from "./propertyComponents/Layout/FontSize";
 import TextColor from "./propertyComponents/Layout/TextColor";
+import Action from "./propertyComponents/Layout/Action";
+import Method from "./propertyComponents/Layout/Method";
 // import { mapState } from "vuex";
 import vuescroll from "vuescroll";
 export default {
@@ -27,6 +53,8 @@ export default {
     FontFamily,
     FontSize,
     TextColor,
+    Action,
+    Method,
   },
   data() {
     return {
@@ -61,10 +89,8 @@ export default {
 .customizer-body-scroll {
   width: 100%;
 }
-.layout-customizer-container {
-  margin: auto;
-  border: 0 !important;
-  width: 90% !important;
+.customizer-container {
+  margin-bottom: 10px !important;
 }
 </style>
 <style>

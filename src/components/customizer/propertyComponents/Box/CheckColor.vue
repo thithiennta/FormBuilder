@@ -66,6 +66,9 @@ export default {
         this.activeElement
       );
     }, 200),
+    activeElement() {
+      this.color = this.activeElement.properties.box.checkColor;
+    },
   },
   methods: {
     handleShowSketch(e) {

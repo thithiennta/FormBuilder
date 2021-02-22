@@ -96,10 +96,10 @@ export default {
   created() {
     this.fullWidth = this.activeElement.properties.border.fullWidth;
     this.allSides = this.activeElement.properties.border.allSidesWidth;
-    this.top = this.activeElement.properties.border.top;
-    this.left = this.activeElement.properties.border.left;
-    this.right = this.activeElement.properties.border.right;
-    this.bottom = this.activeElement.properties.border.bottom;
+    this.top = this.activeElement.properties.border.topWidth;
+    this.left = this.activeElement.properties.border.leftWidth;
+    this.right = this.activeElement.properties.border.rightWidth;
+    this.bottom = this.activeElement.properties.border.bottomWidth;
   },
   watch: {
     fullWidth(newValue, oldValue) {
@@ -120,6 +120,14 @@ export default {
     bottom(newValue, oldValue) {
       this.debounceFunction(newValue, oldValue);
     },
+    activeElement() {
+      this.fullWidth = this.activeElement.properties.border.fullWidth;
+      this.allSides = this.activeElement.properties.border.allSidesWidth;
+      this.top = this.activeElement.properties.border.topWidth;
+      this.left = this.activeElement.properties.border.leftWidth;
+      this.right = this.activeElement.properties.border.rightWidth;
+      this.bottom = this.activeElement.properties.border.bottomWidth;
+    },
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
@@ -129,11 +137,11 @@ export default {
       this.activeElement.properties.border = {
         ...this.activeElement.properties.border,
         fullWidth: this.fullWidth > 25 ? 25 : this.fullWidth,
-        topWidth: this.top > 25 ? 25 : this.fullWidth,
-        leftWidth: this.left > 25 ? 25 : this.fullWidth,
-        rightWidth: this.right > 25 ? 25 : this.fullWidth,
-        bottomWidth: this.bottom > 25 ? 25 : this.fullWidth,
-        allSidesWidth: this.allSides > 25 ? 25 : this.fullWidth,
+        topWidth: this.top > 25 ? 25 : this.top,
+        leftWidth: this.left > 25 ? 25 : this.left,
+        rightWidth: this.right > 25 ? 25 : this.right,
+        bottomWidth: this.bottom > 25 ? 25 : this.bottom,
+        allSidesWidth: this.allSides > 25 ? 25 : this.allSides,
       };
     },
     debounceFunction: _debounce(function(newValue, oldValue) {

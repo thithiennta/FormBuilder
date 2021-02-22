@@ -63,6 +63,7 @@
 <script>
 import { mapState } from "vuex";
 import vuescroll from "vuescroll";
+import { message } from "ant-design-vue";
 export default {
   components: {
     vuescroll,
@@ -110,11 +111,29 @@ export default {
       if (this.canUndo) {
         this.$store.dispatch("customizerModule/unselectElement");
         this.$store.dispatch("formModule/undoAction");
+        message.success({
+          content: "Undo successfully!",
+          duration: 1.5,
+        });
+      } else {
+        message.warning({
+          content: "You cannot go back anymore! ",
+          duration: 1.5,
+        });
       }
     },
     handleRedo() {
       if (this.canRedo) {
         this.$store.dispatch("formModule/redoAction");
+        message.success({
+          content: "Redo successfully!",
+          duration: 1.5,
+        });
+      } else {
+        message.warning({
+          content: "You cannot go forward anymore! ",
+          duration: 1.5,
+        });
       }
     },
     handlePreview() {
@@ -194,6 +213,11 @@ export default {
 }
 </style>
 <style>
+.ant-message {
+  width: calc(100% - 300px) !important;
+  right: 0 !important;
+  left: unset !important;
+}
 .form-side-wrapper {
   position: relative;
   height: 100vh;

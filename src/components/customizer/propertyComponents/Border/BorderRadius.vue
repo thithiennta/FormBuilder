@@ -5,7 +5,7 @@
       <a-input-number
         :min="0"
         :max="50"
-        v-model="activeElement.properties.border.radius"
+        v-model="value"
         class="customizer-input-number"
         @change="handleChange"
       />
@@ -38,7 +38,10 @@ export default {
         "customizerModule/changePropertyValue",
         this.activeElement
       );
-    }),
+    }, 200),
+    activeElement() {
+      this.value = this.activeElement.properties.border.radius;
+    },
   },
   methods: {
     handleChange() {
