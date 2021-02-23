@@ -73,8 +73,6 @@ export default {
     inheritCheck(mewValue, oldValue) {
       if (oldValue === null) return;
       this.activeElement.properties.text.inheritColor = this.inheritCheck;
-      // This to ADD PREVIOUS STATE and CLONE STATE
-      this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
       this.$store.dispatch(
         "customizerModule/changePropertyValue",

@@ -1,6 +1,6 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">Font Size</div>
+    <div class="customizer-sub-title">Label Size</div>
     <div class="property-adjust-wrapper">
       <a-input-number
         :min="1"
@@ -28,7 +28,7 @@ export default {
     ...mapState("formModule", ["layoutSettings"]),
   },
   created() {
-    this.value = this.layoutSettings.fontSize;
+    this.value = this.layoutSettings.input.labelSize;
   },
   watch: {
     value: _debounce(function(newValue, oldValue) {
@@ -42,15 +42,15 @@ export default {
       );
     }, 300),
     layoutSettings() {
-      this.value = this.layoutSettings.fontSize;
+      this.value = this.layoutSettings.input.labelSize;
     },
   },
   methods: {
     handleChange() {
       if (this.value > max) this.value = max;
-      if (this.value < min || this.value === null || this.value === "")
+      if (this.value === null || this.value === "" || this.value < min)
         this.value = min;
-      this.layoutSettings.fontSize = this.value;
+      this.layoutSettings.input.labelSize = this.value;
     },
   },
 };

@@ -24,6 +24,7 @@ import SpacingAlign from "./Spacing/SpacingAlign";
 import SpacingPadding from "./Spacing/SpacingPadding";
 import ElementBackgroundColor from "./Spacing/ElementBackgroundColor";
 import ColumnsWidth from "./Spacing/ColumnsWidth";
+import SpacingMargin from "./Spacing/SpacingMargin";
 export default {
   components: {
     Width,
@@ -32,6 +33,7 @@ export default {
     SpacingPadding,
     ElementBackgroundColor,
     ColumnsWidth,
+    SpacingMargin,
   },
   data() {
     return {

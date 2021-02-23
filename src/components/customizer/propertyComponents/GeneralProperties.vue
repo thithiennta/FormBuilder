@@ -24,6 +24,7 @@ import DividerSize from "./General/DividerSize";
 import DividerStyle from "./General/DividerStyle";
 import FontFamily from "./General/FontFamily";
 import ChangeColumn from "./General/ChangeColumn";
+import LabelMargin from "./General/LabelMargin";
 export default {
   components: {
     BackgroundColor,
@@ -32,6 +33,7 @@ export default {
     DividerStyle,
     FontFamily,
     ChangeColumn,
+    LabelMargin,
   },
   data() {
     return {

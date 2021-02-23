@@ -1,12 +1,12 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">Font Size</div>
+    <div class="customizer-sub-title">Label Width</div>
     <div class="property-adjust-wrapper">
-      <a-input-number
-        :min="1"
-        :max="100"
+      <div class="slider-tool-tip">{{ value }}%</div>
+      <a-slider
         v-model="value"
-        class="customizer-input-number"
+        :tooltip-visible="false"
+        :default-value="layoutSettings.input.labelWidth"
         @change="handleChange"
       />
     </div>
@@ -16,19 +16,14 @@
 <script>
 import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
-const min = 1,
-  max = 100;
 export default {
   data() {
     return {
       value: null,
     };
   },
-  computed: {
-    ...mapState("formModule", ["layoutSettings"]),
-  },
   created() {
-    this.value = this.layoutSettings.fontSize;
+    this.value = this.layoutSettings.input.labelWidth;
   },
   watch: {
     value: _debounce(function(newValue, oldValue) {
@@ -40,20 +35,30 @@ export default {
         "formModule/changeLayoutProperty",
         this.layoutSettings
       );
-    }, 300),
-    layoutSettings() {
-      this.value = this.layoutSettings.fontSize;
+    }, 200),
+    activeElement() {
+      this.value = this.layoutSettings.input.labelWidth;
     },
+  },
+  computed: {
+    ...mapState("formModule", ["layoutSettings"]),
   },
   methods: {
     handleChange() {
-      if (this.value > max) this.value = max;
-      if (this.value < min || this.value === null || this.value === "")
-        this.value = min;
-      this.layoutSettings.fontSize = this.value;
+      this.layoutSettings.input.labelWidth = this.value;
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.property-adjust-wrapper {
+  position: relative;
+}
+.slider-tool-tip {
+  color: grey;
+  position: absolute;
+  right: 0;
+  top: -25px;
+}
+</style>

@@ -1,7 +1,18 @@
 <template>
   <div
     class="form-element-wrapper"
-    :style="{ 'background-color': properties.general.backgroundColor }"
+    :style="{
+      'background-color': properties.general.backgroundColor,
+      margin:
+        properties.spacing.topMargin +
+        'px ' +
+        properties.spacing.rightMargin +
+        'px ' +
+        properties.spacing.bottomMargin +
+        'px ' +
+        properties.spacing.leftMargin +
+        'px ',
+    }"
   >
     <p
       :style="{

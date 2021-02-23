@@ -25,7 +25,7 @@ export default {
     return { value: null };
   },
   created() {
-    this.value = this.layoutSettings.action;
+    this.value = this.layoutSettings.form.action;
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
@@ -42,7 +42,7 @@ export default {
       );
     }, 300),
     layoutSettings() {
-      this.value = this.layoutSettings.action;
+      this.value = this.layoutSettings.form.action;
     },
   },
   methods: {

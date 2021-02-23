@@ -26,8 +26,11 @@ export default {
     emitter(value) {
       this.$emit("input", value);
     },
-    handleChange() {
+    handleChange(v) {
       if (this.list) {
+        if (v.removed) {
+          this.$store.commit("formModule/CLONE_STATE");
+        }
         this.$store.commit("formModule/ADD_PREVIOUS_STATE");
         this.$store.dispatch("customizerModule/addColumnItem");
         this.$store.commit("formModule/CLONE_STATE");

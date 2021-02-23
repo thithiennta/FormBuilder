@@ -6,6 +6,15 @@
         properties.general.backgroundColor.indexOf('0)') !== -1
           ? layoutSettings.backgroundColor
           : properties.general.backgroundColor,
+      margin:
+        properties.spacing.topMargin +
+        'px ' +
+        properties.spacing.rightMargin +
+        'px ' +
+        properties.spacing.bottomMargin +
+        'px ' +
+        properties.spacing.leftMargin +
+        'px ',
     }"
   >
     <p

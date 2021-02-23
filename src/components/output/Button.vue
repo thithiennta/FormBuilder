@@ -7,6 +7,15 @@
       'font-size': properties.text.inheritSize
         ? layoutSettings.fontSize + 'px'
         : properties.text.size + 'px',
+      margin:
+        properties.spacing.topMargin +
+        'px ' +
+        properties.spacing.rightMargin +
+        'px ' +
+        properties.spacing.bottomMargin +
+        'px ' +
+        properties.spacing.leftMargin +
+        'px ',
     }"
   >
     <button

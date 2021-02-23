@@ -1,22 +1,22 @@
 <template>
   <div class="property-wrapper">
     <div class="customizer-sub-title">
-      Width
+      Margin
       <div class="setting-switch">
         More Options
-        <a-switch v-model="fullWidth" @change="handleChange">
+        <a-switch v-model="fullMargin" @change="handleChange" disabled>
           <a-icon slot="checkedChildren" type="check" />
           <a-icon slot="unCheckedChildren" type="close" />
         </a-switch>
       </div>
     </div>
     <transition name="fade">
-      <div class="all-slides-wrapper" v-if="!fullWidth">
+      <div class="all-slides-wrapper" v-if="false">
         <div class="customizer-sub-sub-title">All Sides</div>
         <div class="property-adjust-wrapper">
           <a-input-number
-            :min="1"
-            :max="25"
+            :min="0"
+            :max="100"
             v-model="allSides"
             class="customizer-input-number"
             @change="handleChange"
@@ -25,49 +25,49 @@
       </div>
     </transition>
     <transition name="fade">
-      <div class="full-width-wrapper" v-if="fullWidth">
-        <div class="width-item">
+      <div class="full-width-wrapper" v-if="true">
+        <div class="padding-item">
           <div class="customizer-sub-sub-title">Top</div>
           <div class="property-adjust-wrapper">
             <a-input-number
-              :min="1"
-              :max="25"
+              :min="0"
+              :max="100"
               v-model="top"
               class="customizer-input-number"
               @change="handleChange"
             />
           </div>
         </div>
-        <div class="width-item">
+        <div class="padding-item">
           <div class="customizer-sub-sub-title">Left</div>
           <div class="property-adjust-wrapper">
             <a-input-number
-              :min="1"
-              :max="25"
+              :min="0"
+              :max="100"
               v-model="left"
               class="customizer-input-number"
               @change="handleChange"
             />
           </div>
         </div>
-        <div class="width-item">
+        <div class="padding-item">
           <div class="customizer-sub-sub-title">Bottom</div>
           <div class="property-adjust-wrapper">
             <a-input-number
-              :min="1"
-              :max="25"
+              :min="0"
+              :max="100"
               v-model="bottom"
               class="customizer-input-number"
               @change="handleChange"
             />
           </div>
         </div>
-        <div class="width-item">
+        <div class="padding-item">
           <div class="customizer-sub-sub-title">Right</div>
           <div class="property-adjust-wrapper">
             <a-input-number
-              :min="1"
-              :max="25"
+              :min="0"
+              :max="100"
               v-model="right"
               class="customizer-input-number"
               @change="handleChange"
@@ -82,12 +82,12 @@
 <script>
 import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
-const min = 1,
-  max = 25;
+const min = 0,
+  max = 100;
 export default {
   data() {
     return {
-      fullWidth: null,
+      fullMargin: null,
       allSides: null,
       top: null,
       left: null,
@@ -96,12 +96,16 @@ export default {
     };
   },
   created() {
-    this.fullWidth = this.activeElement.properties.border.fullWidth;
-    this.allSides = this.activeElement.properties.border.allSidesWidth;
-    this.top = this.activeElement.properties.border.topWidth;
-    this.left = this.activeElement.properties.border.leftWidth;
-    this.right = this.activeElement.properties.border.rightWidth;
-    this.bottom = this.activeElement.properties.border.bottomWidth;
+    // this.fullMargin = this.activeElement.properties.spacing.fullMargin;
+    this.fullMargin = true;
+    this.allSides = this.activeElement.properties.spacing.allSidesMargin;
+    this.top = this.activeElement.properties.spacing.topMargin;
+    this.left = this.activeElement.properties.spacing.leftMargin;
+    this.right = this.activeElement.properties.spacing.rightMargin;
+    this.bottom = this.activeElement.properties.spacing.bottomMargin;
+  },
+  computed: {
+    ...mapState("customizerModule", ["activeElement"]),
   },
   watch: {
     fullWidth(newValue, oldValue) {
@@ -123,16 +127,13 @@ export default {
       this.debounceFunction(newValue, oldValue);
     },
     activeElement() {
-      this.fullWidth = this.activeElement.properties.border.fullWidth;
-      this.allSides = this.activeElement.properties.border.allSidesWidth;
-      this.top = this.activeElement.properties.border.topWidth;
-      this.left = this.activeElement.properties.border.leftWidth;
-      this.right = this.activeElement.properties.border.rightWidth;
-      this.bottom = this.activeElement.properties.border.bottomWidth;
+      this.fullMargin = this.activeElement.properties.spacing.fullMargin;
+      this.allSides = this.activeElement.properties.spacing.allSidesMargin;
+      this.top = this.activeElement.properties.spacing.topMargin;
+      this.left = this.activeElement.properties.spacing.leftMargin;
+      this.right = this.activeElement.properties.spacing.rightMargin;
+      this.bottom = this.activeElement.properties.spacing.bottomMargin;
     },
-  },
-  computed: {
-    ...mapState("customizerModule", ["activeElement"]),
   },
   methods: {
     handleChange() {
@@ -151,14 +152,14 @@ export default {
       if (this.right > max) this.right = max;
       if (this.bottom > max) this.bottom = max;
       if (this.allSides > max) this.allSides = max;
-      this.activeElement.properties.border = {
-        ...this.activeElement.properties.border,
-        fullWidth: this.fullWidth,
-        topWidth: this.top,
-        leftWidth: this.left,
-        rightWidth: this.right,
-        bottomWidth: this.bottom,
-        allSidesWidth: this.allSides,
+      this.activeElement.properties.spacing = {
+        ...this.activeElement.properties.spacing,
+        fullMargin: this.fullMargin,
+        topMargin: this.top,
+        leftMargin: this.left,
+        rightMargin: this.right,
+        bottomMargin: this.bottom,
+        allSidesMargin: this.allSides,
       };
     },
     debounceFunction: _debounce(function(newValue, oldValue) {
@@ -178,13 +179,13 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.width-item {
+.padding-item {
   width: 50%;
 }
-.width-item:first-child {
+.padding-item:first-child {
   margin-bottom: 10px;
 }
-.width-item:nth-child(even) {
+.padding-item:nth-child(even) {
   text-align: right;
 }
 .property-wrapper > .customizer-sub-title {

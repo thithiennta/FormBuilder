@@ -19,6 +19,7 @@ import Input from "./Input";
 import Title from "./Title";
 import CheckBox from "./CheckBox";
 import RadioButton from "./RadioButton";
+import TextArea from "./TextArea";
 export default {
   props: {
     formElement: {
@@ -37,6 +38,7 @@ export default {
     ThreeColumn,
     CheckBox,
     RadioButton,
+    TextArea,
   },
 };
 </script>

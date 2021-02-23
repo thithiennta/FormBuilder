@@ -86,14 +86,12 @@ export default {
     },
     debounceFunction: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
-      // This to ADD PREVIOUS STATE and CLONE STATE
-      this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
       this.$store.dispatch(
         "customizerModule/changePropertyValue",
         this.activeElement
       );
-    }, 200),
+    }, 300),
   },
 };
 </script>

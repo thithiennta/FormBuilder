@@ -39,8 +39,6 @@ export default {
     value: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
       this.activeElement.properties.text.name = this.value;
-      // This to ADD PREVIOUS STATE and CLONE STATE
-      this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
       this.$store.dispatch(
         "customizerModule/changePropertyValue",

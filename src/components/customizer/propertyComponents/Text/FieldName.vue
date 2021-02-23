@@ -1,14 +1,19 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">Border Radius</div>
+    <div class="customizer-sub-title">Field Name</div>
     <div class="property-adjust-wrapper">
-      <a-input-number
-        :min="0"
-        :max="50"
+      <a-input
+        ref="inputName"
         v-model="value"
-        class="customizer-input-number"
+        :placeholder="'Sample Field Name'"
         @change="handleChange"
-      />
+        :disabled="!layoutSettings.input.isOutsideLabel"
+      >
+        <a-icon slot="prefix" type="edit" />
+        <a-tooltip slot="suffix" :title="'Name of this field'">
+          <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
+        </a-tooltip>
+      </a-input>
     </div>
   </div>
 </template>
@@ -16,8 +21,6 @@
 <script>
 import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
-const min = 0,
-  max = 50;
 export default {
   data() {
     return {
@@ -25,10 +28,11 @@ export default {
     };
   },
   created() {
-    this.value = this.activeElement.properties.border.radius;
+    this.value = this.activeElement.properties.text.fieldName;
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
+    ...mapState("formModule", ["layoutSettings"]),
   },
   watch: {
     value: _debounce(function(newValue, oldValue) {
@@ -40,18 +44,16 @@ export default {
       );
     }, 300),
     activeElement() {
-      this.value = this.activeElement.properties.border.radius;
+      this.value = this.activeElement.properties.text.fieldName;
     },
   },
   methods: {
+    emitEmpty() {
+      this.$refs.inputName.focus();
+      this.activeElement.properties.text.fieldName = "";
+    },
     handleChange() {
-      if (this.value > max) {
-        this.value = max;
-      }
-      if (this.value === "" || this.value === null || this.value < min) {
-        this.value = min;
-      }
-      this.activeElement.properties.border.radius = this.value;
+      this.activeElement.properties.text.fieldName = this.value;
     },
   },
 };

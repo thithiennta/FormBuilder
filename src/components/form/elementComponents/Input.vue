@@ -2,7 +2,6 @@
   <div
     class="form-element-wrapper"
     :style="{
-      'text-align': properties.spacing.align,
       'background-color':
         properties.general.backgroundColor.indexOf('0)') !== -1
           ? layoutSettings.backgroundColor
@@ -10,33 +9,30 @@
       'font-size': properties.text.inheritSize
         ? layoutSettings.fontSize + 'px'
         : properties.text.size + 'px',
+      margin:
+        properties.spacing.topMargin +
+        'px ' +
+        properties.spacing.rightMargin +
+        'px ' +
+        properties.spacing.bottomMargin +
+        'px ' +
+        properties.spacing.leftMargin +
+        'px ',
     }"
   >
-    <input
-      :style="{
-        'background-color': properties.spacing.backgroundColor,
-        ...border,
-        'border-radius': properties.border.radius + 'px',
-        color: properties.text.inheritColor
-          ? layoutSettings.color
-          : properties.text.color,
-        width: properties.spacing.width + '%',
-        height: properties.spacing.height + 'px',
-        ...padding,
-        'text-align': properties.text.align,
-        'font-weight': properties.text.weight,
-        'font-family': properties.general.fontFamily,
-      }"
-      :placeholder="properties.text.placeholder"
-      :name="properties.text.name"
-    />
+    <component :is="inputComponent" :properties="properties"></component>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-
+import HorizontalInput from "./HorizontalInput";
+import VerticalInput from "./VerticalInput";
 export default {
+  components: {
+    HorizontalInput,
+    VerticalInput,
+  },
   props: {
     properties: {
       required: true,
@@ -45,54 +41,20 @@ export default {
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
-    border() {
-      if (this.properties.border.fullWidth) {
-        return {
-          "border-style": this.properties.border.style,
-          "border-color": this.properties.border.color,
-          "border-top-width": this.properties.border.topWidth + "px ",
-          "border-right-width": this.properties.border.rightWidth + "px ",
-          "border-bottom-width": this.properties.border.bottomWidth + "px ",
-          "border-left-width": this.properties.border.leftWidth + "px ",
-        };
+    inputComponent() {
+      if (!this.layoutSettings.input.isOutsideLabel) {
+        return "VerticalInput";
       } else {
-        return {
-          border:
-            this.properties.border.allSidesWidth +
-            "px " +
-            this.properties.border.style +
-            " " +
-            this.properties.border.color,
-        };
-      }
-    },
-    padding() {
-      if (this.properties.spacing.fullPadding) {
-        return {
-          padding:
-            this.properties.spacing.topPadding +
-            "px " +
-            this.properties.spacing.rightPadding +
-            "px " +
-            this.properties.spacing.bottomPadding +
-            "px " +
-            this.properties.spacing.leftPadding +
-            "px ",
-        };
-      } else {
-        return {
-          padding: this.properties.spacing.allSidesPadding + "px",
-        };
+        if (
+          this.layoutSettings.input.labelPosition === "top" ||
+          this.layoutSettings.input.labelPosition === "bottom"
+        )
+          return "VerticalInput";
+        return "HorizontalInput";
       }
     },
   },
 };
 </script>
 
-<style scoped>
-input {
-  outline: none;
-  min-width: min-content;
-  pointer-events: none;
-}
-</style>
+<style scoped></style>

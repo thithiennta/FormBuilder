@@ -107,7 +107,7 @@ export default {
     if (this.formElement.rowId === this.activeElement.rowId) {
       this.isActive = true;
       this.addClickOutSideEvent();
-      this.$store.commit("formModule/CLONE_STATE");
+      // this.$store.commit("formModule/CLONE_STATE");
     } else this.isActive = false;
   },
   watch: {

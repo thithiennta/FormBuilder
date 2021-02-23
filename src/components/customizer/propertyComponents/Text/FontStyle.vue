@@ -52,8 +52,6 @@ export default {
     underlineActive(value) {
       if (value) this.activeElement.properties.text.decoration = "underline";
       else this.activeElement.properties.text.decoration = "none";
-      // This to ADD PREVIOUS STATE and CLONE STATE
-      this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
       this.$store.dispatch(
         "customizerModule/changePropertyValue",

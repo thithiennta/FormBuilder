@@ -18,23 +18,23 @@ export default {
     return { methods: ["GET", "POST"], value: null };
   },
   created() {
-    this.value = this.layoutSettings.method;
+    this.value = this.layoutSettings.form.method;
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
   },
   watch: {
     layoutSettings() {
-      this.value = this.layoutSettings.method;
+      this.value = this.layoutSettings.form.method;
     },
   },
   methods: {
     emitEmpty() {
       this.$refs.action.focus();
-      this.layoutSettings.method = "";
+      this.layoutSettings.form.method = "";
     },
     handleChange() {
-      this.layoutSettings.method = this.value;
+      this.layoutSettings.form.method = this.value;
       this.$store.dispatch("formModule/updateProperty");
       this.$store.dispatch(
         "formModule/changeLayoutProperty",

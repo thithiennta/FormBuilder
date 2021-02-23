@@ -33,6 +33,29 @@
           <Method />
         </a-collapse-panel>
       </a-collapse>
+      <a-collapse
+        default-active-key="1"
+        :bordered="false"
+        expand-icon-position="right"
+        class="property-wrapper"
+      >
+        <a-collapse-panel
+          key="1"
+          header="INPUT SETTINGS"
+          class="customizer-container"
+        >
+          <Label />
+          <LabelWidth
+            v-if="
+              layoutSettings.input.isOutsideLabel &&
+                layoutSettings.input.labelPosition === 'left'
+            "
+          />
+          <LabelSize v-if="layoutSettings.input.isOutsideLabel" />
+          <LabelStyle v-if="layoutSettings.input.isOutsideLabel" />
+          <LabelMargin v-if="layoutSettings.input.isOutsideLabel" />
+        </a-collapse-panel>
+      </a-collapse>
     </vuescroll>
   </div>
 </template>
@@ -44,7 +67,12 @@ import FontSize from "./propertyComponents/Layout/FontSize";
 import TextColor from "./propertyComponents/Layout/TextColor";
 import Action from "./propertyComponents/Layout/Action";
 import Method from "./propertyComponents/Layout/Method";
-// import { mapState } from "vuex";
+import Label from "./propertyComponents/Layout/Input/Label";
+import LabelSize from "./propertyComponents/Layout/Input/LabelSize";
+import LabelWidth from "./propertyComponents/Layout/Input/LabelWidth";
+import LabelStyle from "./propertyComponents/Layout/Input/LabelStyle";
+import LabelMargin from "./propertyComponents/Layout/Input/LabelMargin";
+import { mapState } from "vuex";
 import vuescroll from "vuescroll";
 export default {
   components: {
@@ -55,6 +83,11 @@ export default {
     TextColor,
     Action,
     Method,
+    Label,
+    LabelSize,
+    LabelStyle,
+    LabelMargin,
+    LabelWidth,
   },
   data() {
     return {
@@ -77,6 +110,9 @@ export default {
       },
       propertiesArray: [],
     };
+  },
+  computed: {
+    ...mapState("formModule", ["layoutSettings"]),
   },
 };
 </script>

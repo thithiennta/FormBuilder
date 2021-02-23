@@ -16,6 +16,8 @@
 <script>
 import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
+const min = 5,
+  max = 50;
 export default {
   data() {
     return {
@@ -31,22 +33,22 @@ export default {
   watch: {
     value: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
-      // This to ADD PREVIOUS STATE and CLONE STATE
-      this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
       this.$store.dispatch(
         "customizerModule/changePropertyValue",
         this.activeElement
       );
-    }, 200),
+    }, 300),
     activeElement() {
       this.value = this.activeElement.properties.box.size;
     },
   },
   methods: {
     handleChange() {
-      this.activeElement.properties.box.size =
-        this.value > 50 ? 50 : this.value;
+      if (this.value > max) this.value = max;
+      if (this.value === null || this.value === "" || this.value < min)
+        this.value = min;
+      this.activeElement.properties.box.size = this.value;
     },
   },
 };

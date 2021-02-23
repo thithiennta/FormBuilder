@@ -26,6 +26,7 @@ import FontWeight from "./Text/FontWeight";
 import FontStyle from "./Text/FontStyle";
 import InputName from "./Text/InputName";
 import InputPlaceholder from "./Text/InputPlaceholder";
+import FieldName from "./Text/FieldName";
 export default {
   components: {
     FontSize,
@@ -36,6 +37,7 @@ export default {
     FontWeight,
     InputName,
     InputPlaceholder,
+    FieldName,
   },
   data() {
     return {
