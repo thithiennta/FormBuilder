@@ -15,11 +15,26 @@
           <BackgroundColor />
           <FontFamily />
           <FontSize />
+          <FontWeight />
           <TextColor />
         </a-collapse-panel>
       </a-collapse>
       <a-collapse
         default-active-key="1"
+        :bordered="false"
+        expand-icon-position="right"
+        class="property-wrapper"
+      >
+        <a-collapse-panel
+          key="1"
+          header="FIELD SETTINGS"
+          class="customizer-container"
+        >
+          <FieldHeight />
+        </a-collapse-panel>
+      </a-collapse>
+      <a-collapse
+        default-active-key="0"
         :bordered="false"
         expand-icon-position="right"
         class="property-wrapper"
@@ -34,28 +49,55 @@
         </a-collapse-panel>
       </a-collapse>
       <a-collapse
-        default-active-key="1"
+        default-active-key="0"
         :bordered="false"
         expand-icon-position="right"
         class="property-wrapper"
       >
         <a-collapse-panel
           key="1"
-          header="INPUT SETTINGS"
+          header="LABEL SETTINGS"
           class="customizer-container"
         >
           <Label />
           <LabelWidth
             v-if="
-              layoutSettings.input.isOutsideLabel &&
-                layoutSettings.input.labelPosition === 'left'
+              layoutSettings.label.isOutsideLabel &&
+                layoutSettings.label.labelPosition === 'left'
             "
           />
-          <LabelSize v-if="layoutSettings.input.isOutsideLabel" />
-          <LabelSize v-if="layoutSettings.input.isOutsideLabel" />
-          <LabelColor v-if="layoutSettings.input.isOutsideLabel" />
-          <LabelStyle v-if="layoutSettings.input.isOutsideLabel" />
-          <LabelMargin v-if="layoutSettings.input.isOutsideLabel" />
+          <LabelAlignCenter
+            v-if="
+              layoutSettings.label.isOutsideLabel &&
+                layoutSettings.label.labelPosition === 'left'
+            "
+          />
+          <LabelMargin
+            v-if="
+              layoutSettings.label.isOutsideLabel &&
+                layoutSettings.label.labelPosition === 'top'
+            "
+          />
+          <LabelSize v-if="layoutSettings.label.isOutsideLabel" />
+          <LabelStyle v-if="layoutSettings.label.isOutsideLabel" />
+          <LabelColor v-if="layoutSettings.label.isOutsideLabel" />
+        </a-collapse-panel>
+      </a-collapse>
+      <a-collapse
+        default-active-key="0"
+        :bordered="false"
+        expand-icon-position="right"
+        class="property-wrapper"
+      >
+        <a-collapse-panel
+          key="1"
+          header="BORDER SETTINGS"
+          class="customizer-container"
+        >
+          <BorderWidth />
+          <BorderStyle />
+          <BorderRadius />
+          <BorderColor />
         </a-collapse-panel>
       </a-collapse>
     </vuescroll>
@@ -67,14 +109,21 @@ import BackgroundColor from "./propertyComponents/Layout/BackgroundColor";
 import FontFamily from "./propertyComponents/Layout/FontFamily";
 import FontSize from "./propertyComponents/Layout/FontSize";
 import TextColor from "./propertyComponents/Layout/TextColor";
+import FontWeight from "./propertyComponents/Layout/FontWeight";
 import Action from "./propertyComponents/Layout/Action";
 import Method from "./propertyComponents/Layout/Method";
-import Label from "./propertyComponents/Layout/Input/Label";
-import LabelSize from "./propertyComponents/Layout/Input/LabelSize";
-import LabelWidth from "./propertyComponents/Layout/Input/LabelWidth";
-import LabelStyle from "./propertyComponents/Layout/Input/LabelStyle";
-import LabelMargin from "./propertyComponents/Layout/Input/LabelMargin";
-import LabelColor from "./propertyComponents/Layout/Input/LabelColor";
+import Label from "./propertyComponents/Layout/Label/Label";
+import LabelSize from "./propertyComponents/Layout/Label/LabelSize";
+import LabelWidth from "./propertyComponents/Layout/Label/LabelWidth";
+import LabelStyle from "./propertyComponents/Layout/Label/LabelStyle";
+import LabelMargin from "./propertyComponents/Layout/Label/LabelMargin";
+import LabelColor from "./propertyComponents/Layout/Label/LabelColor";
+import LabelAlignCenter from "./propertyComponents/Layout/Label/LabelAlignCenter";
+import BorderColor from "./propertyComponents/Layout/Border/BorderColor";
+import BorderRadius from "./propertyComponents/Layout/Border/BorderRadius";
+import BorderStyle from "./propertyComponents/Layout/Border/BorderStyle";
+import BorderWidth from "./propertyComponents/Layout/Border/BorderWidth";
+import FieldHeight from "./propertyComponents/Layout/Field/FieldHeight";
 import { mapState } from "vuex";
 import vuescroll from "vuescroll";
 export default {
@@ -84,6 +133,7 @@ export default {
     FontFamily,
     FontSize,
     TextColor,
+    FontWeight,
     Action,
     Method,
     Label,
@@ -92,6 +142,12 @@ export default {
     LabelMargin,
     LabelWidth,
     LabelColor,
+    LabelAlignCenter,
+    BorderColor,
+    BorderRadius,
+    BorderStyle,
+    BorderWidth,
+    FieldHeight,
   },
   data() {
     return {

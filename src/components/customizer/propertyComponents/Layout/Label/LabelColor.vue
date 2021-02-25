@@ -35,7 +35,7 @@ export default {
     ...mapState("formModule", ["layoutSettings"]),
   },
   created() {
-    this.color = this.layoutSettings.input.labelColor;
+    this.color = this.layoutSettings.label.labelColor;
   },
   mounted() {
     document.addEventListener("click", (e) => {
@@ -58,7 +58,7 @@ export default {
       );
     }, 200),
     activeElement() {
-      this.color = this.layoutSettings.input.labelColor;
+      this.color = this.layoutSettings.label.labelColor;
     },
   },
   methods: {
@@ -72,7 +72,7 @@ export default {
     },
     updateValue({ rgba }) {
       this.color = `rgba(${rgba.r},${rgba.g}, ${rgba.b}, ${rgba.a})`;
-      this.layoutSettings.input.labelColor = this.color;
+      this.layoutSettings.label.labelColor = this.color;
     },
   },
 };

@@ -9,14 +9,15 @@
       class="input-field-name"
       :style="{
         ...labelPosition,
-        'font-size': layoutSettings.input.labelSize + 'px',
-        'font-weight': layoutSettings.input.labelBold ? 'bold' : '',
-        'font-style': layoutSettings.input.labelItalic ? 'italic' : '',
+        'font-size': layoutSettings.label.labelSize + 'px',
+        'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+        'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
         ...margin,
-        color: layoutSettings.input.labelColor,
+        color: layoutSettings.label.labelColor,
+        'margin-bottom': layoutSettings.label.labelBottomMargin + 'px',
       }"
-      v-if="layoutSettings.input.isOutsideLabel"
+      v-if="layoutSettings.label.isOutsideLabel"
     >
       {{ properties.text.fieldName }}
     </div>
@@ -31,10 +32,10 @@
           : properties.text.color,
 
         width: properties.spacing.width + '%',
-        height: properties.spacing.height + 'px',
-        ...padding,
+        height: layoutSettings.field.height + 'px',
+        padding: layoutSettings.field.padding + 'px',
         'text-align': properties.text.align,
-        'font-weight': properties.text.weight,
+        'font-weight': layoutSettings.weight,
         'font-family': properties.general.fontFamily,
       }"
       :placeholder="properties.text.placeholder"
@@ -65,8 +66,8 @@ export default {
         display: "flex",
       };
       if (
-        this.layoutSettings.input.labelPosition === "top" ||
-        this.layoutSettings.input.labelPosition === "bottom"
+        this.layoutSettings.label.labelPosition === "top" ||
+        this.layoutSettings.label.labelPosition === "bottom"
       ) {
         flex = { ...flex, "flex-direction": "column" };
       }
@@ -75,8 +76,8 @@ export default {
     labelPosition() {
       var position = {};
       if (
-        this.layoutSettings.input.labelPosition === "bottom" ||
-        this.layoutSettings.input.labelPosition === "right"
+        this.layoutSettings.label.labelPosition === "bottom" ||
+        this.layoutSettings.label.labelPosition === "right"
       ) {
         position = { order: 1 };
       }
@@ -126,13 +127,13 @@ export default {
       if (this.properties.general.label.inheritLabelMargin) {
         return {
           margin:
-            this.layoutSettings.input.labelTopMargin +
+            this.layoutSettings.label.labelTopMargin +
             "px " +
-            this.layoutSettings.input.labelRightMargin +
+            this.layoutSettings.label.labelRightMargin +
             "px " +
-            this.layoutSettings.input.labelBottomMargin +
+            this.layoutSettings.label.labelBottomMargin +
             "px " +
-            this.layoutSettings.input.labelLeftMargin +
+            this.layoutSettings.label.labelLeftMargin +
             "px ",
         };
       }

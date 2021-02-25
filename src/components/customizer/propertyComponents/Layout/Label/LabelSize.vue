@@ -28,7 +28,7 @@ export default {
     ...mapState("formModule", ["layoutSettings"]),
   },
   created() {
-    this.value = this.layoutSettings.input.labelSize;
+    this.value = this.layoutSettings.label.labelSize;
   },
   watch: {
     value: _debounce(function(newValue, oldValue) {
@@ -42,7 +42,7 @@ export default {
       );
     }, 300),
     layoutSettings() {
-      this.value = this.layoutSettings.input.labelSize;
+      this.value = this.layoutSettings.label.labelSize;
     },
   },
   methods: {
@@ -50,7 +50,7 @@ export default {
       if (this.value > max) this.value = max;
       if (this.value === null || this.value === "" || this.value < min)
         this.value = min;
-      this.layoutSettings.input.labelSize = this.value;
+      this.layoutSettings.label.labelSize = this.value;
     },
   },
 };

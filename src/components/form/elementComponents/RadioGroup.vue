@@ -23,27 +23,42 @@
     <div
       class="input-field-name"
       :style="{
-        'font-size': layoutSettings.input.labelSize + 'px',
-        'font-weight': layoutSettings.input.labelBold ? 'bold' : '',
-        'font-style': layoutSettings.input.labelItalic ? 'italic' : '',
+        'font-size': layoutSettings.label.labelSize + 'px',
+        'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+        'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
-        ...margin,
-        color: layoutSettings.input.labelColor,
+        color: layoutSettings.label.labelColor,
+        'margin-bottom': layoutSettings.label.labelBottomMargin + 'px',
       }"
-      v-if="layoutSettings.input.isOutsideLabel"
+      v-if="
+        layoutSettings.label.isOutsideLabel &&
+          layoutSettings.label.labelPosition === 'top'
+      "
     >
       {{ properties.text.fieldName }}
     </div>
     <div class="option-container" style="display:flex">
       <div
-        class="margin-left"
-        :style="{ width: properties.option.leftMargin + '%' }"
-      ></div>
+        class="input-field-name"
+        :style="{
+          width: layoutSettings.label.labelWidth + 'px',
+          'font-size': layoutSettings.label.labelSize + 'px',
+          'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+          'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
+          'min-width': 'fit-content',
+          color: layoutSettings.label.labelColor,
+        }"
+        v-if="
+          layoutSettings.label.isOutsideLabel &&
+            layoutSettings.label.labelPosition === 'left'
+        "
+      >
+        {{ properties.text.fieldName }}
+      </div>
       <div
         class="options-wrapper"
         :style="{
           ...flexDirection,
-          'min-width': 'fit-content',
           'flex-wrap': 'wrap',
           flex: 1,
         }"
@@ -55,8 +70,7 @@
             properties.option.optionsDirection === 'horizontal'
               ? {
                   'min-width': 'fit-content',
-                  'margin-left': properties.option.optionSpacing / 2 + '%',
-                  'margin-right': properties.option.optionSpacing / 2 + '%',
+                  width: properties.option.optionSpacing + 'px',
                 }
               : {
                   'min-width': 'fit-content',
@@ -84,7 +98,7 @@
               'font-size': properties.text.inheritSize
                 ? layoutSettings.fontSize + 'px'
                 : properties.text.size + 'px',
-              'font-weight': properties.text.weight,
+              'font-weight': layoutSettings.weight,
               'font-family': properties.general.fontFamily,
             }"
             >{{ option }}</span
@@ -106,32 +120,6 @@ export default {
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
-    margin() {
-      if (this.properties.general.label.inheritLabelMargin) {
-        return {
-          margin:
-            this.layoutSettings.input.labelTopMargin +
-            "px " +
-            this.layoutSettings.input.labelRightMargin +
-            "px " +
-            this.layoutSettings.input.labelBottomMargin +
-            "px " +
-            this.layoutSettings.input.labelLeftMargin +
-            "px ",
-        };
-      }
-      return {
-        margin:
-          this.properties.general.label.labelTopMargin +
-          "px " +
-          this.properties.general.label.labelRightMargin +
-          "px " +
-          this.properties.general.label.labelBottomMargin +
-          "px " +
-          this.properties.general.label.labelLeftMargin +
-          "px ",
-      };
-    },
     flexDirection() {
       if (this.properties.option.optionsDirection === "vertical") {
         return {

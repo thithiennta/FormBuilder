@@ -40,8 +40,8 @@ export default {
     };
   },
   created() {
-    this.italicActive = this.layoutSettings.input.labelItalic;
-    this.boldActive = this.layoutSettings.input.labelBold;
+    this.italicActive = this.layoutSettings.label.labelItalic;
+    this.boldActive = this.layoutSettings.label.labelBold;
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
@@ -50,7 +50,7 @@ export default {
   watch: {
     boldActive(value, oldValue) {
       if (oldValue === null) return;
-      this.layoutSettings.input.labelBold = value;
+      this.layoutSettings.label.labelBold = value;
       // This to ADD PREVIOUS STATE and CLONE STATE
       this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
@@ -61,7 +61,7 @@ export default {
     },
     italicActive(value, oldValue) {
       if (oldValue === null) return;
-      this.layoutSettings.input.labelItalic = value;
+      this.layoutSettings.label.labelItalic = value;
       // This to ADD PREVIOUS STATE and CLONE STATE
       this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
@@ -71,8 +71,8 @@ export default {
       );
     },
     activeElement() {
-      this.italicActive = this.layoutSettings.input.labelItaluc;
-      this.boldActive = this.layoutSettings.input.labelBold;
+      this.italicActive = this.layoutSettings.label.labelItaluc;
+      this.boldActive = this.layoutSettings.label.labelBold;
     },
   },
   methods: {

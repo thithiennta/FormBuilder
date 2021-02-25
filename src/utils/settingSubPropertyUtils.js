@@ -56,6 +56,9 @@ const getElementsByName = function(name, type) {
           break;
         case "Input":
         case "TextArea":
+          result = ["Width", "SpacingPadding", "ElementBackgroundColor"];
+          break;
+
         case "Button":
           result = [
             "Width",
@@ -115,7 +118,6 @@ const getElementsByName = function(name, type) {
             "InputName",
             "FontSize",
             "FontWeight",
-            "TextAlign",
             "TextColor",
           ];
           break;
@@ -185,12 +187,7 @@ const getElementsByName = function(name, type) {
           break;
         case "RadioGroup":
         case "CheckBoxGroup":
-          result = [
-            "OptionsDirection",
-            "MarginLeft",
-            "OptionSpacing",
-            "Options",
-          ];
+          result = ["OptionsDirection", "OptionSpacing", "Options"];
           break;
       }
       break;

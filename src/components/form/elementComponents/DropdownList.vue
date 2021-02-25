@@ -23,26 +23,49 @@
     <div
       class="input-field-name"
       :style="{
-        'font-size': layoutSettings.input.labelSize + 'px',
-        'font-weight': layoutSettings.input.labelBold ? 'bold' : '',
-        'font-style': layoutSettings.input.labelItalic ? 'italic' : '',
+        'font-size': layoutSettings.label.labelSize + 'px',
+        'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+        'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
-        ...margin,
-        color: layoutSettings.input.labelColor,
+        color: layoutSettings.label.labelColor,
+        'margin-bottom': layoutSettings.label.labelBottomMargin + 'px',
       }"
-      v-if="layoutSettings.input.isOutsideLabel"
+      v-if="
+        layoutSettings.label.isOutsideLabel &&
+          layoutSettings.label.labelPosition === 'top'
+      "
     >
       {{ properties.text.fieldName }}
     </div>
-    <div class="select-wrapper">
+    <div
+      class="select-wrapper"
+      :style="{
+        display: 'flex',
+        'align-items': layoutSettings.label.labelAlignCenter ? 'center' : '',
+      }"
+    >
       <div
-        class="margin-left"
-        :style="{ width: properties.option.leftMargin + '%' }"
-      ></div>
+        class="input-field-name"
+        :style="{
+          width: layoutSettings.label.labelWidth + 'px',
+          'font-size': layoutSettings.label.labelSize + 'px',
+          'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+          'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
+          'min-width': 'fit-content',
+          color: layoutSettings.label.labelColor,
+        }"
+        v-if="
+          layoutSettings.label.isOutsideLabel &&
+            layoutSettings.label.labelPosition === 'left'
+        "
+      >
+        {{ properties.text.fieldName }}
+      </div>
       <div
         class="select"
         :style="{
           width: properties.spacing.width + '%',
+          flex: 1,
           'min-width': 'fit-content',
           'background-color': properties.spacing.backgroundColor,
         }"
@@ -51,11 +74,14 @@
           class="select__trigger"
           @click="handleShowOptions"
           :style="{
-            ...padding,
-            'border-radius': properties.border.radius + 'px',
+            padding: layoutSettings.field.padding + 'px',
+            'border-radius': layoutSettings.border.radius + 'px',
             color: properties.text.inheritColor
               ? layoutSettings.color
               : properties.text.color,
+            ...border,
+            'font-weight': layoutSettings.weight,
+            height: layoutSettings.field.height + 'px',
           }"
         >
           <span>{{ properties.option.options[0] }}</span>
@@ -65,17 +91,19 @@
           class="select-options"
           :class="{ show: showOptions }"
           :style="{
-            'border-radius': properties.border.radius + 'px',
+            'border-radius': layoutSettings.border.radius + 'px',
             color: properties.text.inheritColor
               ? layoutSettings.color
               : properties.text.color,
+            ...border,
+            'font-weight': layoutSettings.weight,
           }"
         >
           <div
             class="option"
             v-for="(option, index) in properties.option.options"
             :key="index"
-            :style="{ ...padding }"
+            :style="{ padding: layoutSettings.field.padding + 'px' }"
           >
             {{ option }}
           </div>
@@ -107,50 +135,26 @@ export default {
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
     ...mapState("customizerModule", ["activeElement"]),
-    padding() {
-      if (this.properties.spacing.fullPadding) {
+    border() {
+      if (this.layoutSettings.border.fullWidth) {
         return {
-          padding:
-            this.properties.spacing.topPadding +
-            "px " +
-            this.properties.spacing.rightPadding +
-            "px " +
-            this.properties.spacing.bottomPadding +
-            "px " +
-            this.properties.spacing.leftPadding +
-            "px ",
+          "border-style": this.layoutSettings.border.style,
+          "border-color": this.layoutSettings.border.color,
+          "border-top-width": this.layoutSettings.border.topWidth + "px ",
+          "border-right-width": this.layoutSettings.border.rightWidth + "px ",
+          "border-bottom-width": this.layoutSettings.border.bottomWidth + "px ",
+          "border-left-width": this.layoutSettings.border.leftWidth + "px ",
         };
       } else {
         return {
-          padding: this.properties.spacing.allSidesPadding + "px",
+          border:
+            this.layoutSettings.border.allSidesWidth +
+            "px " +
+            this.layoutSettings.border.style +
+            " " +
+            this.layoutSettings.border.color,
         };
       }
-    },
-    margin() {
-      if (this.properties.general.label.inheritLabelMargin) {
-        return {
-          margin:
-            this.layoutSettings.input.labelTopMargin +
-            "px " +
-            this.layoutSettings.input.labelRightMargin +
-            "px " +
-            this.layoutSettings.input.labelBottomMargin +
-            "px " +
-            this.layoutSettings.input.labelLeftMargin +
-            "px ",
-        };
-      }
-      return {
-        margin:
-          this.properties.general.label.labelTopMargin +
-          "px " +
-          this.properties.general.label.labelRightMargin +
-          "px " +
-          this.properties.general.label.labelBottomMargin +
-          "px " +
-          this.properties.general.label.labelLeftMargin +
-          "px ",
-      };
     },
   },
   methods: {

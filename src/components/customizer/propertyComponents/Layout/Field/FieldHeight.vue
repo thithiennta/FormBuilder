@@ -1,14 +1,12 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">Option Spacing</div>
+    <div class="customizer-sub-title">Field Height</div>
     <div class="property-adjust-wrapper">
       <div class="slider-tool-tip">{{ value }}px</div>
       <a-slider
         v-model="value"
         :tooltip-visible="false"
-        :default-value="activeElement.properties.option.optionSpacing"
         @change="handleChange"
-        :max="200"
       />
     </div>
   </div>
@@ -24,27 +22,24 @@ export default {
     };
   },
   created() {
-    this.value = this.activeElement.properties.option.optionSpacing;
+    this.value = this.layoutSettings.field.height;
+  },
+  computed: {
+    ...mapState("formModule", ["layoutSettings"]),
   },
   watch: {
     value: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
-      // This to UPDATE PROPERTY
+      this.$store.dispatch("formModule/updateProperty");
       this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
+        "formModule/changeLayoutProperty",
+        this.layoutSettings
       );
     }, 200),
-    activeElement() {
-      this.value = this.activeElement.properties.option.optionSpacing;
-    },
-  },
-  computed: {
-    ...mapState("customizerModule", ["activeElement"]),
   },
   methods: {
     handleChange() {
-      this.activeElement.properties.option.optionSpacing = this.value;
+      this.layoutSettings.field.height = this.value;
     },
   },
 };

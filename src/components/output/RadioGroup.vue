@@ -23,14 +23,14 @@
     <div
       class="input-field-name"
       :style="{
-        'font-size': layoutSettings.input.labelSize + 'px',
-        'font-weight': layoutSettings.input.labelBold ? 'bold' : '',
-        'font-style': layoutSettings.input.labelItalic ? 'italic' : '',
+        'font-size': layoutSettings.label.labelSize + 'px',
+        'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+        'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
         ...margin,
-        color: layoutSettings.input.labelColor,
+        color: layoutSettings.label.labelColor,
       }"
-      v-if="layoutSettings.input.isOutsideLabel"
+      v-if="layoutSettings.label.isOutsideLabel"
     >
       {{ properties.text.fieldName }}
     </div>
@@ -110,13 +110,13 @@ export default {
       if (this.properties.general.label.inheritLabelMargin) {
         return {
           margin:
-            this.layoutSettings.input.labelTopMargin +
+            this.layoutSettings.label.labelTopMargin +
             "px " +
-            this.layoutSettings.input.labelRightMargin +
+            this.layoutSettings.label.labelRightMargin +
             "px " +
-            this.layoutSettings.input.labelBottomMargin +
+            this.layoutSettings.label.labelBottomMargin +
             "px " +
-            this.layoutSettings.input.labelLeftMargin +
+            this.layoutSettings.label.labelLeftMargin +
             "px ",
         };
       }

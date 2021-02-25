@@ -1,12 +1,12 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">Option Spacing</div>
+    <div class="customizer-sub-title">Label Width</div>
     <div class="property-adjust-wrapper">
-      <div class="slider-tool-tip">{{ value }}px</div>
+      <div class="slider-tool-tip">{{ value }}</div>
       <a-slider
         v-model="value"
         :tooltip-visible="false"
-        :default-value="activeElement.properties.option.optionSpacing"
+        :default-value="layoutSettings.label.labelWidth"
         @change="handleChange"
         :max="200"
       />
@@ -24,27 +24,29 @@ export default {
     };
   },
   created() {
-    this.value = this.activeElement.properties.option.optionSpacing;
+    this.value = this.layoutSettings.label.labelWidth;
   },
   watch: {
     value: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
+      // This to ADD PREVIOUS STATE and CLONE STATE
+      this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
       this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
+        "formModule/changeLayoutProperty",
+        this.layoutSettings
       );
     }, 200),
     activeElement() {
-      this.value = this.activeElement.properties.option.optionSpacing;
+      this.value = this.layoutSettings.label.labelWidth;
     },
   },
   computed: {
-    ...mapState("customizerModule", ["activeElement"]),
+    ...mapState("formModule", ["layoutSettings"]),
   },
   methods: {
     handleChange() {
-      this.activeElement.properties.option.optionSpacing = this.value;
+      this.layoutSettings.label.labelWidth = this.value;
     },
   },
 };

@@ -1,12 +1,12 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">Label Width</div>
+    <div class="customizer-sub-title">Border Radius</div>
     <div class="property-adjust-wrapper">
-      <div class="slider-tool-tip">{{ value }}%</div>
-      <a-slider
+      <a-input-number
+        :min="0"
+        :max="50"
         v-model="value"
-        :tooltip-visible="false"
-        :default-value="layoutSettings.input.labelWidth"
+        class="customizer-input-number"
         @change="handleChange"
       />
     </div>
@@ -16,6 +16,8 @@
 <script>
 import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
+const min = 0,
+  max = 50;
 export default {
   data() {
     return {
@@ -23,42 +25,36 @@ export default {
     };
   },
   created() {
-    this.value = this.layoutSettings.input.labelWidth;
-  },
-  watch: {
-    value: _debounce(function(newValue, oldValue) {
-      if (oldValue === null) return;
-      // This to ADD PREVIOUS STATE and CLONE STATE
-      this.$store.dispatch("formModule/updateProperty");
-      // This to UPDATE PROPERTY
-      this.$store.dispatch(
-        "formModule/changeLayoutProperty",
-        this.layoutSettings
-      );
-    }, 200),
-    activeElement() {
-      this.value = this.layoutSettings.input.labelWidth;
-    },
+    this.value = this.layoutSettings.border.radius;
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
   },
+  watch: {
+    value: _debounce(function(newValue, oldValue) {
+      if (oldValue === null) return;
+      this.$store.dispatch("formModule/updateProperty");
+      this.$store.dispatch(
+        "formModule/changeLayoutProperty",
+        this.layoutSettings
+      );
+    }, 300),
+    activeElement() {
+      this.value = this.layoutSettings.border.radius;
+    },
+  },
   methods: {
     handleChange() {
-      this.layoutSettings.input.labelWidth = this.value;
+      if (this.value > max) {
+        this.value = max;
+      }
+      if (this.value === "" || this.value === null || this.value < min) {
+        this.value = min;
+      }
+      this.layoutSettings.border.radius = this.value;
     },
   },
 };
 </script>
 
-<style scoped>
-.property-adjust-wrapper {
-  position: relative;
-}
-.slider-tool-tip {
-  color: grey;
-  position: absolute;
-  right: 0;
-  top: -25px;
-}
-</style>
+<style></style>

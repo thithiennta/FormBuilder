@@ -23,14 +23,13 @@
     <div
       class="input-field-name"
       :style="{
-        'font-size': layoutSettings.input.labelSize + 'px',
-        'font-weight': layoutSettings.input.labelBold ? 'bold' : '',
-        'font-style': layoutSettings.input.labelItalic ? 'italic' : '',
+        'font-size': layoutSettings.label.labelSize + 'px',
+        'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+        'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
-        ...margin,
-        color: layoutSettings.input.labelColor,
+        color: layoutSettings.label.labelColor,
       }"
-      v-if="layoutSettings.input.isOutsideLabel"
+      v-if="layoutSettings.label.isOutsideLabel"
     >
       {{ properties.text.fieldName }}
     </div>
@@ -125,32 +124,6 @@ export default {
           padding: this.properties.spacing.allSidesPadding + "px",
         };
       }
-    },
-    margin() {
-      if (this.properties.general.label.inheritLabelMargin) {
-        return {
-          margin:
-            this.layoutSettings.input.labelTopMargin +
-            "px " +
-            this.layoutSettings.input.labelRightMargin +
-            "px " +
-            this.layoutSettings.input.labelBottomMargin +
-            "px " +
-            this.layoutSettings.input.labelLeftMargin +
-            "px ",
-        };
-      }
-      return {
-        margin:
-          this.properties.general.label.labelTopMargin +
-          "px " +
-          this.properties.general.label.labelRightMargin +
-          "px " +
-          this.properties.general.label.labelBottomMargin +
-          "px " +
-          this.properties.general.label.labelLeftMargin +
-          "px ",
-      };
     },
   },
   methods: {

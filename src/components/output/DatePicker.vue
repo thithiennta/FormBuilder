@@ -23,14 +23,13 @@
     <div
       class="input-field-name"
       :style="{
-        'font-size': layoutSettings.input.labelSize + 'px',
-        'font-weight': layoutSettings.input.labelBold ? 'bold' : '',
-        'font-style': layoutSettings.input.labelItalic ? 'italic' : '',
+        'font-size': layoutSettings.label.labelSize + 'px',
+        'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+        'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
-        ...margin,
-        color: layoutSettings.input.labelColor,
+        color: layoutSettings.label.labelColor,
       }"
-      v-if="layoutSettings.input.isOutsideLabel"
+      v-if="layoutSettings.label.isOutsideLabel"
     >
       {{ properties.text.fieldName }}
     </div>
@@ -47,7 +46,7 @@
           'min-width': 'fit-content',
           ...padding,
           ...border,
-          'border-radius': properties.border.radius + 'px',
+          'border-radius': properties.layoutSettings.radius + 'px',
           color: properties.text.inheritColor
             ? layoutSettings.color
             : properties.text.color,
@@ -71,23 +70,23 @@ export default {
     ...mapState("formModule", ["layoutSettings"]),
     ...mapState("customizerModule", ["activeElement"]),
     border() {
-      if (this.properties.border.fullWidth) {
+      if (this.properties.layoutSettings.fullWidth) {
         return {
-          "border-style": this.properties.border.style,
-          "border-color": this.properties.border.color,
-          "border-top-width": this.properties.border.topWidth + "px ",
-          "border-right-width": this.properties.border.rightWidth + "px ",
-          "border-bottom-width": this.properties.border.bottomWidth + "px ",
-          "border-left-width": this.properties.border.leftWidth + "px ",
+          "border-style": this.layoutSettings.border.style,
+          "border-color": this.layoutSettings.border.color,
+          "border-top-width": this.layoutSettings.border.topWidth + "px ",
+          "border-right-width": this.layoutSettings.border.rightWidth + "px ",
+          "border-bottom-width": this.layoutSettings.border.bottomWidth + "px ",
+          "border-left-width": this.layoutSettings.border.leftWidth + "px ",
         };
       } else {
         return {
           border:
-            this.properties.border.allSidesWidth +
+            this.layoutSettings.border.allSidesWidth +
             "px " +
-            this.properties.border.style +
+            this.layoutSettings.border.style +
             " " +
-            this.properties.border.color,
+            this.layoutSettings.border.color,
         };
       }
     },
@@ -109,32 +108,6 @@ export default {
           padding: this.properties.spacing.allSidesPadding + "px",
         };
       }
-    },
-    margin() {
-      if (this.properties.general.label.inheritLabelMargin) {
-        return {
-          margin:
-            this.layoutSettings.input.labelTopMargin +
-            "px " +
-            this.layoutSettings.input.labelRightMargin +
-            "px " +
-            this.layoutSettings.input.labelBottomMargin +
-            "px " +
-            this.layoutSettings.input.labelLeftMargin +
-            "px ",
-        };
-      }
-      return {
-        margin:
-          this.properties.general.label.labelTopMargin +
-          "px " +
-          this.properties.general.label.labelRightMargin +
-          "px " +
-          this.properties.general.label.labelBottomMargin +
-          "px " +
-          this.properties.general.label.labelLeftMargin +
-          "px ",
-      };
     },
   },
 };

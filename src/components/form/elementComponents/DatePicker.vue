@@ -23,37 +23,58 @@
     <div
       class="input-field-name"
       :style="{
-        'font-size': layoutSettings.input.labelSize + 'px',
-        'font-weight': layoutSettings.input.labelBold ? 'bold' : '',
-        'font-style': layoutSettings.input.labelItalic ? 'italic' : '',
+        'font-size': layoutSettings.label.labelSize + 'px',
+        'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+        'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
-        ...margin,
-        color: layoutSettings.input.labelColor,
+        color: layoutSettings.label.labelColor,
+        'margin-bottom': layoutSettings.label.labelBottomMargin + 'px',
       }"
-      v-if="layoutSettings.input.isOutsideLabel"
+      v-if="
+        layoutSettings.label.isOutsideLabel &&
+          layoutSettings.label.labelPosition === 'top'
+      "
     >
       {{ properties.text.fieldName }}
     </div>
-    <div class="date-picker-wrapper" style="display:flex">
+    <div
+      class="date-picker-wrapper"
+      :style="{
+        display: 'flex',
+        'align-items': layoutSettings.label.labelAlignCenter ? 'center' : '',
+      }"
+    >
       <div
-        class="margin-left"
+        class="input-field-name"
         :style="{
-          width: properties.option.leftMargin + '%',
+          width: layoutSettings.label.labelWidth + 'px',
+          'font-size': layoutSettings.label.labelSize + 'px',
+          'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+          'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
+          'min-width': 'fit-content',
+          color: layoutSettings.label.labelColor,
         }"
-      ></div>
+        v-if="
+          layoutSettings.label.isOutsideLabel &&
+            layoutSettings.label.labelPosition === 'left'
+        "
+      >
+        {{ properties.text.fieldName }}
+      </div>
       <input
         type="date"
         :name="properties.text.fieldName"
         :style="{
           width: properties.spacing.width + '%',
           'min-width': 'fit-content',
-          ...padding,
+          padding: layoutSettings.field.padding + 'px',
           ...border,
-          'border-radius': properties.border.radius + 'px',
+          'border-radius': layoutSettings.border.radius + 'px',
           color: properties.text.inheritColor
             ? layoutSettings.color
             : properties.text.color,
           'background-color': properties.spacing.backgroundColor,
+          height: layoutSettings.field.height + 'px',
         }"
       />
     </div>
@@ -73,70 +94,25 @@ export default {
     ...mapState("formModule", ["layoutSettings"]),
     ...mapState("customizerModule", ["activeElement"]),
     border() {
-      if (this.properties.border.fullWidth) {
+      if (this.layoutSettings.border.fullWidth) {
         return {
-          "border-style": this.properties.border.style,
-          "border-color": this.properties.border.color,
-          "border-top-width": this.properties.border.topWidth + "px ",
-          "border-right-width": this.properties.border.rightWidth + "px ",
-          "border-bottom-width": this.properties.border.bottomWidth + "px ",
-          "border-left-width": this.properties.border.leftWidth + "px ",
+          "border-style": this.layoutSettings.border.style,
+          "border-color": this.layoutSettings.border.color,
+          "border-top-width": this.layoutSettings.border.topWidth + "px ",
+          "border-right-width": this.layoutSettings.border.rightWidth + "px ",
+          "border-bottom-width": this.layoutSettings.border.bottomWidth + "px ",
+          "border-left-width": this.layoutSettings.border.leftWidth + "px ",
         };
       } else {
         return {
           border:
-            this.properties.border.allSidesWidth +
+            this.layoutSettings.border.allSidesWidth +
             "px " +
-            this.properties.border.style +
+            this.layoutSettings.border.style +
             " " +
-            this.properties.border.color,
+            this.layoutSettings.border.color,
         };
       }
-    },
-    padding() {
-      if (this.properties.spacing.fullPadding) {
-        return {
-          padding:
-            this.properties.spacing.topPadding +
-            "px " +
-            this.properties.spacing.rightPadding +
-            "px " +
-            this.properties.spacing.bottomPadding +
-            "px " +
-            this.properties.spacing.leftPadding +
-            "px ",
-        };
-      } else {
-        return {
-          padding: this.properties.spacing.allSidesPadding + "px",
-        };
-      }
-    },
-    margin() {
-      if (this.properties.general.label.inheritLabelMargin) {
-        return {
-          margin:
-            this.layoutSettings.input.labelTopMargin +
-            "px " +
-            this.layoutSettings.input.labelRightMargin +
-            "px " +
-            this.layoutSettings.input.labelBottomMargin +
-            "px " +
-            this.layoutSettings.input.labelLeftMargin +
-            "px ",
-        };
-      }
-      return {
-        margin:
-          this.properties.general.label.labelTopMargin +
-          "px " +
-          this.properties.general.label.labelRightMargin +
-          "px " +
-          this.properties.general.label.labelBottomMargin +
-          "px " +
-          this.properties.general.label.labelLeftMargin +
-          "px ",
-      };
     },
   },
 };

@@ -209,7 +209,7 @@ export default {
               leftMargin: 0,
             },
           },
-          settings: ["general", "spacing", "text", "border"],
+          settings: ["general", "spacing", "text"],
         },
         {
           name: "Text Area",
@@ -268,7 +268,7 @@ export default {
               leftMargin: 0,
             },
           },
-          settings: ["general", "spacing", "text", "border"],
+          settings: ["general", "spacing", "text"],
         },
         // {
         //   name: "Check Box",
@@ -494,7 +494,7 @@ export default {
               checkColor: "black",
             },
           },
-          settings: ["general", "spacing", "text", "option", "border"],
+          settings: ["general", "spacing", "text", "option"],
         },
         // {
         //   name: "Birth Date Field",
@@ -624,7 +624,7 @@ export default {
               checkColor: "black",
             },
           },
-          settings: ["general", "spacing", "option", "text", "border"],
+          settings: ["general", "spacing", "option", "text"],
         },
       ],
     };

@@ -38,12 +38,12 @@ export default {
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
     inputComponent() {
-      if (!this.layoutSettings.input.isOutsideLabel) {
+      if (!this.layoutSettings.label.isOutsideLabel) {
         return "VerticalTextArea";
       } else {
         if (
-          this.layoutSettings.input.labelPosition === "top" ||
-          this.layoutSettings.input.labelPosition === "bottom"
+          this.layoutSettings.label.labelPosition === "top" ||
+          this.layoutSettings.label.labelPosition === "bottom"
         )
           return "VerticalTextArea";
         return "HorizontalTextArea";

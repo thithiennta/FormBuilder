@@ -4,21 +4,21 @@
       width: '100%',
       ['margin' + spacingAlign]: 'auto',
       ...flexDirection,
+      'align-items': layoutSettings.label.labelAlignCenter ? 'center' : '',
     }"
   >
     <div
       class="input-field-name"
       :style="{
         ...labelPosition,
-        'font-size': layoutSettings.input.labelSize + 'px',
-        'font-weight': layoutSettings.input.labelBold ? 'bold' : '',
-        'font-style': layoutSettings.input.labelItalic ? 'italic' : '',
-        width: layoutSettings.input.labelWidth + '%',
+        'font-size': layoutSettings.label.labelSize + 'px',
+        'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+        'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
+        width: layoutSettings.label.labelWidth + 'px',
         'min-width': 'fit-content',
-        ...margin,
-        color: layoutSettings.input.labelColor,
+        color: layoutSettings.label.labelColor,
       }"
-      v-if="layoutSettings.input.isOutsideLabel"
+      v-if="layoutSettings.label.isOutsideLabel"
     >
       {{ properties.text.fieldName }}
     </div>
@@ -26,16 +26,17 @@
       :style="{
         'background-color': properties.spacing.backgroundColor,
         ...border,
-        'border-radius': properties.border.radius + 'px',
+        'border-radius': layoutSettings.border.radius + 'px',
         color: properties.text.inheritColor
           ? layoutSettings.color
           : properties.text.color,
-        height: properties.spacing.height + 'px',
-        ...padding,
+        height: layoutSettings.field.height + 'px',
+        padding: layoutSettings.field.padding + 'px',
         width: properties.spacing.width + '%',
-        'max-width': 100 - layoutSettings.input.labelWidth + '%',
+        'max-width':
+          'calc(' + 100 + '% - ' + layoutSettings.label.labelWidth + 'px)',
         'text-align': properties.text.align,
-        'font-weight': properties.text.weight,
+        'font-weight': layoutSettings.weight,
         'font-family': properties.general.fontFamily,
       }"
       :placeholder="properties.text.placeholder"
@@ -66,8 +67,8 @@ export default {
         display: "flex",
       };
       if (
-        this.layoutSettings.input.labelPosition === "top" ||
-        this.layoutSettings.input.labelPosition === "bottom"
+        this.layoutSettings.label.labelPosition === "top" ||
+        this.layoutSettings.label.labelPosition === "bottom"
       ) {
         flex = { ...flex, "flex-direction": "column" };
       }
@@ -76,78 +77,33 @@ export default {
     labelPosition() {
       var position = {};
       if (
-        this.layoutSettings.input.labelPosition === "bottom" ||
-        this.layoutSettings.input.labelPosition === "right"
+        this.layoutSettings.label.labelPosition === "bottom" ||
+        this.layoutSettings.label.labelPosition === "right"
       ) {
         position = { order: 1 };
       }
       return position;
     },
     border() {
-      if (this.properties.border.fullWidth) {
+      if (this.layoutSettings.border.fullWidth) {
         return {
-          "border-style": this.properties.border.style,
-          "border-color": this.properties.border.color,
-          "border-top-width": this.properties.border.topWidth + "px ",
-          "border-right-width": this.properties.border.rightWidth + "px ",
-          "border-bottom-width": this.properties.border.bottomWidth + "px ",
-          "border-left-width": this.properties.border.leftWidth + "px ",
+          "border-style": this.layoutSettings.border.style,
+          "border-color": this.layoutSettings.border.color,
+          "border-top-width": this.layoutSettings.border.topWidth + "px ",
+          "border-right-width": this.layoutSettings.border.rightWidth + "px ",
+          "border-bottom-width": this.layoutSettings.border.bottomWidth + "px ",
+          "border-left-width": this.layoutSettings.border.leftWidth + "px ",
         };
       } else {
         return {
           border:
-            this.properties.border.allSidesWidth +
+            this.layoutSettings.border.allSidesWidth +
             "px " +
-            this.properties.border.style +
+            this.layoutSettings.border.style +
             " " +
-            this.properties.border.color,
+            this.layoutSettings.border.color,
         };
       }
-    },
-    padding() {
-      if (this.properties.spacing.fullPadding) {
-        return {
-          padding:
-            this.properties.spacing.topPadding +
-            "px " +
-            this.properties.spacing.rightPadding +
-            "px " +
-            this.properties.spacing.bottomPadding +
-            "px " +
-            this.properties.spacing.leftPadding +
-            "px ",
-        };
-      } else {
-        return {
-          padding: this.properties.spacing.allSidesPadding + "px",
-        };
-      }
-    },
-    margin() {
-      if (this.properties.general.label.inheritLabelMargin) {
-        return {
-          margin:
-            this.layoutSettings.input.labelTopMargin +
-            "px " +
-            this.layoutSettings.input.labelRightMargin +
-            "px " +
-            this.layoutSettings.input.labelBottomMargin +
-            "px " +
-            this.layoutSettings.input.labelLeftMargin +
-            "px ",
-        };
-      }
-      return {
-        margin:
-          this.properties.general.label.labelTopMargin +
-          "px " +
-          this.properties.general.label.labelRightMargin +
-          "px " +
-          this.properties.general.label.labelBottomMargin +
-          "px " +
-          this.properties.general.label.labelLeftMargin +
-          "px ",
-      };
     },
   },
 };

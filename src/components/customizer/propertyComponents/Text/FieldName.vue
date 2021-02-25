@@ -7,7 +7,7 @@
         v-model="value"
         :placeholder="'Sample Field Name'"
         @change="handleChange"
-        :disabled="!layoutSettings.input.isOutsideLabel"
+        :disabled="!layoutSettings.label.isOutsideLabel"
       >
         <a-icon slot="prefix" type="edit" />
         <a-tooltip slot="suffix" :title="'Name of this field'">

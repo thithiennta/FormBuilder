@@ -12,7 +12,7 @@
       </a-radio-group>
     </div>
     <div v-if="isOutsideLabel" style="margin-top: 10px">
-      <div class="customizer-sub-title">Position</div>
+      <div class="customizer-sub-title">Label Position</div>
       <div class="property-adjust-wrapper">
         <a-radio-group v-model="labelPosition" button-style="solid">
           <a-radio-button value="top">
@@ -37,8 +37,8 @@ export default {
     };
   },
   created() {
-    this.isOutsideLabel = this.layoutSettings.input.isOutsideLabel;
-    this.labelPosition = this.layoutSettings.input.labelPosition;
+    this.isOutsideLabel = this.layoutSettings.label.isOutsideLabel;
+    this.labelPosition = this.layoutSettings.label.labelPosition;
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
@@ -46,7 +46,7 @@ export default {
   watch: {
     isOutsideLabel(newValue, oldValue) {
       if (oldValue === null) return;
-      this.layoutSettings.input.isOutsideLabel = newValue;
+      this.layoutSettings.label.isOutsideLabel = newValue;
       this.$store.dispatch("formModule/updateProperty");
       this.$store.dispatch(
         "formModule/changeLayoutProperty",
@@ -55,7 +55,7 @@ export default {
     },
     labelPosition(newValue, oldValue) {
       if (oldValue === null) return;
-      this.layoutSettings.input.labelPosition = newValue;
+      this.layoutSettings.label.labelPosition = newValue;
       this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
       this.$store.dispatch(

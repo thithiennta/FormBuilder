@@ -10,15 +10,14 @@
       class="input-field-name"
       :style="{
         ...labelPosition,
-        'font-size': layoutSettings.input.labelSize + 'px',
-        'font-weight': layoutSettings.input.labelBold ? 'bold' : '',
-        'font-style': layoutSettings.input.labelItalic ? 'italic' : '',
-        width: layoutSettings.input.labelWidth + '%',
+        'font-size': layoutSettings.label.labelSize + 'px',
+        'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+        'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
+        width: layoutSettings.label.labelWidth + '%',
         'min-width': 'fit-content',
-        ...margin,
-        color: layoutSettings.input.labelColor,
+        color: layoutSettings.label.labelColor,
       }"
-      v-if="layoutSettings.input.isOutsideLabel"
+      v-if="layoutSettings.label.isOutsideLabel"
     >
       {{ properties.text.fieldName }}
     </div>
@@ -33,7 +32,7 @@
         height: properties.spacing.height + 'px',
         ...padding,
         width: properties.spacing.width + '%',
-        'max-width': 100 - layoutSettings.input.labelWidth + '%',
+        'max-width': 100 - layoutSettings.label.labelWidth + '%',
         'text-align': properties.text.align,
         'font-weight': properties.text.weight,
         'font-family': properties.general.fontFamily,
@@ -66,8 +65,8 @@ export default {
         display: "flex",
       };
       if (
-        this.layoutSettings.input.labelPosition === "top" ||
-        this.layoutSettings.input.labelPosition === "bottom"
+        this.layoutSettings.label.labelPosition === "top" ||
+        this.layoutSettings.label.labelPosition === "bottom"
       ) {
         flex = { ...flex, "flex-direction": "column" };
       }
@@ -76,8 +75,8 @@ export default {
     labelPosition() {
       var position = {};
       if (
-        this.layoutSettings.input.labelPosition === "bottom" ||
-        this.layoutSettings.input.labelPosition === "right"
+        this.layoutSettings.label.labelPosition === "bottom" ||
+        this.layoutSettings.label.labelPosition === "right"
       ) {
         position = { order: 1 };
       }
@@ -122,32 +121,6 @@ export default {
           padding: this.properties.spacing.allSidesPadding + "px",
         };
       }
-    },
-    margin() {
-      if (this.properties.general.label.inheritLabelMargin) {
-        return {
-          margin:
-            this.layoutSettings.input.labelTopMargin +
-            "px " +
-            this.layoutSettings.input.labelRightMargin +
-            "px " +
-            this.layoutSettings.input.labelBottomMargin +
-            "px " +
-            this.layoutSettings.input.labelLeftMargin +
-            "px ",
-        };
-      }
-      return {
-        margin:
-          this.properties.general.label.labelTopMargin +
-          "px " +
-          this.properties.general.label.labelRightMargin +
-          "px " +
-          this.properties.general.label.labelBottomMargin +
-          "px " +
-          this.properties.general.label.labelLeftMargin +
-          "px ",
-      };
     },
   },
 };
