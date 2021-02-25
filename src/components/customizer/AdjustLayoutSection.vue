@@ -52,6 +52,8 @@
             "
           />
           <LabelSize v-if="layoutSettings.input.isOutsideLabel" />
+          <LabelSize v-if="layoutSettings.input.isOutsideLabel" />
+          <LabelColor v-if="layoutSettings.input.isOutsideLabel" />
           <LabelStyle v-if="layoutSettings.input.isOutsideLabel" />
           <LabelMargin v-if="layoutSettings.input.isOutsideLabel" />
         </a-collapse-panel>
@@ -72,6 +74,7 @@ import LabelSize from "./propertyComponents/Layout/Input/LabelSize";
 import LabelWidth from "./propertyComponents/Layout/Input/LabelWidth";
 import LabelStyle from "./propertyComponents/Layout/Input/LabelStyle";
 import LabelMargin from "./propertyComponents/Layout/Input/LabelMargin";
+import LabelColor from "./propertyComponents/Layout/Input/LabelColor";
 import { mapState } from "vuex";
 import vuescroll from "vuescroll";
 export default {
@@ -88,6 +91,7 @@ export default {
     LabelStyle,
     LabelMargin,
     LabelWidth,
+    LabelColor,
   },
   data() {
     return {

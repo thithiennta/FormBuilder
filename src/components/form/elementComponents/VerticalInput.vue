@@ -16,6 +16,7 @@
         width: layoutSettings.input.labelWidth + '%',
         'min-width': 'fit-content',
         ...margin,
+        color: layoutSettings.input.labelColor,
       }"
       v-if="layoutSettings.input.isOutsideLabel"
     >

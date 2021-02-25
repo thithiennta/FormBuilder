@@ -16,6 +16,7 @@
         width: layoutSettings.input.labelWidth + '%',
         'min-width': 'fit-content',
         ...margin,
+        color: layoutSettings.input.labelColor,
       }"
       v-if="layoutSettings.input.isOutsideLabel"
     >
@@ -153,11 +154,6 @@ export default {
 </script>
 
 <style scoped>
-input {
-  outline: none;
-  min-width: min-content;
-  pointer-events: none;
-}
 .form-element-wrapper input {
   margin-right: 0;
 }

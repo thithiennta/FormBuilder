@@ -16,6 +16,9 @@ const parseNameToElement = function(name) {
     case "general":
       result = "GeneralProperties";
       break;
+    case "option":
+      result = "OptionProperties";
+      break;
     default:
       break;
   }

@@ -19,6 +19,7 @@ import TextProperties from "./propertyComponents/TextProperties";
 import BorderProperties from "./propertyComponents/BorderProperties";
 import BoxProperties from "./propertyComponents/BoxProperties";
 import GeneralProperties from "./propertyComponents/GeneralProperties";
+import OptionProperties from "./propertyComponents/OptionProperties";
 export default {
   components: {
     SpacingProperties,
@@ -27,6 +28,7 @@ export default {
     BorderProperties,
     BoxProperties,
     GeneralProperties,
+    OptionProperties,
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),

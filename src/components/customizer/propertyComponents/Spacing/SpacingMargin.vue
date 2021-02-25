@@ -2,80 +2,57 @@
   <div class="property-wrapper">
     <div class="customizer-sub-title">
       Margin
-      <div class="setting-switch">
-        More Options
-        <a-switch v-model="fullMargin" @change="handleChange" disabled>
-          <a-icon slot="checkedChildren" type="check" />
-          <a-icon slot="unCheckedChildren" type="close" />
-        </a-switch>
-      </div>
     </div>
-    <transition name="fade">
-      <div class="all-slides-wrapper" v-if="false">
-        <div class="customizer-sub-sub-title">All Sides</div>
+    <div class="full-width-wrapper" v-if="true">
+      <div class="padding-item">
+        <div class="customizer-sub-sub-title">Top</div>
         <div class="property-adjust-wrapper">
           <a-input-number
             :min="0"
             :max="100"
-            v-model="allSides"
+            v-model="top"
             class="customizer-input-number"
             @change="handleChange"
           />
         </div>
       </div>
-    </transition>
-    <transition name="fade">
-      <div class="full-width-wrapper" v-if="true">
-        <div class="padding-item">
-          <div class="customizer-sub-sub-title">Top</div>
-          <div class="property-adjust-wrapper">
-            <a-input-number
-              :min="0"
-              :max="100"
-              v-model="top"
-              class="customizer-input-number"
-              @change="handleChange"
-            />
-          </div>
-        </div>
-        <div class="padding-item">
-          <div class="customizer-sub-sub-title">Left</div>
-          <div class="property-adjust-wrapper">
-            <a-input-number
-              :min="0"
-              :max="100"
-              v-model="left"
-              class="customizer-input-number"
-              @change="handleChange"
-            />
-          </div>
-        </div>
-        <div class="padding-item">
-          <div class="customizer-sub-sub-title">Bottom</div>
-          <div class="property-adjust-wrapper">
-            <a-input-number
-              :min="0"
-              :max="100"
-              v-model="bottom"
-              class="customizer-input-number"
-              @change="handleChange"
-            />
-          </div>
-        </div>
-        <div class="padding-item">
-          <div class="customizer-sub-sub-title">Right</div>
-          <div class="property-adjust-wrapper">
-            <a-input-number
-              :min="0"
-              :max="100"
-              v-model="right"
-              class="customizer-input-number"
-              @change="handleChange"
-            />
-          </div>
+      <div class="padding-item">
+        <div class="customizer-sub-sub-title">Left</div>
+        <div class="property-adjust-wrapper">
+          <a-input-number
+            :min="0"
+            :max="100"
+            v-model="left"
+            class="customizer-input-number"
+            @change="handleChange"
+          />
         </div>
       </div>
-    </transition>
+      <div class="padding-item">
+        <div class="customizer-sub-sub-title">Bottom</div>
+        <div class="property-adjust-wrapper">
+          <a-input-number
+            :min="0"
+            :max="100"
+            v-model="bottom"
+            class="customizer-input-number"
+            @change="handleChange"
+          />
+        </div>
+      </div>
+      <div class="padding-item">
+        <div class="customizer-sub-sub-title">Right</div>
+        <div class="property-adjust-wrapper">
+          <a-input-number
+            :min="0"
+            :max="100"
+            v-model="right"
+            class="customizer-input-number"
+            @change="handleChange"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

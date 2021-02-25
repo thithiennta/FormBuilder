@@ -16,6 +16,7 @@
         width: layoutSettings.input.labelWidth + '%',
         'min-width': 'fit-content',
         ...margin,
+        color: layoutSettings.input.labelColor,
       }"
       v-if="layoutSettings.input.isOutsideLabel"
     >
@@ -153,10 +154,4 @@ export default {
 };
 </script>
 
-<style scoped>
-textarea {
-  outline: none;
-  min-width: min-content;
-  pointer-events: none;
-}
-</style>
+<style scoped></style>

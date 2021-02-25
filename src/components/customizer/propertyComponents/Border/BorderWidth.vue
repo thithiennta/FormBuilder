@@ -15,7 +15,7 @@
         <div class="customizer-sub-sub-title">All Sides</div>
         <div class="property-adjust-wrapper">
           <a-input-number
-            :min="1"
+            :min="0"
             :max="25"
             v-model="allSides"
             class="customizer-input-number"
@@ -30,7 +30,7 @@
           <div class="customizer-sub-sub-title">Top</div>
           <div class="property-adjust-wrapper">
             <a-input-number
-              :min="1"
+              :min="0"
               :max="25"
               v-model="top"
               class="customizer-input-number"
@@ -42,7 +42,7 @@
           <div class="customizer-sub-sub-title">Left</div>
           <div class="property-adjust-wrapper">
             <a-input-number
-              :min="1"
+              :min="0"
               :max="25"
               v-model="left"
               class="customizer-input-number"
@@ -54,7 +54,7 @@
           <div class="customizer-sub-sub-title">Bottom</div>
           <div class="property-adjust-wrapper">
             <a-input-number
-              :min="1"
+              :min="0"
               :max="25"
               v-model="bottom"
               class="customizer-input-number"
@@ -66,7 +66,7 @@
           <div class="customizer-sub-sub-title">Right</div>
           <div class="property-adjust-wrapper">
             <a-input-number
-              :min="1"
+              :min="0"
               :max="25"
               v-model="right"
               class="customizer-input-number"
@@ -82,7 +82,7 @@
 <script>
 import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
-const min = 1,
+const min = 0,
   max = 25;
 export default {
   data() {

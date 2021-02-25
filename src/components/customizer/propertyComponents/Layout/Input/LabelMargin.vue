@@ -1,7 +1,7 @@
 <template>
   <div class="property-wrapper">
     <div class="customizer-sub-title">
-      Margin
+      Label Margin
     </div>
     <div class="full-width-wrapper">
       <div class="padding-item">

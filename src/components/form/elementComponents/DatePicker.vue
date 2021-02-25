@@ -1,19 +1,31 @@
 <template>
   <div
+    class="form-element-wrapper"
     :style="{
-      width: '100%',
-      ['margin' + spacingAlign]: 'auto',
-      ...flexDirection,
+      'background-color':
+        properties.general.backgroundColor.indexOf('0)') !== -1
+          ? layoutSettings.backgroundColor
+          : properties.general.backgroundColor,
+      'font-size': properties.text.inheritSize
+        ? layoutSettings.fontSize + 'px'
+        : properties.text.size + 'px',
+      margin:
+        properties.spacing.topMargin +
+        'px ' +
+        properties.spacing.rightMargin +
+        'px ' +
+        properties.spacing.bottomMargin +
+        'px ' +
+        properties.spacing.leftMargin +
+        'px ',
     }"
   >
     <div
       class="input-field-name"
       :style="{
-        ...labelPosition,
         'font-size': layoutSettings.input.labelSize + 'px',
         'font-weight': layoutSettings.input.labelBold ? 'bold' : '',
         'font-style': layoutSettings.input.labelItalic ? 'italic' : '',
-        width: layoutSettings.input.labelWidth + '%',
         'min-width': 'fit-content',
         ...margin,
         color: layoutSettings.input.labelColor,
@@ -22,31 +34,34 @@
     >
       {{ properties.text.fieldName }}
     </div>
-    <input
-      :style="{
-        'background-color': properties.spacing.backgroundColor,
-        ...border,
-        'border-radius': properties.border.radius + 'px',
-        color: properties.text.inheritColor
-          ? layoutSettings.color
-          : properties.text.color,
-        height: properties.spacing.height + 'px',
-        ...padding,
-        width: properties.spacing.width + '%',
-        'max-width': 100 - layoutSettings.input.labelWidth + '%',
-        'text-align': properties.text.align,
-        'font-weight': properties.text.weight,
-        'font-family': properties.general.fontFamily,
-      }"
-      :placeholder="properties.text.placeholder"
-      :name="properties.text.name"
-    />
+    <div class="date-picker-wrapper" style="display:flex">
+      <div
+        class="margin-left"
+        :style="{
+          width: properties.option.leftMargin + '%',
+        }"
+      ></div>
+      <input
+        type="date"
+        :name="properties.text.fieldName"
+        :style="{
+          width: properties.spacing.width + '%',
+          'min-width': 'fit-content',
+          ...padding,
+          ...border,
+          'border-radius': properties.border.radius + 'px',
+          color: properties.text.inheritColor
+            ? layoutSettings.color
+            : properties.text.color,
+          'background-color': properties.spacing.backgroundColor,
+        }"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-
 export default {
   props: {
     properties: {
@@ -56,33 +71,7 @@ export default {
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
-    spacingAlign() {
-      if (this.properties.spacing.align === "left") return "-right";
-      if (this.properties.spacing.align === "right") return "-left";
-      return "";
-    },
-    flexDirection() {
-      var flex = {
-        display: "flex",
-      };
-      if (
-        this.layoutSettings.input.labelPosition === "top" ||
-        this.layoutSettings.input.labelPosition === "bottom"
-      ) {
-        flex = { ...flex, "flex-direction": "column" };
-      }
-      return flex;
-    },
-    labelPosition() {
-      var position = {};
-      if (
-        this.layoutSettings.input.labelPosition === "bottom" ||
-        this.layoutSettings.input.labelPosition === "right"
-      ) {
-        position = { order: 1 };
-      }
-      return position;
-    },
+    ...mapState("customizerModule", ["activeElement"]),
     border() {
       if (this.properties.border.fullWidth) {
         return {
@@ -154,11 +143,6 @@ export default {
 </script>
 
 <style scoped>
-input {
-  outline: none;
-  min-width: min-content;
-  pointer-events: none;
-}
 .form-element-wrapper input {
   margin-right: 0;
 }

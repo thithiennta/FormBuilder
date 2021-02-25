@@ -5,7 +5,7 @@
     expand-icon-position="right"
     class="property-wrapper"
   >
-    <a-collapse-panel key="1" header="GENERAL" class="customizer-container">
+    <a-collapse-panel key="1" header="OPTION" class="customizer-container">
       <component
         v-for="(property, index) in propertiesArray"
         :key="index"
@@ -18,24 +18,18 @@
 <script>
 import { getElementsByType } from "../../../utils/settingSubPropertyUtils";
 import { mapState } from "vuex";
-import BackgroundColor from "./General/BackgroundColor";
-import DividerColor from "./General/DividerColor";
-import DividerSize from "./General/DividerSize";
-import DividerStyle from "./General/DividerStyle";
-import FontFamily from "./General/FontFamily";
-import ChangeColumn from "./General/ChangeColumn";
-import LabelMargin from "./General/LabelMargin";
-import SubLabel from "./General/SubLabel";
+import Options from "./Option/Options";
+import OptionsDirection from "./Option/OptionsDirection";
+import MarginLeft from "./Option/MarginLeft";
+import MarginRight from "./Option/MarginRight";
+import OptionSpacing from "./Option/OptionSpacing";
 export default {
   components: {
-    BackgroundColor,
-    DividerColor,
-    DividerSize,
-    DividerStyle,
-    FontFamily,
-    ChangeColumn,
-    LabelMargin,
-    SubLabel,
+    Options,
+    OptionsDirection,
+    MarginLeft,
+    MarginRight,
+    OptionSpacing,
   },
   data() {
     return {
@@ -55,7 +49,7 @@ export default {
   },
   methods: {
     getElementsByType() {
-      return getElementsByType("general", this.activeElement.type);
+      return getElementsByType("option", this.activeElement.type);
     },
   },
 };

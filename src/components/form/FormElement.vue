@@ -66,6 +66,11 @@ import TwoColumn from "./elementComponents/TwoColumn";
 import ThreeColumn from "./elementComponents/ThreeColumn";
 import FourColumn from "./elementComponents/FourColumn";
 import Divider from "./elementComponents/Divider";
+import RadioGroup from "./elementComponents/RadioGroup";
+import CheckBoxGroup from "./elementComponents/CheckBoxGroup";
+import DropdownList from "./elementComponents/DropdownList";
+import DatePicker from "./elementComponents/DatePicker";
+import BirthdayField from "./elementComponents/BirthdayField";
 import { Modal, message } from "ant-design-vue";
 export default {
   components: {
@@ -81,6 +86,11 @@ export default {
     FourColumn,
     Divider,
     CustomText,
+    RadioGroup,
+    CheckBoxGroup,
+    DropdownList,
+    DatePicker,
+    BirthdayField,
   },
   props: {
     formElement: {

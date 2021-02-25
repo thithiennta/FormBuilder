@@ -21,9 +21,6 @@
           <a-radio-button value="left">
             Left
           </a-radio-button>
-          <a-radio-button value="bottom">
-            Bottom
-          </a-radio-button>
         </a-radio-group>
       </div>
     </div>

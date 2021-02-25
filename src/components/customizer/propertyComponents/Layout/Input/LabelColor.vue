@@ -1,20 +1,13 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">
-      {{ activeElement.type }} Background Color
-    </div>
+    <div class="customizer-sub-title">Label Color</div>
     <div class="property-adjust-wrapper">
       <div class="show-color-wrapper" @click="handleShowSketch">
-        <div
-          class="color-block"
-          :style="{
-            'background-color': color,
-          }"
-        ></div>
+        <div class="color-block" :style="{ 'background-color': color }"></div>
         <div class="text-block">Choose Color</div>
       </div>
       <Sketch
-        id="element-background-sketch"
+        id="label-sketch"
         v-model="color"
         v-show="showSketch"
         class="sketch-wrapper"
@@ -39,14 +32,14 @@ export default {
     };
   },
   computed: {
-    ...mapState("customizerModule", ["activeElement"]),
+    ...mapState("formModule", ["layoutSettings"]),
   },
   created() {
-    this.color = this.activeElement.properties.spacing.backgroundColor;
+    this.color = this.layoutSettings.input.labelColor;
   },
   mounted() {
     document.addEventListener("click", (e) => {
-      var colorPicker = document.getElementById("element-background-sketch");
+      var colorPicker = document.getElementById("label-sketch");
       if (colorPicker === null) return;
       if (!colorPicker.contains(e.target)) {
         this.showSketch = false;
@@ -56,14 +49,16 @@ export default {
   watch: {
     color: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
+      // This to ADD PREVIOUS STATE and CLONE STATE
+      this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
       this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
+        "formModule/changeLayoutProperty",
+        this.layoutSettings
       );
     }, 200),
     activeElement() {
-      this.color = this.activeElement.properties.spacing.backgroundColor;
+      this.color = this.layoutSettings.input.labelColor;
     },
   },
   methods: {
@@ -75,9 +70,9 @@ export default {
       });
       this.showSketch = !this.showSketch;
     },
-    updateValue(value) {
-      this.color = value.hex;
-      this.activeElement.properties.spacing.backgroundColor = this.color;
+    updateValue({ rgba }) {
+      this.color = `rgba(${rgba.r},${rgba.g}, ${rgba.b}, ${rgba.a})`;
+      this.layoutSettings.input.labelColor = this.color;
     },
   },
 };

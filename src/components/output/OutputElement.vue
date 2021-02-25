@@ -20,6 +20,10 @@ import Title from "./Title";
 import CheckBox from "./CheckBox";
 import RadioButton from "./RadioButton";
 import TextArea from "./TextArea";
+import CheckBoxGroup from "./CheckBoxGroup";
+import RadioGroup from "./RadioGroup";
+import DropdownList from "./DropdownList";
+import DatePicker from "./DatePicker";
 export default {
   props: {
     formElement: {
@@ -39,6 +43,10 @@ export default {
     CheckBox,
     RadioButton,
     TextArea,
+    CheckBoxGroup,
+    RadioGroup,
+    DropdownList,
+    DatePicker,
   },
 };
 </script>
