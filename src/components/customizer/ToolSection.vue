@@ -235,8 +235,8 @@ export default {
               bottomWidth: 1,
               leftWidth: 1,
               style: "solid",
-              color: "black",
-              radius: 0,
+              color: "rgba(174,170,170,1)",
+              radius: 5,
             },
             text: {
               fieldName: "Textarea Field",
@@ -252,8 +252,8 @@ export default {
             spacing: {
               backgroundColor: "white",
               width: 50,
-              height: 50,
-              align: "center",
+              height: 100,
+              align: "left",
               fullPadding: false,
               allSidesPadding: 5,
               topPadding: 5,

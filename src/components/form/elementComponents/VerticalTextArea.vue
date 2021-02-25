@@ -1,7 +1,6 @@
 <template>
   <div
     :style="{
-      width: properties.spacing.width + '%',
       ['margin' + spacingAlign]: 'auto',
       ...flexDirection,
     }"
@@ -13,7 +12,6 @@
         'font-size': layoutSettings.input.labelSize + 'px',
         'font-weight': layoutSettings.input.labelBold ? 'bold' : '',
         'font-style': layoutSettings.input.labelItalic ? 'italic' : '',
-        width: layoutSettings.input.labelWidth + '%',
         'min-width': 'fit-content',
         ...margin,
         color: layoutSettings.input.labelColor,
