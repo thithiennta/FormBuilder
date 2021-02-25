@@ -44,6 +44,7 @@
         :style="{
           width: properties.spacing.width + '%',
           'min-width': 'fit-content',
+          'background-color': properties.spacing.backgroundColor,
         }"
       >
         <div

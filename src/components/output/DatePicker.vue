@@ -51,6 +51,7 @@
           color: properties.text.inheritColor
             ? layoutSettings.color
             : properties.text.color,
+          'background-color': properties.spacing.backgroundColor,
         }"
       />
     </div>

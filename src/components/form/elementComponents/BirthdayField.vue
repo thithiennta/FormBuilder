@@ -19,6 +19,7 @@
         properties.spacing.leftMargin +
         'px ',
     }"
+    disabled
   >
     <div
       class="input-field-name"
