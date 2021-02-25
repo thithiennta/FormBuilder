@@ -83,3 +83,15 @@ export default {
   margin: 20px 0;
 }
 </style>
+<style>
+.adjust-section-wrapper .__view > .property-wrapper {
+  padding-bottom: 0 !important;
+}
+.adjust-section-wrapper
+  .__view
+  > .property-wrapper
+  .ant-collapse-content
+  > .ant-collapse-content-box {
+  padding-bottom: 0 !important;
+}
+</style>

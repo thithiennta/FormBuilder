@@ -103,11 +103,10 @@ export default {
 
 <style scoped>
 .property-adjust-wrapper {
+  display: flex;
 }
 .property-inherit {
-  position: relative;
-  top: -25px;
-  left: 150px;
+  margin-left: 10px;
 }
 .show-color-wrapper {
   display: flex;
@@ -132,7 +131,7 @@ export default {
 }
 .sketch-wrapper {
   position: absolute;
-  margin-top: 5px;
+  margin-top: 30px;
   z-index: 999;
 }
 </style>

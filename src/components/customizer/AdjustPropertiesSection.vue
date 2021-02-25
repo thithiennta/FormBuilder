@@ -82,7 +82,7 @@ export default {
 </style>
 <style>
 .property-wrapper {
-  padding: 10px 0;
+  padding: 10px 0 !important;
   /* background-color: rgb(35, 35, 35) !important; */
   background-color: transparent !important;
 }
