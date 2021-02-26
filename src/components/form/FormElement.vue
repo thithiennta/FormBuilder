@@ -21,6 +21,7 @@
     </div>
     <component
       :is="formElement.type"
+      :rowId="formElement.rowId"
       :properties="formElement.properties"
       :nestedElements="formElement.elements"
     ></component>

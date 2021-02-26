@@ -1,6 +1,9 @@
 <template>
-  <div class="property-wrapper">
-    <div class="customizer-sub-title">Margin Left</div>
+  <div
+    class="property-wrapper"
+    v-if="layoutSettings.label.labelPosition === 'top'"
+  >
+    <div class="customizer-sub-title">Options Alignment</div>
     <div class="property-adjust-wrapper">
       <div class="slider-tool-tip">{{ value }}%</div>
       <a-slider
@@ -40,6 +43,7 @@ export default {
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
+    ...mapState("formModule", ["layoutSettings"]),
   },
   methods: {
     handleChange() {

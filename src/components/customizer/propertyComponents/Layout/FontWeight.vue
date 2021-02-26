@@ -27,7 +27,7 @@ export default {
     this.value = this.layoutSettings.weight;
   },
   watch: {
-    activeElement() {
+    layoutSettings() {
       this.value = this.layoutSettings.weight;
     },
   },

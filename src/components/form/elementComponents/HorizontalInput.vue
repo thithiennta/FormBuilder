@@ -14,17 +14,19 @@
         'font-size': layoutSettings.label.labelSize + 'px',
         'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
         'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
-        width: layoutSettings.label.labelWidth + 'px',
+        width: properties.general.label.inheritLabelMargin
+          ? layoutSettings.label.labelWidth + 'px'
+          : properties.general.label.labelRightMargin + 'px',
         'min-width': 'fit-content',
         color: layoutSettings.label.labelColor,
       }"
-      v-if="layoutSettings.label.isOutsideLabel"
+      v-if="properties.general.label.isOutsideLabel"
     >
       {{ properties.text.fieldName }}
     </div>
     <input
       :style="{
-        'background-color': properties.spacing.backgroundColor,
+        'background-color': layoutSettings.field.backgroundColor,
         ...border,
         'border-radius': layoutSettings.border.radius + 'px',
         color: properties.text.inheritColor
@@ -33,8 +35,7 @@
         height: layoutSettings.field.height + 'px',
         padding: layoutSettings.field.padding + 'px',
         width: properties.spacing.width + '%',
-        'max-width':
-          'calc(' + 100 + '% - ' + layoutSettings.label.labelWidth + 'px)',
+        ...maxWidth,
         'text-align': properties.text.align,
         'font-weight': layoutSettings.weight,
         'font-family': properties.general.fontFamily,
@@ -104,6 +105,24 @@ export default {
             this.layoutSettings.border.color,
         };
       }
+    },
+    maxWidth() {
+      if (
+        this.layoutSettings.label.labelPosition === "left" &&
+        this.properties.general.label.isOutsideLabel
+      ) {
+        return {
+          "max-width":
+            "calc(" +
+            100 +
+            "% - " +
+            (this.properties.general.label.inheritLabelMargin
+              ? this.layoutSettings.label.labelWidth
+              : this.properties.general.label.labelRightMargin) +
+            "px)",
+        };
+      }
+      return {};
     },
   },
 };

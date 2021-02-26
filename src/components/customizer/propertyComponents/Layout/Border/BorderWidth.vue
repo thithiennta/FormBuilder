@@ -122,7 +122,7 @@ export default {
     bottom(newValue, oldValue) {
       this.debounceFunction(newValue, oldValue);
     },
-    activeElement() {
+    layoutSettings() {
       this.fullWidth = this.layoutSettings.border.fullWidth;
       this.allSides = this.layoutSettings.border.allSidesWidth;
       this.top = this.layoutSettings.border.topWidth;

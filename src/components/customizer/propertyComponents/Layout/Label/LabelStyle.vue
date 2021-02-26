@@ -70,7 +70,7 @@ export default {
         this.layoutSettings
       );
     },
-    activeElement() {
+    layoutSettings() {
       this.italicActive = this.layoutSettings.label.labelItaluc;
       this.boldActive = this.layoutSettings.label.labelBold;
     },

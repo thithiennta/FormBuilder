@@ -3,7 +3,10 @@
     class="form-element-wrapper"
     :style="{
       'text-align': properties.spacing.align,
-      'background-color': properties.general.backgroundColor,
+      'background-color':
+        properties.general.backgroundColor.indexOf('0)') !== -1
+          ? layoutSettings.backgroundColor
+          : properties.general.backgroundColor,
       'font-size': properties.text.inheritSize
         ? layoutSettings.fontSize + 'px'
         : properties.text.size + 'px',
@@ -26,6 +29,7 @@
         color: properties.text.inheritColor
           ? layoutSettings.color
           : properties.text.color,
+
         'font-weight': properties.text.weight,
         'text-align': properties.text.align,
         width: properties.spacing.width + '%',
@@ -95,5 +99,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>

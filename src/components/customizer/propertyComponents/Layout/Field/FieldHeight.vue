@@ -36,6 +36,9 @@ export default {
         this.layoutSettings
       );
     }, 200),
+    layoutSettings() {
+      this.value = this.layoutSettings.field.height;
+    },
   },
   methods: {
     handleChange() {

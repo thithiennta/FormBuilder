@@ -57,4 +57,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.form-element-wrapper {
+  user-select: none;
+}
+</style>

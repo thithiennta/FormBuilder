@@ -23,16 +23,16 @@
     </div>
     <textarea
       :style="{
-        'background-color': properties.spacing.backgroundColor,
+        'background-color': layoutSettings.field.backgroundColor,
         ...border,
-
         'border-radius': properties.border.radius + 'px',
         color: properties.text.inheritColor
           ? layoutSettings.color
           : properties.text.color,
 
         width: properties.spacing.width + '%',
-        height: layoutSettings.field.height + 'px',
+        height: properties.spacing.height + 'px',
+        'min-height': '50px',
         padding: layoutSettings.field.padding + 'px',
         'text-align': properties.text.align,
         'font-weight': layoutSettings.weight,

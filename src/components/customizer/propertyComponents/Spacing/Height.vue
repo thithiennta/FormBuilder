@@ -7,6 +7,7 @@
         v-model="value"
         :tooltip-visible="false"
         @change="handleChange"
+        :max="200"
       />
     </div>
   </div>

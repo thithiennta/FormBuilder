@@ -225,6 +225,7 @@ export default {
                 labelLeftMargin: 0,
                 labelBottomMargin: 0,
                 inheritLabelMargin: true,
+                isOutsideLabel: true,
               },
             },
             border: {
@@ -251,7 +252,7 @@ export default {
             },
             spacing: {
               backgroundColor: "white",
-              width: 50,
+              width: 100,
               height: 100,
               align: "left",
               fullPadding: false,

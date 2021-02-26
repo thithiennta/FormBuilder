@@ -1,13 +1,20 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">Label Color</div>
+    <div class="customizer-sub-title">
+      Field Background Color
+    </div>
     <div class="property-adjust-wrapper">
       <div class="show-color-wrapper" @click="handleShowSketch">
-        <div class="color-block" :style="{ 'background-color': color }"></div>
+        <div
+          class="color-block"
+          :style="{
+            'background-color': color,
+          }"
+        ></div>
         <div class="text-block">Choose Color</div>
       </div>
       <Sketch
-        id="label-sketch"
+        id="field-background-sketch"
         v-model="color"
         v-show="showSketch"
         class="sketch-wrapper"
@@ -35,11 +42,11 @@ export default {
     ...mapState("formModule", ["layoutSettings"]),
   },
   created() {
-    this.color = this.layoutSettings.label.labelColor;
+    this.color = this.layoutSettings.field.backgroundColor;
   },
   mounted() {
     document.addEventListener("click", (e) => {
-      var colorPicker = document.getElementById("label-sketch");
+      var colorPicker = document.getElementById("field-background-sketch");
       if (colorPicker === null) return;
       if (!colorPicker.contains(e.target)) {
         this.showSketch = false;
@@ -49,16 +56,15 @@ export default {
   watch: {
     color: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
-      // This to ADD PREVIOUS STATE and CLONE STATE
-      this.$store.dispatch("formModule/updateProperty");
       // This to UPDATE PROPERTY
+      this.$store.dispatch("formModule/updateProperty");
       this.$store.dispatch(
         "formModule/changeLayoutProperty",
         this.layoutSettings
       );
     }, 200),
     layoutSettings() {
-      this.color = this.layoutSettings.label.labelColor;
+      this.color = this.layoutSettings.field.backgroundColor;
     },
   },
   methods: {
@@ -70,9 +76,9 @@ export default {
       });
       this.showSketch = !this.showSketch;
     },
-    updateValue({ rgba }) {
-      this.color = `rgba(${rgba.r},${rgba.g}, ${rgba.b}, ${rgba.a})`;
-      this.layoutSettings.label.labelColor = this.color;
+    updateValue(value) {
+      this.color = value.hex;
+      this.layoutSettings.field.backgroundColor = this.color;
     },
   },
 };

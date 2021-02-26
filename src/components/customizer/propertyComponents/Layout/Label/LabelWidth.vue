@@ -37,7 +37,7 @@ export default {
         this.layoutSettings
       );
     }, 200),
-    activeElement() {
+    layoutSettings() {
       this.value = this.layoutSettings.label.labelWidth;
     },
   },

@@ -58,4 +58,7 @@ button {
   cursor: pointer;
   outline: none;
 }
+.form-element-wrapper {
+  user-select: none;
+}
 </style>

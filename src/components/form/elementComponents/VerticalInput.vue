@@ -24,7 +24,7 @@
     </div>
     <input
       :style="{
-        'background-color': properties.spacing.backgroundColor,
+        'background-color': layoutSettings.field.backgroundColor,
         ...border,
         'border-radius': layoutSettings.border.radius + 'px',
         color: properties.text.inheritColor

@@ -55,7 +55,7 @@ export default {
         this.layoutSettings
       );
     }, 200),
-    activeElement() {
+    layoutSettings() {
       this.color = this.layoutSettings.border.color;
     },
   },

@@ -37,11 +37,22 @@
     >
       {{ properties.text.fieldName }}
     </div>
-    <div class="option-container" style="display:flex">
+    <div
+      class="option-container"
+      style="display:flex"
+      :style="{
+        'margin-left':
+          layoutSettings.label.labelPosition === 'top'
+            ? properties.option.leftMargin + 'px'
+            : '',
+      }"
+    >
       <div
         class="input-field-name"
         :style="{
-          width: layoutSettings.label.labelWidth + 'px',
+          width: properties.general.label.inheritLabelMargin
+            ? layoutSettings.label.labelWidth + 'px'
+            : properties.general.label.labelRightMargin + 'px',
           'font-size': layoutSettings.label.labelSize + 'px',
           'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
           'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
@@ -80,6 +91,7 @@
                       : properties.option.optionSpacing + 'px',
                 }
           "
+          style="display:flex; align-items:center"
         >
           <input
             type="radio"
@@ -139,5 +151,8 @@ export default {
 <style scoped>
 .options-wrapper {
   pointer-events: none;
+}
+.form-element-wrapper {
+  user-select: none;
 }
 </style>

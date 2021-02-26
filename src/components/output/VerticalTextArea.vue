@@ -13,7 +13,9 @@
         'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
         'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
+        ...margin,
         color: layoutSettings.label.labelColor,
+        'margin-bottom': layoutSettings.label.labelBottomMargin + 'px',
       }"
       v-if="layoutSettings.label.isOutsideLabel"
     >
@@ -21,9 +23,8 @@
     </div>
     <textarea
       :style="{
-        'background-color': properties.spacing.backgroundColor,
+        'background-color': layoutSettings.field.backgroundColor,
         ...border,
-
         'border-radius': properties.border.radius + 'px',
         color: properties.text.inheritColor
           ? layoutSettings.color
@@ -31,9 +32,10 @@
 
         width: properties.spacing.width + '%',
         height: properties.spacing.height + 'px',
-        ...padding,
+        'min-height': '50px',
+        padding: layoutSettings.field.padding + 'px',
         'text-align': properties.text.align,
-        'font-weight': properties.text.weight,
+        'font-weight': layoutSettings.weight,
         'font-family': properties.general.fontFamily,
       }"
       :placeholder="properties.text.placeholder"
@@ -121,8 +123,32 @@ export default {
         };
       }
     },
+    margin() {
+      if (this.properties.general.label.inheritLabelMargin) {
+        return {
+          margin:
+            this.layoutSettings.label.labelTopMargin +
+            "px " +
+            this.layoutSettings.label.labelRightMargin +
+            "px " +
+            this.layoutSettings.label.labelBottomMargin +
+            "px " +
+            this.layoutSettings.label.labelLeftMargin +
+            "px ",
+        };
+      }
+      return {
+        margin:
+          this.properties.general.label.labelTopMargin +
+          "px " +
+          this.properties.general.label.labelRightMargin +
+          "px " +
+          this.properties.general.label.labelBottomMargin +
+          "px " +
+          this.properties.general.label.labelLeftMargin +
+          "px ",
+      };
+    },
   },
 };
 </script>
-
-<style scoped></style>

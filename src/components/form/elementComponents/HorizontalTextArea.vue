@@ -13,26 +13,29 @@
         'font-size': layoutSettings.label.labelSize + 'px',
         'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
         'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
-        width: layoutSettings.label.labelWidth + '%',
+        width: properties.general.label.inheritLabelMargin
+          ? layoutSettings.label.labelWidth + 'px'
+          : properties.general.label.labelRightMargin + 'px',
         'min-width': 'fit-content',
         color: layoutSettings.label.labelColor,
       }"
-      v-if="layoutSettings.label.isOutsideLabel"
+      v-if="properties.general.label.isOutsideLabel"
     >
       {{ properties.text.fieldName }}
     </div>
     <textarea
       :style="{
-        'background-color': properties.spacing.backgroundColor,
+        'background-color': layoutSettings.field.backgroundColor,
         ...border,
 
         'border-radius': properties.border.radius + 'px',
         color: properties.text.inheritColor
           ? layoutSettings.color
           : properties.text.color,
-
+        ...maxWidth,
         width: properties.spacing.width + '%',
-        height: layoutSettings.field.height + 'px',
+        height: properties.spacing.height + 'px',
+        'min-height': '50px',
         padding: layoutSettings.field.padding + 'px',
         'text-align': properties.text.align,
         'font-weight': layoutSettings.weight,
@@ -103,6 +106,24 @@ export default {
             this.properties.border.color,
         };
       }
+    },
+    maxWidth() {
+      if (
+        this.layoutSettings.label.labelPosition === "left" &&
+        this.properties.general.label.isOutsideLabel
+      ) {
+        return {
+          "max-width":
+            "calc(" +
+            100 +
+            "% - " +
+            (this.properties.general.label.inheritLabelMargin
+              ? this.layoutSettings.label.labelWidth
+              : this.properties.general.label.labelRightMargin) +
+            "px)",
+        };
+      }
+      return {};
     },
   },
 };

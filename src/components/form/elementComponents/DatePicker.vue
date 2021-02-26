@@ -47,7 +47,9 @@
       <div
         class="input-field-name"
         :style="{
-          width: layoutSettings.label.labelWidth + 'px',
+          width: properties.general.label.inheritLabelMargin
+            ? layoutSettings.label.labelWidth + 'px'
+            : properties.general.label.labelRightMargin + 'px',
           'font-size': layoutSettings.label.labelSize + 'px',
           'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
           'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
@@ -69,11 +71,12 @@
           'min-width': 'fit-content',
           padding: layoutSettings.field.padding + 'px',
           ...border,
+          ...maxWidth,
           'border-radius': layoutSettings.border.radius + 'px',
           color: properties.text.inheritColor
             ? layoutSettings.color
             : properties.text.color,
-          'background-color': properties.spacing.backgroundColor,
+          'background-color': layoutSettings.field.backgroundColor,
           height: layoutSettings.field.height + 'px',
         }"
       />
@@ -114,6 +117,24 @@ export default {
         };
       }
     },
+    maxWidth() {
+      if (
+        this.layoutSettings.label.labelPosition === "left" &&
+        this.layoutSettings.label.isOutsideLabel
+      ) {
+        return {
+          "max-width":
+            "calc(" +
+            100 +
+            "% - " +
+            (this.properties.general.label.inheritLabelMargin
+              ? this.layoutSettings.label.labelWidth
+              : this.properties.general.label.labelRightMargin) +
+            "px)",
+        };
+      }
+      return {};
+    },
   },
 };
 </script>
@@ -121,5 +142,8 @@ export default {
 <style scoped>
 .form-element-wrapper input {
   margin-right: 0;
+}
+.form-element-wrapper {
+  user-select: none;
 }
 </style>

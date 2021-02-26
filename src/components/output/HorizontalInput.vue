@@ -4,6 +4,7 @@
       width: '100%',
       ['margin' + spacingAlign]: 'auto',
       ...flexDirection,
+      'align-items': layoutSettings.label.labelAlignCenter ? 'center' : '',
     }"
   >
     <div
@@ -13,28 +14,30 @@
         'font-size': layoutSettings.label.labelSize + 'px',
         'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
         'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
-        width: layoutSettings.label.labelWidth + '%',
+        width: properties.general.label.inheritLabelMargin
+          ? layoutSettings.label.labelWidth + 'px'
+          : properties.general.label.labelRightMargin + 'px',
         'min-width': 'fit-content',
         color: layoutSettings.label.labelColor,
       }"
-      v-if="layoutSettings.label.isOutsideLabel"
+      v-if="properties.general.label.isOutsideLabel"
     >
       {{ properties.text.fieldName }}
     </div>
     <input
       :style="{
-        'background-color': properties.spacing.backgroundColor,
+        'background-color': layoutSettings.field.backgroundColor,
         ...border,
-        'border-radius': properties.border.radius + 'px',
+        'border-radius': layoutSettings.border.radius + 'px',
         color: properties.text.inheritColor
           ? layoutSettings.color
           : properties.text.color,
-        height: properties.spacing.height + 'px',
-        ...padding,
+        height: layoutSettings.field.height + 'px',
+        padding: layoutSettings.field.padding + 'px',
         width: properties.spacing.width + '%',
-        'max-width': 100 - layoutSettings.label.labelWidth + '%',
+        ...maxWidth,
         'text-align': properties.text.align,
-        'font-weight': properties.text.weight,
+        'font-weight': layoutSettings.weight,
         'font-family': properties.general.fontFamily,
       }"
       :placeholder="properties.text.placeholder"
@@ -83,51 +86,44 @@ export default {
       return position;
     },
     border() {
-      if (this.properties.border.fullWidth) {
+      if (this.layoutSettings.border.fullWidth) {
         return {
-          "border-style": this.properties.border.style,
-          "border-color": this.properties.border.color,
-          "border-top-width": this.properties.border.topWidth + "px ",
-          "border-right-width": this.properties.border.rightWidth + "px ",
-          "border-bottom-width": this.properties.border.bottomWidth + "px ",
-          "border-left-width": this.properties.border.leftWidth + "px ",
+          "border-style": this.layoutSettings.border.style,
+          "border-color": this.layoutSettings.border.color,
+          "border-top-width": this.layoutSettings.border.topWidth + "px ",
+          "border-right-width": this.layoutSettings.border.rightWidth + "px ",
+          "border-bottom-width": this.layoutSettings.border.bottomWidth + "px ",
+          "border-left-width": this.layoutSettings.border.leftWidth + "px ",
         };
       } else {
         return {
           border:
-            this.properties.border.allSidesWidth +
+            this.layoutSettings.border.allSidesWidth +
             "px " +
-            this.properties.border.style +
+            this.layoutSettings.border.style +
             " " +
-            this.properties.border.color,
+            this.layoutSettings.border.color,
         };
       }
     },
-    padding() {
-      if (this.properties.spacing.fullPadding) {
+    maxWidth() {
+      if (
+        this.layoutSettings.label.labelPosition === "left" &&
+        this.properties.general.label.isOutsideLabel
+      ) {
         return {
-          padding:
-            this.properties.spacing.topPadding +
-            "px " +
-            this.properties.spacing.rightPadding +
-            "px " +
-            this.properties.spacing.bottomPadding +
-            "px " +
-            this.properties.spacing.leftPadding +
-            "px ",
-        };
-      } else {
-        return {
-          padding: this.properties.spacing.allSidesPadding + "px",
+          "max-width":
+            "calc(" +
+            100 +
+            "% - " +
+            (this.properties.general.label.inheritLabelMargin
+              ? this.layoutSettings.label.labelWidth
+              : this.properties.general.label.labelRightMargin) +
+            "px)",
         };
       }
+      return {};
     },
   },
 };
 </script>
-
-<style scoped>
-.form-element-wrapper input {
-  margin-right: 0;
-}
-</style>

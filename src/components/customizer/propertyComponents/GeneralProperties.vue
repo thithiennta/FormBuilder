@@ -26,6 +26,7 @@ import FontFamily from "./General/FontFamily";
 import ChangeColumn from "./General/ChangeColumn";
 import LabelMargin from "./General/LabelMargin";
 import SubLabel from "./General/SubLabel";
+import OutsideLabel from "./General/OutsideLabel";
 export default {
   components: {
     BackgroundColor,
@@ -36,6 +37,7 @@ export default {
     ChangeColumn,
     LabelMargin,
     SubLabel,
+    OutsideLabel,
   },
   data() {
     return {

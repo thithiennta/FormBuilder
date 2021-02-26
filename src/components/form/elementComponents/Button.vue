@@ -107,4 +107,7 @@ button {
   overflow-wrap: anywhere;
   min-width: min-content;
 }
+.form-element-wrapper {
+  user-select: none;
+}
 </style>

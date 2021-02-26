@@ -47,7 +47,9 @@
       <div
         class="input-field-name"
         :style="{
-          width: layoutSettings.label.labelWidth + 'px',
+          width: properties.general.label.inheritLabelMargin
+            ? layoutSettings.label.labelWidth + 'px'
+            : properties.general.label.labelRightMargin + 'px',
           'font-size': layoutSettings.label.labelSize + 'px',
           'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
           'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
@@ -65,9 +67,10 @@
         class="select"
         :style="{
           width: properties.spacing.width + '%',
-          flex: 1,
           'min-width': 'fit-content',
-          'background-color': properties.spacing.backgroundColor,
+          'background-color': layoutSettings.field.backgroundColor,
+          'border-radius': layoutSettings.border.radius + 'px',
+          ...maxWidth,
         }"
       >
         <div
@@ -96,6 +99,7 @@
               ? layoutSettings.color
               : properties.text.color,
             ...border,
+
             'font-weight': layoutSettings.weight,
           }"
         >
@@ -103,7 +107,10 @@
             class="option"
             v-for="(option, index) in properties.option.options"
             :key="index"
-            :style="{ padding: layoutSettings.field.padding + 'px' }"
+            :style="{
+              padding: layoutSettings.field.padding + 'px',
+              'background-color': layoutSettings.field.backgroundColor,
+            }"
           >
             {{ option }}
           </div>
@@ -155,6 +162,24 @@ export default {
             this.layoutSettings.border.color,
         };
       }
+    },
+    maxWidth() {
+      if (
+        this.layoutSettings.label.labelPosition === "left" &&
+        this.layoutSettings.label.isOutsideLabel
+      ) {
+        return {
+          "max-width":
+            "calc(" +
+            100 +
+            "% - " +
+            (this.properties.general.label.inheritLabelMargin
+              ? this.layoutSettings.label.labelWidth
+              : this.properties.general.label.labelRightMargin) +
+            "px)",
+        };
+      }
+      return {};
     },
   },
   methods: {
@@ -216,5 +241,8 @@ export default {
 }
 .select-options .option:hover {
   background-color: rgb(243, 243, 243);
+}
+.form-element-wrapper {
+  user-select: none;
 }
 </style>

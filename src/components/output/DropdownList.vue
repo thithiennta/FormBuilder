@@ -28,33 +28,63 @@
         'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
         color: layoutSettings.label.labelColor,
+        'margin-bottom': layoutSettings.label.labelBottomMargin + 'px',
       }"
-      v-if="layoutSettings.label.isOutsideLabel"
+      v-if="
+        layoutSettings.label.isOutsideLabel &&
+          layoutSettings.label.labelPosition === 'top'
+      "
     >
       {{ properties.text.fieldName }}
     </div>
-    <div class="select-wrapper">
+    <div
+      class="select-wrapper"
+      :style="{
+        display: 'flex',
+        'align-items': layoutSettings.label.labelAlignCenter ? 'center' : '',
+      }"
+    >
       <div
-        class="margin-left"
-        :style="{ width: properties.option.leftMargin + '%' }"
-      ></div>
+        class="input-field-name"
+        :style="{
+          width: properties.general.label.inheritLabelMargin
+            ? layoutSettings.label.labelWidth + 'px'
+            : properties.general.label.labelRightMargin + 'px',
+          'font-size': layoutSettings.label.labelSize + 'px',
+          'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+          'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
+          'min-width': 'fit-content',
+          color: layoutSettings.label.labelColor,
+        }"
+        v-if="
+          layoutSettings.label.isOutsideLabel &&
+            layoutSettings.label.labelPosition === 'left'
+        "
+      >
+        {{ properties.text.fieldName }}
+      </div>
       <div
         class="select"
         :style="{
           width: properties.spacing.width + '%',
           'min-width': 'fit-content',
-          'background-color': properties.spacing.backgroundColor,
+          'background-color': layoutSettings.field.backgroundColor,
+          'border-radius': layoutSettings.border.radius + 'px',
+          ...maxWidth,
         }"
       >
         <div
           class="select__trigger"
           @click="handleShowOptions"
           :style="{
-            ...padding,
-            'border-radius': properties.border.radius + 'px',
+            padding: layoutSettings.field.padding + 'px',
+            'border-radius': layoutSettings.border.radius + 'px',
             color: properties.text.inheritColor
               ? layoutSettings.color
               : properties.text.color,
+            ...border,
+            'font-weight': layoutSettings.weight,
+            height: layoutSettings.field.height + 'px',
           }"
         >
           <span>{{ properties.option.options[0] }}</span>
@@ -64,17 +94,23 @@
           class="select-options"
           :class="{ show: showOptions }"
           :style="{
-            'border-radius': properties.border.radius + 'px',
+            'border-radius': layoutSettings.border.radius + 'px',
             color: properties.text.inheritColor
               ? layoutSettings.color
               : properties.text.color,
+            ...border,
+
+            'font-weight': layoutSettings.weight,
           }"
         >
           <div
             class="option"
             v-for="(option, index) in properties.option.options"
             :key="index"
-            :style="{ ...padding }"
+            :style="{
+              padding: layoutSettings.field.padding + 'px',
+              'background-color': layoutSettings.field.backgroundColor,
+            }"
           >
             {{ option }}
           </div>
@@ -106,24 +142,44 @@ export default {
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
     ...mapState("customizerModule", ["activeElement"]),
-    padding() {
-      if (this.properties.spacing.fullPadding) {
+    border() {
+      if (this.layoutSettings.border.fullWidth) {
         return {
-          padding:
-            this.properties.spacing.topPadding +
-            "px " +
-            this.properties.spacing.rightPadding +
-            "px " +
-            this.properties.spacing.bottomPadding +
-            "px " +
-            this.properties.spacing.leftPadding +
-            "px ",
+          "border-style": this.layoutSettings.border.style,
+          "border-color": this.layoutSettings.border.color,
+          "border-top-width": this.layoutSettings.border.topWidth + "px ",
+          "border-right-width": this.layoutSettings.border.rightWidth + "px ",
+          "border-bottom-width": this.layoutSettings.border.bottomWidth + "px ",
+          "border-left-width": this.layoutSettings.border.leftWidth + "px ",
         };
       } else {
         return {
-          padding: this.properties.spacing.allSidesPadding + "px",
+          border:
+            this.layoutSettings.border.allSidesWidth +
+            "px " +
+            this.layoutSettings.border.style +
+            " " +
+            this.layoutSettings.border.color,
         };
       }
+    },
+    maxWidth() {
+      if (
+        this.layoutSettings.label.labelPosition === "left" &&
+        this.layoutSettings.label.isOutsideLabel
+      ) {
+        return {
+          "max-width":
+            "calc(" +
+            100 +
+            "% - " +
+            (this.properties.general.label.inheritLabelMargin
+              ? this.layoutSettings.label.labelWidth
+              : this.properties.general.label.labelRightMargin) +
+            "px)",
+        };
+      }
+      return {};
     },
   },
   methods: {

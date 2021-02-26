@@ -7,7 +7,6 @@
           checked-children="Sub label"
           un-checked-children="Sub label"
           v-model="haveSubLabel"
-          disabled
         />
       </div>
     </div>

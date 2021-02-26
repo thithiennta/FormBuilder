@@ -39,7 +39,7 @@ export default {
     },
   },
   watch: {
-    activeElement() {
+    layoutSettings() {
       this.value =
         this.layoutSettings.border.style.charAt(0).toUpperCase() +
         this.layoutSettings.border.style.slice(1);

@@ -38,6 +38,9 @@ export default {
         this.layoutSettings
       );
     },
+    layoutSettings() {
+      this.labelAlignCenter = this.layoutSettings.label.labelAlignCenter;
+    },
   },
 };
 </script>

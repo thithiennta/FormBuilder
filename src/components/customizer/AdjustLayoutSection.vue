@@ -20,20 +20,6 @@
         </a-collapse-panel>
       </a-collapse>
       <a-collapse
-        default-active-key="1"
-        :bordered="false"
-        expand-icon-position="right"
-        class="property-wrapper"
-      >
-        <a-collapse-panel
-          key="1"
-          header="FIELD SETTINGS"
-          class="customizer-container"
-        >
-          <FieldHeight />
-        </a-collapse-panel>
-      </a-collapse>
-      <a-collapse
         default-active-key="0"
         :bordered="false"
         expand-icon-position="right"
@@ -49,7 +35,7 @@
         </a-collapse-panel>
       </a-collapse>
       <a-collapse
-        default-active-key="0"
+        default-active-key="1"
         :bordered="false"
         expand-icon-position="right"
         class="property-wrapper"
@@ -81,6 +67,21 @@
           <LabelSize v-if="layoutSettings.label.isOutsideLabel" />
           <LabelStyle v-if="layoutSettings.label.isOutsideLabel" />
           <LabelColor v-if="layoutSettings.label.isOutsideLabel" />
+        </a-collapse-panel>
+      </a-collapse>
+      <a-collapse
+        default-active-key="0"
+        :bordered="false"
+        expand-icon-position="right"
+        class="property-wrapper"
+      >
+        <a-collapse-panel
+          key="1"
+          header="FIELD SETTINGS"
+          class="customizer-container"
+        >
+          <FieldHeight />
+          <FieldBackgroundColor />
         </a-collapse-panel>
       </a-collapse>
       <a-collapse
@@ -124,6 +125,7 @@ import BorderRadius from "./propertyComponents/Layout/Border/BorderRadius";
 import BorderStyle from "./propertyComponents/Layout/Border/BorderStyle";
 import BorderWidth from "./propertyComponents/Layout/Border/BorderWidth";
 import FieldHeight from "./propertyComponents/Layout/Field/FieldHeight";
+import FieldBackgroundColor from "./propertyComponents/Layout/Field/FieldBackgroundColor";
 import { mapState } from "vuex";
 import vuescroll from "vuescroll";
 export default {
@@ -148,6 +150,7 @@ export default {
     BorderStyle,
     BorderWidth,
     FieldHeight,
+    FieldBackgroundColor,
   },
   data() {
     return {

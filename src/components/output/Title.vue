@@ -2,7 +2,10 @@
   <div
     class="form-element-wrapper"
     :style="{
-      'background-color': properties.general.backgroundColor,
+      'background-color':
+        properties.general.backgroundColor.indexOf('0)') !== -1
+          ? layoutSettings.backgroundColor
+          : properties.general.backgroundColor,
       margin:
         properties.spacing.topMargin +
         'px ' +
@@ -31,12 +34,16 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     properties: {
       required: true,
       type: Object,
     },
+  },
+  computed: {
+    ...mapState("formModule", ["layoutSettings"]),
   },
 };
 </script>

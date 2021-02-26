@@ -4,6 +4,7 @@
       width: '100%',
       ['margin' + spacingAlign]: 'auto',
       ...flexDirection,
+      'align-items': layoutSettings.label.labelAlignCenter ? 'center' : '',
     }"
   >
     <div
@@ -23,27 +24,37 @@
     >
       {{ properties.text.fieldName }}
     </div>
-    <textarea
-      :style="{
-        'background-color': layoutSettings.field.backgroundColor,
-        ...border,
-
-        'border-radius': properties.border.radius + 'px',
-        color: properties.text.inheritColor
-          ? layoutSettings.color
-          : properties.text.color,
-        ...maxWidth,
-        width: properties.spacing.width + '%',
-        height: properties.spacing.height + 'px',
-        'min-height': '50px',
-        padding: layoutSettings.field.padding + 'px',
-        'text-align': properties.text.align,
-        'font-weight': layoutSettings.weight,
-        'font-family': properties.general.fontFamily,
-      }"
-      :placeholder="properties.text.placeholder"
-      :name="properties.text.name"
-    ></textarea>
+    <div :style="{ width: properties.spacing.width + '%', ...maxWidth }">
+      <input
+        :style="{
+          'background-color': layoutSettings.field.backgroundColor,
+          ...border,
+          'border-radius': layoutSettings.border.radius + 'px',
+          color: properties.text.inheritColor
+            ? layoutSettings.color
+            : properties.text.color,
+          height: layoutSettings.field.height + 'px',
+          padding: layoutSettings.field.padding + 'px',
+          width: '100%',
+          'text-align': properties.text.align,
+          'font-weight': layoutSettings.weight,
+          'font-family': properties.general.fontFamily,
+        }"
+        :placeholder="properties.text.placeholder"
+        :name="properties.text.name"
+      />
+      <div
+        :style="{
+          'font-size': layoutSettings.label.labelSize + 'px',
+          'min-width': 'fit-content',
+          color: 'gray',
+          'margin-top': '5px',
+        }"
+        v-if="properties.general.label.haveSubLabel"
+      >
+        {{ properties.general.label.subLabel }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -87,23 +98,23 @@ export default {
       return position;
     },
     border() {
-      if (this.properties.border.fullWidth) {
+      if (this.layoutSettings.border.fullWidth) {
         return {
-          "border-style": this.properties.border.style,
-          "border-color": this.properties.border.color,
-          "border-top-width": this.properties.border.topWidth + "px ",
-          "border-right-width": this.properties.border.rightWidth + "px ",
-          "border-bottom-width": this.properties.border.bottomWidth + "px ",
-          "border-left-width": this.properties.border.leftWidth + "px ",
+          "border-style": this.layoutSettings.border.style,
+          "border-color": this.layoutSettings.border.color,
+          "border-top-width": this.layoutSettings.border.topWidth + "px ",
+          "border-right-width": this.layoutSettings.border.rightWidth + "px ",
+          "border-bottom-width": this.layoutSettings.border.bottomWidth + "px ",
+          "border-left-width": this.layoutSettings.border.leftWidth + "px ",
         };
       } else {
         return {
           border:
-            this.properties.border.allSidesWidth +
+            this.layoutSettings.border.allSidesWidth +
             "px " +
-            this.properties.border.style +
+            this.layoutSettings.border.style +
             " " +
-            this.properties.border.color,
+            this.layoutSettings.border.color,
         };
       }
     },
@@ -128,3 +139,14 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+input {
+  outline: none;
+  min-width: min-content;
+  pointer-events: none;
+}
+.form-element-wrapper input {
+  margin-right: 0;
+}
+</style>

@@ -7,6 +7,7 @@
           ? layoutSettings.backgroundColor
           : properties.general.backgroundColor,
     }"
+    :id="rowId + '-columns-wrapper'"
   >
     <div
       class="column-wrapper"
@@ -16,15 +17,32 @@
       :style="{
         width: properties.spacing['column' + (index + 1) + 'Width'] + '%',
       }"
+      :id="rowId + '-col-' + (index + 1)"
     >
       <NestedElement
         :list="nestedElement"
         :class="{ 'empty-nested': isColumnEmpty(nestedElement) }"
       />
+      <div
+        @mousedown="handleMouseDown"
+        :id="rowId + '-col-' + (index + 1) + '-resize'"
+        class="resize"
+        v-if="
+          index + 1 !== nestedElements.length && activeElement.rowId === rowId
+        "
+        :style="{
+          left:
+            'calc(' +
+            properties.spacing['column' + (index + 1) + 'Width'] +
+            '%' +
+            ' - 2px)',
+        }"
+      ></div>
     </div>
   </div>
 </template>
 <script>
+import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
 export default {
   props: {
@@ -37,14 +55,71 @@ export default {
       type: Array,
       default: null,
     },
+    rowId: {
+      required: true,
+      type: String,
+    },
   },
+  data() {
+    return {
+      colWrap: null,
+      col1: null,
+      m_pos: null,
+      col1Width: null,
+    };
+  },
+  mounted() {
+    this.col1 = document.getElementById(this.rowId + "-col-1");
+    this.colWrap = document.getElementById(this.rowId + "-columns-wrapper");
+    document.addEventListener(
+      "mouseup",
+      () => {
+        document.removeEventListener("mousemove", this.resize, false);
+      },
+      false
+    );
+  },
+  created() {},
   methods: {
     isColumnEmpty(column) {
       return column.length === 0;
     },
+    handleMouseDown(e) {
+      this.m_pos = e.x;
+      document.addEventListener("mousemove", this.resize, false);
+    },
+    resize(e) {
+      const dx = this.m_pos - e.x;
+      this.m_pos = e.x;
+      let percent =
+        ((parseInt(getComputedStyle(this.col1, "").width) - dx) /
+          parseInt(getComputedStyle(this.colWrap, "").width)) *
+        100;
+      if (percent < 10) {
+        percent = 10;
+      }
+      if (percent > 90) {
+        percent = 90;
+      }
+      this.col1.style.width = percent + "%";
+      this.col1Width = percent;
+      this.activeElement.properties.spacing.column1Width = percent;
+      this.activeElement.properties.spacing.column2Width = 100 - percent;
+    },
+  },
+  watch: {
+    col1Width: _debounce(function(newValue, oldValue) {
+      if (oldValue === null) return;
+      // This to UPDATE PROPERTY
+      this.$store.dispatch(
+        "customizerModule/changePropertyValue",
+        this.activeElement
+      );
+    }),
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
+    ...mapState("customizerModule", ["activeElement"]),
   },
 };
 </script>
@@ -89,5 +164,13 @@ export default {
   width: 100%;
   text-align: center;
   font-family: "Open sans", sans-serif !important;
+}
+.resize {
+  top: 0;
+  position: absolute;
+  background-color: rgb(64, 186, 248);
+  width: 5px;
+  cursor: col-resize;
+  height: 100%;
 }
 </style>

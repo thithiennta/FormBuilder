@@ -2,7 +2,10 @@
   <div
     class="form-element-wrapper"
     :style="{
-      'background-color': properties.general.backgroundColor,
+      'background-color':
+        properties.general.backgroundColor.indexOf('0)') !== -1
+          ? layoutSettings.backgroundColor
+          : properties.general.backgroundColor,
       'font-size': properties.text.inheritSize
         ? layoutSettings.fontSize + 'px'
         : properties.text.size + 'px',
@@ -22,9 +25,9 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import HorizontalInput from "./HorizontalInput";
 import VerticalInput from "./VerticalInput";
-import { mapState } from "vuex";
 export default {
   components: {
     HorizontalInput,

@@ -39,7 +39,7 @@ export default {
         this.layoutSettings
       );
     }, 300),
-    activeElement() {
+    layoutSettings() {
       this.value = this.layoutSettings.border.radius;
     },
   },

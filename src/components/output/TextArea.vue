@@ -5,6 +5,10 @@
       'font-size': properties.text.inheritSize
         ? layoutSettings.fontSize + 'px'
         : properties.text.size + 'px',
+      'background-color':
+        properties.general.backgroundColor.indexOf('0)') !== -1
+          ? layoutSettings.backgroundColor
+          : properties.general.backgroundColor,
       margin:
         properties.spacing.topMargin +
         'px ' +
@@ -52,5 +56,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
