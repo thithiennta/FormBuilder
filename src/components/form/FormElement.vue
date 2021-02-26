@@ -72,6 +72,7 @@ import CheckBoxGroup from "./elementComponents/CheckBoxGroup";
 import DropdownList from "./elementComponents/DropdownList";
 import DatePicker from "./elementComponents/DatePicker";
 import BirthdayField from "./elementComponents/BirthdayField";
+import GCaptcha from "./elementComponents/GCaptcha";
 import { Modal, message } from "ant-design-vue";
 export default {
   components: {
@@ -92,6 +93,7 @@ export default {
     DropdownList,
     DatePicker,
     BirthdayField,
+    GCaptcha,
   },
   props: {
     formElement: {

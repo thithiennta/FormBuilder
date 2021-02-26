@@ -115,7 +115,7 @@ export default {
         "customizerModule/changePropertyValue",
         this.activeElement
       );
-    }),
+    }, 300),
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
@@ -172,5 +172,6 @@ export default {
   width: 5px;
   cursor: col-resize;
   height: 100%;
+  z-index: 999;
 }
 </style>

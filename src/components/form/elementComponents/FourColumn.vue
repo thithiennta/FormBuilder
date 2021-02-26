@@ -90,7 +90,7 @@ export default {
         "customizerModule/changePropertyValue",
         this.activeElement
       );
-    }),
+    }, 300),
     col2Width: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
       // This to UPDATE PROPERTY
@@ -98,7 +98,7 @@ export default {
         "customizerModule/changePropertyValue",
         this.activeElement
       );
-    }),
+    }, 300),
     col3Width: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
       // This to UPDATE PROPERTY
@@ -106,7 +106,7 @@ export default {
         "customizerModule/changePropertyValue",
         this.activeElement
       );
-    }),
+    }, 300),
   },
   methods: {
     left(index) {
@@ -240,5 +240,6 @@ export default {
   cursor: col-resize;
   height: 100%;
   opacity: 1;
+  z-index: 999;
 }
 </style>

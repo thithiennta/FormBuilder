@@ -627,6 +627,11 @@ export default {
           },
           settings: ["general", "spacing", "option", "text"],
         },
+        {
+          name: "G-Captcha",
+          type: "GCaptcha",
+          icon: "google",
+        },
       ],
     };
   },
