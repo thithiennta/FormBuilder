@@ -36,8 +36,7 @@
 </template>
 
 <script>
-import defaultForm from "../../utils/defaultForm.js";
-import { emptyForm } from "../../utils/emptyForm";
+import basicForms from "../../utils/defaultForm.js";
 import { Modal } from "ant-design-vue";
 export default {
   data() {
@@ -69,18 +68,17 @@ export default {
     handleSaveForm() {},
     handleDownloadForm() {},
     handleNewOk() {
-      console.log(emptyForm);
       return new Promise((resolve) => {
         setTimeout(resolve, 1000);
       }).then(() => {
-        this.$store.dispatch("formModule/initForm", emptyForm);
+        this.$store.dispatch("formModule/initForm", basicForms.emptyForm);
       });
     },
     handleSampleOk() {
       return new Promise((resolve) => {
         setTimeout(resolve, 1000);
       }).then(() => {
-        this.$store.dispatch("formModule/initForm", defaultForm);
+        this.$store.dispatch("formModule/initForm", basicForms.defaultForm);
       });
     },
     handleSaveOk() {},

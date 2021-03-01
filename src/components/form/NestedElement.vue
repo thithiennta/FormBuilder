@@ -4,7 +4,6 @@
     :list="list"
     :value="value"
     @input="emitter"
-    handle=".element-moving-handle"
     @change="handleChange"
   >
     <div v-for="el in realValue" :key="el.rowId">

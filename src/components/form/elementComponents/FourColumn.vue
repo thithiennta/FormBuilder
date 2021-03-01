@@ -132,6 +132,7 @@ export default {
       return column.length === 0;
     },
     handleMouseDown(e, index) {
+      e.preventDefault();
       this.currentIndex = index;
       this.m_pos = e.x;
       document.addEventListener("mousemove", this.resize, false);

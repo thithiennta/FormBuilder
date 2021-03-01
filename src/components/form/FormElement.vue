@@ -15,11 +15,9 @@
     <div class="detect-element">
       {{ formElement.type.indexOf("Column") !== -1 ? "Row" : "Content" }}
     </div>
-    <div class="element-moving-options" v-if="isActive">
-      <!-- <a-icon type="caret-up" /> -->
+    <!-- <div class="element-moving-options" v-if="isActive">
       <a-icon type="drag" class="element-moving-handle" />
-      <!-- <a-icon type="caret-down" /> -->
-    </div>
+    </div> -->
     <component
       :is="formElement.type"
       :rowId="formElement.rowId"

@@ -22,7 +22,7 @@
 <script>
 import { Spin } from "ant-design-vue";
 import Vue from "vue";
-import defaultForm from "./utils/defaultForm";
+import basicForms from "./utils/defaultForm";
 import CustomizerSide from "./components/customizer/CustomizerSide";
 import FormSide from "./components/form/FormSide";
 import PreviewComponent from "./components/PreviewComponent";
@@ -45,7 +45,7 @@ export default {
     this.isLoading = true;
     new Promise((resolve) => {
       setTimeout(resolve, 2000);
-      this.$store.dispatch("formModule/initForm", defaultForm);
+      this.$store.dispatch("formModule/initForm", basicForms.defaultForm);
     }).then(() => {
       this.isLoading = false;
     });
