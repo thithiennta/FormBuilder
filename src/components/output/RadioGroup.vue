@@ -147,3 +147,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.form-element-wrapper input {
+  margin-right: 5px;
+}
+</style>
