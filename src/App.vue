@@ -1,21 +1,32 @@
 <template>
   <div id="app">
-    <a-row type="flex">
-      <a-col flex="300px">
-        <CustomizerSide />
-      </a-col>
-      <a-col flex="1">
-        <FormSide @showPreview="handleShowPreview" />
-      </a-col>
-    </a-row>
-    <PreviewComponent v-if="showPreview" @closePreview="handleClosePreview" />
+    <a-spin tip="Loading form..." :spinning="isLoading" class="loading-spin">
+      <div class="spin-content">
+        <a-row type="flex">
+          <a-col flex="300px">
+            <CustomizerSide />
+          </a-col>
+          <a-col flex="1"
+            ><FormSide @showPreview="handleShowPreview" v-if="!isLoading" />
+          </a-col>
+        </a-row>
+        <PreviewComponent
+          v-if="showPreview"
+          @closePreview="handleClosePreview"
+        />
+      </div>
+    </a-spin>
   </div>
 </template>
 
 <script>
+import { Spin } from "ant-design-vue";
+import Vue from "vue";
 import CustomizerSide from "./components/customizer/CustomizerSide";
 import FormSide from "./components/form/FormSide";
 import PreviewComponent from "./components/PreviewComponent";
+
+Vue.use(Spin);
 export default {
   name: "App",
   components: {
@@ -26,10 +37,17 @@ export default {
   data() {
     return {
       showPreview: false,
+      isLoading: null,
     };
   },
   created() {
-    this.$store.dispatch("formModule/initForm");
+    this.isLoading = true;
+    new Promise((resolve) => {
+      setTimeout(resolve, 0);
+      this.$store.dispatch("formModule/initForm");
+    }).then(() => {
+      this.isLoading = false;
+    });
   },
   methods: {
     handleShowPreview() {
@@ -69,6 +87,10 @@ body {
 }
 #app p {
   margin: unset !important;
+}
+.loading-spin .ant-spin {
+  top: 50% !important;
+  transform: translateY(-50%);
 }
 </style>
 <style scoped></style>

@@ -22,6 +22,7 @@
       <NestedElement
         :list="nestedElement"
         :class="{ 'empty-nested': isColumnEmpty(nestedElement) }"
+        style="z-index: 995"
       />
       <div
         @mousedown="handleMouseDown"
@@ -166,12 +167,13 @@ export default {
   font-family: "Open sans", sans-serif !important;
 }
 .resize {
-  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
   position: absolute;
   background-color: rgb(64, 186, 248);
   width: 5px;
   cursor: col-resize;
-  height: 100%;
+  height: calc(100% - 10px);
   z-index: 999;
 }
 </style>

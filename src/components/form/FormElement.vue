@@ -10,6 +10,7 @@
     }"
     ref="element"
     :id="formElement.rowId"
+    :style="{ ...topElementPadding }"
   >
     <div class="detect-element">
       {{ formElement.type.indexOf("Column") !== -1 ? "Row" : "Content" }}
@@ -104,9 +105,22 @@ export default {
       required: false,
       type: Array,
     },
+    isTopElement: {
+      required: true,
+      type: Boolean,
+    },
   },
   computed: {
     ...mapState("customizerModule", ["haveActiveElement", "activeElement"]),
+    topElementPadding() {
+      if (this.formElement.type.indexOf("Column") === -1 && this.isTopElement) {
+        return {
+          "padding-left": "3px",
+          "padding-right": "3px",
+        };
+      }
+      return {};
+    },
   },
   data() {
     return {
@@ -217,7 +231,7 @@ export default {
         title: "Confirmation",
         content: () => (
           <div>
-            <div>Do you want to dupplicate this element?</div>
+            <div>Do you want to dupplicate this element? </div>
             <div>New element will be created at bottom of this!</div>
           </div>
         ),
@@ -274,7 +288,7 @@ export default {
 .detect-element {
   display: none;
   position: absolute;
-  top: 100%;
+  top: calc(100% + 1px);
   right: -3px;
   background-color: rgb(110, 206, 248);
   width: fit-content;

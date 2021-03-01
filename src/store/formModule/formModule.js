@@ -314,7 +314,7 @@ export default {
           option: {
             options: ["male", "female"],
             optionsDirection: "horizontal",
-            optionSpacing: 10,
+            optionSpacing: 100,
             leftMargin: 0,
             rightMargin: 50,
           },

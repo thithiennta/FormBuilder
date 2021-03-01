@@ -253,4 +253,7 @@ export default {
 .form-content > div > div > .element-big-wrapper {
   /* padding: 0 15px; */
 }
+.columns-wrapper {
+  padding: 5px 0;
+}
 </style>

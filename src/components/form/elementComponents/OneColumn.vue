@@ -1,6 +1,6 @@
 <template>
   <div
-    class="column-wrapper"
+    class="column-wrapper columns-wrapper"
     :class="{ 'empty-nested-wrapper': isEmpty }"
     :style="{
       'background-color':

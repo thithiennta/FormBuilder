@@ -8,7 +8,11 @@
     @change="handleChange"
   >
     <div v-for="el in realValue" :key="el.rowId">
-      <FormElement :formElement="el" :parentElement="realValue" />
+      <FormElement
+        :formElement="el"
+        :parentElement="realValue"
+        :isTopElement="value ? true : false"
+      />
     </div>
   </draggable>
 </template>

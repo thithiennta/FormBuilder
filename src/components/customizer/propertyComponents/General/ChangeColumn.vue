@@ -113,8 +113,12 @@ export default {
       });
     },
     handleOk() {
-      this.value = this.target;
-      this.$store.dispatch("customizerModule/changeColumn", this.target);
+      return new Promise((resolve) => {
+        setTimeout(resolve, 1000);
+      }).then(() => {
+        this.value = this.target;
+        this.$store.dispatch("customizerModule/changeColumn", this.target);
+      });
     },
   },
 };

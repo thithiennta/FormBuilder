@@ -42,6 +42,7 @@
       }"
       :placeholder="properties.text.placeholder"
       :name="properties.text.name"
+      :value="value"
     />
   </div>
 </template>
@@ -55,6 +56,11 @@ export default {
       required: true,
       type: Object,
     },
+  },
+  data() {
+    return {
+      value: "",
+    };
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
