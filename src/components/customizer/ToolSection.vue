@@ -165,6 +165,7 @@ export default {
                 inheritLabelMargin: true,
                 haveSubLabel: false,
                 subLabel: "",
+                isOutsideLabel: true,
               },
             },
             border: {
