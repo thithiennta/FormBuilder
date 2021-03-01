@@ -1,6 +1,12 @@
 import { v4 as uuid } from "uuid";
 const MAX_UNDO_REDO = 20;
 export default {
+  USE_FORM(state, payload) {
+    state.elements = JSON.parse(JSON.stringify(payload.elements));
+    state.layoutSettings = JSON.parse(JSON.stringify(payload.layoutSettings));
+    state.nextStates = JSON.parse(JSON.stringify(payload.nextStates));
+    state.previousStates = JSON.parse(JSON.stringify(payload.previousStates));
+  },
   UPDATE_ELEMENTS(state, payload) {
     state.elements = payload;
   },

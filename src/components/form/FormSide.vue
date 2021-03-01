@@ -1,5 +1,6 @@
 <template>
   <div id="form-side" class="form-side-wrapper">
+    <FormLayoutControl />
     <div class="form-control">
       <div class="undo-redo-control form-control-item">
         <a-tooltip placement="bottom" class="item-wrapper" @click="handleUndo">
@@ -42,6 +43,7 @@
         </a-tooltip>
       </div>
     </div>
+
     <vuescroll :ops="options" class="customizer-body-scroll">
       <div class="form-side-container">
         <div
@@ -64,9 +66,11 @@
 import { mapState } from "vuex";
 import vuescroll from "vuescroll";
 import { message } from "ant-design-vue";
+import FormLayoutControl from "./FormLayoutControl";
 export default {
   components: {
     vuescroll,
+    FormLayoutControl,
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
@@ -155,6 +159,7 @@ export default {
   width: fit-content;
   border-radius: 5px;
 }
+
 .form-control-item {
   display: flex;
   padding: 10px;

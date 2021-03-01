@@ -31,6 +31,9 @@ export default {
   watch: {
     isOutsideLabel(newValue, oldValue) {
       if (oldValue === null) return;
+      if (newValue === false)
+        this.activeElement.properties.text.placeholder = this.activeElement.properties.text.fieldName;
+      else this.activeElement.properties.text.placeholder = "";
       this.activeElement.properties.general.label.isOutsideLabel = newValue;
       this.$store.dispatch(
         "customizerModule/changePropertyValue",

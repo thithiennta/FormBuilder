@@ -31,7 +31,8 @@ export default {
   changeLayoutProperty({ commit }, payload) {
     commit("UPDATE_LAYOUT_SETTINGS", payload);
   },
-  initForm({ commit }) {
+  initForm({ commit }, payload) {
+    commit("USE_FORM", payload);
     commit("CLONE_STATE");
   },
 };
