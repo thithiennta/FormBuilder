@@ -24,6 +24,7 @@ export default {
         labelBottomMargin: 0,
         labelAlignCenter: true,
         labelColor: "black",
+        labelInheritColor: true,
       },
       border: {
         fullWidth: false,
@@ -56,6 +57,7 @@ export default {
             weight: 700,
             style: "normal",
             decoration: "none",
+            inheritColor: true,
           },
           spacing: {
             align: "center",

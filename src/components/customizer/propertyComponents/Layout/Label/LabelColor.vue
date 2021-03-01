@@ -2,8 +2,19 @@
   <div class="property-wrapper">
     <div class="customizer-sub-title">Label Color</div>
     <div class="property-adjust-wrapper">
-      <div class="show-color-wrapper" @click="handleShowSketch">
-        <div class="color-block" :style="{ 'background-color': color }"></div>
+      <div
+        class="show-color-wrapper"
+        @click="handleShowSketch"
+        :class="{ disable: inheritCheck }"
+      >
+        <div
+          class="color-block"
+          :style="{
+            'background-color': layoutSettings.label.labelInheritColor
+              ? layoutSettings.color
+              : color,
+          }"
+        ></div>
         <div class="text-block">Choose Color</div>
       </div>
       <Sketch
@@ -13,6 +24,13 @@
         class="sketch-wrapper"
         @input="updateValue"
       />
+      <div class="property-inherit">
+        <a-switch
+          checked-children="Inherit"
+          un-checked-children="Inherit"
+          v-model="inheritCheck"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +47,8 @@ export default {
     return {
       color: null,
       showSketch: false,
+      inheritCheck: null,
+      check: null,
     };
   },
   computed: {
@@ -36,6 +56,7 @@ export default {
   },
   created() {
     this.color = this.layoutSettings.label.labelColor;
+    this.inheritCheck = this.layoutSettings.label.labelInheritColor;
   },
   mounted() {
     document.addEventListener("click", (e) => {
@@ -57,8 +78,15 @@ export default {
         this.layoutSettings
       );
     }, 200),
+    inheritCheck(newValue, oldValue) {
+      if (oldValue === null) return;
+      this.layoutSettings.label.labelInheritColor = newValue;
+      if (newValue === true) this.color = this.layoutSettings.color;
+      else this.color = this.layoutSettings.label.labelColor;
+    },
     layoutSettings() {
       this.color = this.layoutSettings.label.labelColor;
+      this.inheritCheck = this.layoutSettings.label.labelInheritColor;
     },
   },
   methods: {
@@ -80,6 +108,10 @@ export default {
 
 <style scoped>
 .property-adjust-wrapper {
+  display: flex;
+}
+.property-inherit {
+  margin-left: 10px;
 }
 .show-color-wrapper {
   display: flex;
@@ -88,6 +120,11 @@ export default {
   background-color: white;
   border-radius: 6px;
   cursor: pointer;
+  transition: filter 0.3s ease-in-out;
+}
+.show-color-wrapper.disable {
+  pointer-events: none;
+  filter: contrast(0.4);
 }
 .color-block {
   width: 25px;
@@ -98,7 +135,7 @@ export default {
   padding: 0 15px 0 5px;
 }
 .sketch-wrapper {
-  margin-top: 5px;
+  margin-top: 30px;
   position: absolute;
   z-index: 999;
 }

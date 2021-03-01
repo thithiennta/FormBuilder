@@ -58,7 +58,4 @@ textarea {
   align-items: center;
   width: fit-content;
 }
-.form-element-wrapper input {
-  margin-right: 5px;
-}
 </style>

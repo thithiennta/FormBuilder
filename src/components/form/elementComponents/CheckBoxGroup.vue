@@ -27,7 +27,9 @@
         'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
         'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
-        color: layoutSettings.label.labelColor,
+        color: layoutSettings.label.labelInheritColor
+          ? layoutSettings.color
+          : layoutSettings.label.labelColor,
         'margin-bottom': layoutSettings.label.labelBottomMargin + 'px',
       }"
       v-if="
@@ -57,7 +59,9 @@
           'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
           'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
           'min-width': 'fit-content',
-          color: layoutSettings.label.labelColor,
+          color: layoutSettings.label.labelInheritColor
+            ? layoutSettings.color
+            : layoutSettings.label.labelColor,
         }"
         v-if="
           layoutSettings.label.isOutsideLabel &&
@@ -154,5 +158,8 @@ export default {
 }
 .form-element-wrapper {
   user-select: none;
+}
+.form-element-wrapper input {
+  margin-right: 5px;
 }
 </style>

@@ -17,7 +17,9 @@
           ? layoutSettings.label.labelWidth + 'px'
           : properties.general.label.labelRightMargin + 'px',
         'min-width': 'fit-content',
-        color: layoutSettings.label.labelColor,
+        color: layoutSettings.label.labelInheritColor
+          ? layoutSettings.color
+          : layoutSettings.label.labelColor,
       }"
       v-if="properties.general.label.isOutsideLabel"
     >
@@ -27,8 +29,7 @@
       :style="{
         'background-color': layoutSettings.field.backgroundColor,
         ...border,
-
-        'border-radius': properties.border.radius + 'px',
+        'border-radius': layoutSettings.border.radius + 'px',
         color: properties.text.inheritColor
           ? layoutSettings.color
           : properties.text.color,
@@ -87,23 +88,23 @@ export default {
       return position;
     },
     border() {
-      if (this.properties.border.fullWidth) {
+      if (this.layoutSettings.border.fullWidth) {
         return {
-          "border-style": this.properties.border.style,
-          "border-color": this.properties.border.color,
-          "border-top-width": this.properties.border.topWidth + "px ",
-          "border-right-width": this.properties.border.rightWidth + "px ",
-          "border-bottom-width": this.properties.border.bottomWidth + "px ",
-          "border-left-width": this.properties.border.leftWidth + "px ",
+          "border-style": this.layoutSettings.border.style,
+          "border-color": this.layoutSettings.border.color,
+          "border-top-width": this.layoutSettings.border.topWidth + "px ",
+          "border-right-width": this.layoutSettings.border.rightWidth + "px ",
+          "border-bottom-width": this.layoutSettings.border.bottomWidth + "px ",
+          "border-left-width": this.layoutSettings.border.leftWidth + "px ",
         };
       } else {
         return {
           border:
-            this.properties.border.allSidesWidth +
+            this.layoutSettings.border.allSidesWidth +
             "px " +
-            this.properties.border.style +
+            this.layoutSettings.border.style +
             " " +
-            this.properties.border.color,
+            this.layoutSettings.border.color,
         };
       }
     },

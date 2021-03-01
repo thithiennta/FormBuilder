@@ -10,7 +10,10 @@
         @change="handleChange"
         :disabled="inheritCheck"
       />
-      <div class="property-inherit">
+      <div
+        class="property-inherit"
+        v-if="blackList.indexOf(activeElement.type) === -1"
+      >
         <a-switch
           checked-children="Inherit"
           un-checked-children="Inherit"
@@ -31,6 +34,7 @@ export default {
     return {
       value: null,
       inheritCheck: null,
+      blackList: ["Title"],
     };
   },
   computed: {

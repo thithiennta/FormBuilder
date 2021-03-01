@@ -15,12 +15,14 @@
         'px ' +
         properties.spacing.leftMargin +
         'px ',
+      color: properties.text.inheritColor
+        ? layoutSettings.color
+        : properties.text.color,
     }"
   >
     <p
       :style="{
         'font-size': properties.text.size + 'px',
-        color: properties.text.color,
         'text-align': properties.spacing.align,
         'font-weight': properties.text.weight,
         'font-family': properties.general.fontFamily,

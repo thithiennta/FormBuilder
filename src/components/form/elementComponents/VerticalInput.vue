@@ -15,7 +15,9 @@
         'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         width: layoutSettings.label.labelWidth + '%',
         'min-width': 'fit-content',
-        color: layoutSettings.label.labelColor,
+        color: layoutSettings.label.labelInheritColor
+          ? layoutSettings.color
+          : layoutSettings.label.labelColor,
         'margin-bottom': layoutSettings.label.labelBottomMargin + 'px',
       }"
       v-if="layoutSettings.label.isOutsideLabel"
@@ -112,8 +114,5 @@ input {
   outline: none;
   min-width: min-content;
   pointer-events: none;
-}
-.form-element-wrapper input {
-  margin-right: 0;
 }
 </style>

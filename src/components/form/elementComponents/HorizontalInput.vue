@@ -18,7 +18,9 @@
           ? layoutSettings.label.labelWidth + 'px'
           : properties.general.label.labelRightMargin + 'px',
         'min-width': 'fit-content',
-        color: layoutSettings.label.labelColor,
+        color: layoutSettings.label.labelInheritColor
+          ? layoutSettings.color
+          : layoutSettings.label.labelColor,
       }"
       v-if="properties.general.label.isOutsideLabel"
     >
@@ -139,8 +141,5 @@ input {
   outline: none;
   min-width: min-content;
   pointer-events: none;
-}
-.form-element-wrapper input {
-  margin-right: 0;
 }
 </style>

@@ -45,6 +45,7 @@ export default {
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
+    ...mapState("formModule", ["layoutSettings"]),
   },
   created() {
     this.color = this.activeElement.properties.text.color;
@@ -70,7 +71,7 @@ export default {
         this.activeElement
       );
     }, 200),
-    inheritCheck(mewValue, oldValue) {
+    inheritCheck(newValue, oldValue) {
       if (oldValue === null) return;
       this.activeElement.properties.text.inheritColor = this.inheritCheck;
       // This to UPDATE PROPERTY

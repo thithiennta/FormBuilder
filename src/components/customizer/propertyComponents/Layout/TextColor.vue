@@ -56,7 +56,7 @@ export default {
         "formModule/changeLayoutProperty",
         this.layoutSettings
       );
-    }, 200),
+    }, 300),
     layoutSettings() {
       this.color = this.layoutSettings.color;
     },
