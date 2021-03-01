@@ -43,7 +43,7 @@ export default {
   created() {
     this.isLoading = true;
     new Promise((resolve) => {
-      setTimeout(resolve, 0);
+      setTimeout(resolve, 2000);
       this.$store.dispatch("formModule/initForm");
     }).then(() => {
       this.isLoading = false;
