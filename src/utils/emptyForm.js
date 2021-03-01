@@ -1,0 +1,45 @@
+const emptyForm = {
+  layoutSettings: {
+    backgroundColor: "white",
+    fontFamily: "'Nunito', sans-serif",
+    fontSize: 16,
+    color: "black",
+    weight: 600,
+    form: {
+      action: "",
+      method: "GET",
+    },
+    label: {
+      isOutsideLabel: true,
+      labelPosition: "left",
+      labelSize: 16,
+      labelWidth: 100,
+      labelBold: true,
+      labelItalic: false,
+      labelBottomMargin: 0,
+      labelAlignCenter: true,
+      labelColor: "black",
+      labelInheritColor: true,
+    },
+    border: {
+      fullWidth: false,
+      allSidesWidth: 1,
+      topWidth: 1,
+      rightWidth: 1,
+      bottomWidth: 1,
+      leftWidth: 1,
+      style: "solid",
+      color: "rgba(174,170,170,1)",
+      radius: 5,
+    },
+    field: {
+      padding: 10,
+      height: 45,
+      backgroundColor: "rgba(0,0,0,0)",
+    },
+  },
+  elements: [],
+  previousStates: [],
+  nextStates: [],
+};
+module.exports = { emptyForm };
