@@ -9,20 +9,21 @@ const getElementsByName = function(name, type) {
           result = [""];
           break;
         case "Input":
+          result = ["OutsideLabel", "LabelMargin", "InputType", "Require"];
+          break;
         case "TextArea":
-          result = ["OutsideLabel", "LabelMargin"];
+          result = ["OutsideLabel", "LabelMargin", "Require"];
           break;
         case "DropdownList":
-          result = ["LabelMargin"];
+          result = ["LabelMargin", "Require"];
           break;
         case "RadioGroup":
         case "CheckBoxGroup":
         case "DatePicker":
-          result = ["LabelMargin"];
+          result = ["LabelMargin", "Require"];
           break;
-        case "CheckBox":
-        case "RadioButton":
-          result = [];
+        case "Date":
+          result = ["LabelMargin", "Require"];
           break;
         case "OneColumn":
         case "TwoColumn":
@@ -39,14 +40,6 @@ const getElementsByName = function(name, type) {
       break;
     case "spacing":
       switch (type) {
-        case "RadioGroup":
-        case "CheckBoxGroup":
-          result = [];
-          break;
-        case "DropdownList":
-        case "DatePicker":
-          result = ["Width"];
-          break;
         case "Title":
         case "CustomText":
           result = ["SpacingAlign"];
@@ -57,7 +50,13 @@ const getElementsByName = function(name, type) {
         case "TextArea":
           result = ["Width", "Height"];
           break;
-
+        case "DropdownList":
+        case "DatePicker":
+          result = ["Width"];
+          break;
+        case "Date":
+          result = ["DayWidth", "MonthWidth", "YearWidth"];
+          break;
         case "Button":
           result = [
             "Width",
@@ -66,13 +65,6 @@ const getElementsByName = function(name, type) {
             "SpacingMargin",
             "ElementBackgroundColor",
           ];
-          break;
-        case "CheckBox":
-        case "RadioButton":
-          result = ["SpacingAlign"];
-          break;
-        case "OneColumn":
-          result = [""];
           break;
         case "TwoColumn":
         case "ThreeColumn":
@@ -105,14 +97,11 @@ const getElementsByName = function(name, type) {
         case "Input":
           result = ["FieldName", "InputPlaceholder", "InputName"];
           break;
-        case "CheckBox":
-        case "RadioButton":
-          result = ["TextValue", "InputName"];
-          break;
         case "DropdownList":
         case "RadioGroup":
         case "CheckBoxGroup":
         case "DatePicker":
+        case "Date":
           result = ["FieldName", "InputName"];
           break;
         default:
@@ -121,12 +110,6 @@ const getElementsByName = function(name, type) {
       break;
     case "border":
       switch (type) {
-        case "DropdownList":
-        case "DatePicker":
-          result = ["BorderRadius", "BorderColor"];
-          break;
-        case "Input":
-        case "TextArea":
         case "Button":
           result = [
             "BorderWidth",
@@ -151,9 +134,6 @@ const getElementsByName = function(name, type) {
       break;
     case "option":
       switch (type) {
-        case "DatePicker":
-          result = [];
-          break;
         case "DropdownList":
           result = ["Options"];
           break;
@@ -165,6 +145,9 @@ const getElementsByName = function(name, type) {
             "OptionSpacing",
             "Options",
           ];
+          break;
+        case "Date":
+          result = ["DateFormat"];
           break;
       }
       break;

@@ -25,6 +25,9 @@ import SpacingPadding from "./Spacing/SpacingPadding";
 import ElementBackgroundColor from "./Spacing/ElementBackgroundColor";
 import ColumnsWidth from "./Spacing/ColumnsWidth";
 import SpacingMargin from "./Spacing/SpacingMargin";
+import DayWidth from "./Spacing/DayWidth";
+import MonthWidth from "./Spacing/MonthWidth";
+import YearWidth from "./Spacing/YearWidth";
 export default {
   components: {
     Width,
@@ -34,6 +37,9 @@ export default {
     ElementBackgroundColor,
     ColumnsWidth,
     SpacingMargin,
+    DayWidth,
+    MonthWidth,
+    YearWidth,
   },
   data() {
     return {

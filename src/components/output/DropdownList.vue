@@ -27,7 +27,9 @@
         'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
         'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
-        color: layoutSettings.label.labelColor,
+        color: layoutSettings.label.labelInheritColor
+          ? layoutSettings.color
+          : layoutSettings.label.labelColor,
         'margin-bottom': layoutSettings.label.labelBottomMargin + 'px',
       }"
       v-if="
@@ -54,7 +56,9 @@
           'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
           'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
           'min-width': 'fit-content',
-          color: layoutSettings.label.labelColor,
+          color: layoutSettings.label.labelInheritColor
+            ? layoutSettings.color
+            : layoutSettings.label.labelColor,
         }"
         v-if="
           layoutSettings.label.isOutsideLabel &&
@@ -87,7 +91,11 @@
             height: layoutSettings.field.height + 'px',
           }"
         >
-          <span>{{ properties.option.options[0] }}</span>
+          <span>{{
+            currentOption === null
+              ? properties.option.options[0]
+              : currentOption
+          }}</span>
           <a-icon type="down" :class="{ 'icon-show': showOptions }" />
         </div>
         <div
@@ -99,7 +107,6 @@
               ? layoutSettings.color
               : properties.text.color,
             ...border,
-
             'font-weight': layoutSettings.weight,
           }"
         >
@@ -111,6 +118,7 @@
               padding: layoutSettings.field.padding + 'px',
               'background-color': layoutSettings.field.backgroundColor,
             }"
+            @click="handleChangeOption(option)"
           >
             {{ option }}
           </div>
@@ -126,6 +134,7 @@ export default {
   data() {
     return {
       showOptions: false,
+      currentOption: null,
     };
   },
   props: {
@@ -184,6 +193,10 @@ export default {
   },
   methods: {
     handleShowOptions() {
+      this.showOptions = !this.showOptions;
+    },
+    handleChangeOption(value) {
+      this.currentOption = value;
       this.showOptions = !this.showOptions;
     },
   },

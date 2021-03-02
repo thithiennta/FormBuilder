@@ -82,6 +82,8 @@
             : properties.text.color,
           'background-color': layoutSettings.field.backgroundColor,
           height: layoutSettings.field.height + 'px',
+          'font-family': 'inherit',
+          'font-weight': layoutSettings.weight,
         }"
       />
     </div>

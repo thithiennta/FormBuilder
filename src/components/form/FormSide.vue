@@ -53,6 +53,7 @@
             'font-family': layoutSettings.fontFamily,
             'font-size': layoutSettings.fontSize + 'px',
             color: layoutSettings.color,
+            padding: layoutSettings.padding + 'px',
           }"
         >
           <NestedElement v-model="elements" />

@@ -23,6 +23,7 @@ import OptionsDirection from "./Option/OptionsDirection";
 import MarginLeft from "./Option/MarginLeft";
 import MarginRight from "./Option/MarginRight";
 import OptionSpacing from "./Option/OptionSpacing";
+import DateFormat from "./Option/DateFormat";
 export default {
   components: {
     Options,
@@ -30,6 +31,7 @@ export default {
     MarginLeft,
     MarginRight,
     OptionSpacing,
+    DateFormat,
   },
   data() {
     return {

@@ -25,10 +25,10 @@
     <a-tooltip
       placement="bottom"
       class="item-wrapper"
-      @click="handleDownloadForm"
+      @click="handleLoadSavedForm"
     >
       <template slot="title">
-        <span>Download Form</span>
+        <span>Load Saved Form</span>
       </template>
       <a-icon type="download" />
     </a-tooltip>
@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import basicForms from "../../utils/defaultForm.js";
-import { Modal } from "ant-design-vue";
+import basicForms from "../../utils/basicForms.js";
+import { Modal, message } from "ant-design-vue";
 export default {
   data() {
     return {};
@@ -47,7 +47,7 @@ export default {
       Modal.confirm({
         title: "Use sample form",
         content:
-          "When do this, you will get our sample form. All history will be lost and you can go back anymore. Will you use this?",
+          "When do this, you will get our sample form. All history will be lost and you cannot go back anymore. Will you use this?",
         okText: "Use",
         cancelText: "Cancel",
         onOk: this.handleSampleOk,
@@ -65,13 +65,34 @@ export default {
         onCancel: this.handleCancel,
       });
     },
-    handleSaveForm() {},
-    handleDownloadForm() {},
+    handleSaveForm() {
+      Modal.confirm({
+        title: "Save your form",
+        content:
+          "Save this with your account. You can load this form whenever you want!",
+        okText: "Save",
+        cancelText: "Cancel",
+        onOk: this.handleSaveOk,
+        onCancel: this.handleCancel,
+      });
+    },
+    handleLoadSavedForm() {
+      Modal.confirm({
+        title: "Load your saved form",
+        content:
+          "Load your form from database. This will delete all current form!",
+        okText: "Load",
+        cancelText: "Cancel",
+        onOk: this.handleLoadOk,
+        onCancel: this.handleCancel,
+      });
+    },
     handleNewOk() {
       return new Promise((resolve) => {
         setTimeout(resolve, 1000);
       }).then(() => {
         this.$store.dispatch("formModule/initForm", basicForms.emptyForm);
+        message.success("Created new blank form");
       });
     },
     handleSampleOk() {
@@ -79,10 +100,19 @@ export default {
         setTimeout(resolve, 1000);
       }).then(() => {
         this.$store.dispatch("formModule/initForm", basicForms.defaultForm);
+        message.success("Used sample form");
       });
     },
-    handleSaveOk() {},
-    handleDownloadOk() {},
+    handleSaveOk() {
+      return new Promise((resolve) => {
+        setTimeout(resolve, 1000);
+      }).then(() => {});
+    },
+    handleLoadOk() {
+      return new Promise((resolve) => {
+        setTimeout(resolve, 1000);
+      }).then(() => {});
+    },
     handleCancel() {},
   },
 };

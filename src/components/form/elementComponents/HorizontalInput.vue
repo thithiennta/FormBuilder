@@ -45,6 +45,9 @@
       :placeholder="properties.text.placeholder"
       :name="properties.text.name"
       :value="value"
+      :type="properties.general.type"
+      :required="properties.general.isRequire"
+      :disabled="properties.general.isRquire"
     />
   </div>
 </template>

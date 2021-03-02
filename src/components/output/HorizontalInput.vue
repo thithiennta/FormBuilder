@@ -42,6 +42,7 @@
       }"
       :placeholder="properties.text.placeholder"
       :name="properties.text.name"
+      :type="properties.general.type"
     />
   </div>
 </template>
@@ -127,3 +128,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>

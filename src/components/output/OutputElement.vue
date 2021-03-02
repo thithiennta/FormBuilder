@@ -24,6 +24,7 @@ import CheckBoxGroup from "./CheckBoxGroup";
 import RadioGroup from "./RadioGroup";
 import DropdownList from "./DropdownList";
 import DatePicker from "./DatePicker";
+import Date from "./Date";
 export default {
   props: {
     formElement: {
@@ -47,6 +48,7 @@ export default {
     RadioGroup,
     DropdownList,
     DatePicker,
+    Date,
   },
 };
 </script>

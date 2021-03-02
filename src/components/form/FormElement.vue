@@ -57,8 +57,6 @@ import { mapState } from "vuex";
 import Button from "./elementComponents/Button";
 import Input from "./elementComponents/Input";
 import TextArea from "./elementComponents/TextArea";
-import CheckBox from "./elementComponents/CheckBox";
-import RadioButton from "./elementComponents/RadioButton";
 import Title from "./elementComponents/Title";
 import CustomText from "./elementComponents/CustomText";
 import OneColumn from "./elementComponents/OneColumn";
@@ -70,16 +68,14 @@ import RadioGroup from "./elementComponents/RadioGroup";
 import CheckBoxGroup from "./elementComponents/CheckBoxGroup";
 import DropdownList from "./elementComponents/DropdownList";
 import DatePicker from "./elementComponents/DatePicker";
-import BirthdayField from "./elementComponents/BirthdayField";
 import GCaptcha from "./elementComponents/GCaptcha";
+import Date from "./elementComponents/Date";
 import { Modal, message } from "ant-design-vue";
 export default {
   components: {
     Button,
     Input,
     TextArea,
-    CheckBox,
-    RadioButton,
     Title,
     OneColumn,
     TwoColumn,
@@ -91,8 +87,8 @@ export default {
     CheckBoxGroup,
     DropdownList,
     DatePicker,
-    BirthdayField,
     GCaptcha,
+    Date,
   },
   props: {
     formElement: {

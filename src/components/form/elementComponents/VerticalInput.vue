@@ -41,6 +41,8 @@
       }"
       :placeholder="properties.text.placeholder"
       :name="properties.text.name"
+      :type="properties.general.type"
+      :required="properties.general.isRequire"
     />
   </div>
 </template>

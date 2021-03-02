@@ -49,7 +49,7 @@ export default {
               backgroundColor: "rgba(0,0,0,0)",
             },
           },
-          settings: ["general", "spacing"],
+          settings: ["general"],
           elements: [],
         },
         {

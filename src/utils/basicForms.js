@@ -6,6 +6,7 @@ const defaultForm = {
     fontSize: 16,
     color: "black",
     weight: 600,
+    padding: 0,
     form: {
       action: "",
       method: "GET",
@@ -91,6 +92,8 @@ const defaultForm = {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
                 fontFamily: "Inherit",
+                type: "text",
+                isRequire: true,
                 label: {
                   labelTopMargin: 0,
                   labelRightMargin: 0,
@@ -155,6 +158,8 @@ const defaultForm = {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
                 fontFamily: "Inherit",
+                type: "text",
+                isRequire: true,
                 label: {
                   labelTopMargin: 0,
                   labelRightMargin: 0,
@@ -220,6 +225,8 @@ const defaultForm = {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "Inherit",
+          type: "email",
+          isRequire: true,
           label: {
             labelTopMargin: 0,
             labelRightMargin: 0,
@@ -282,6 +289,7 @@ const defaultForm = {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "inherit",
+          isRequire: true,
           label: {
             labelTopMargin: 0,
             labelRightMargin: 0,
@@ -331,6 +339,7 @@ const defaultForm = {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "inherit",
+          isRequire: true,
           label: {
             labelTopMargin: 0,
             labelRightMargin: 0,
@@ -411,6 +420,7 @@ const defaultForm = {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
                 fontFamily: "inherit",
+                isRequire: true,
                 label: {
                   labelTopMargin: 0,
                   labelRightMargin: 0,
@@ -495,6 +505,7 @@ const defaultForm = {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
                 fontFamily: "inherit",
+                isRequire: true,
                 label: {
                   labelTopMargin: 0,
                   labelRightMargin: 43,
@@ -582,6 +593,7 @@ const defaultForm = {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "inherit",
+          isRequire: true,
           label: {
             labelTopMargin: 0,
             labelRightMargin: 0,

@@ -27,6 +27,8 @@ import ChangeColumn from "./General/ChangeColumn";
 import LabelMargin from "./General/LabelMargin";
 import SubLabel from "./General/SubLabel";
 import OutsideLabel from "./General/OutsideLabel";
+import InputType from "./General/InputType";
+import Require from "./General/Require";
 export default {
   components: {
     BackgroundColor,
@@ -38,6 +40,8 @@ export default {
     LabelMargin,
     SubLabel,
     OutsideLabel,
+    InputType,
+    Require,
   },
   data() {
     return {
