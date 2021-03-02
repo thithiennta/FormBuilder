@@ -6,6 +6,7 @@
       'font-family': layoutSettings.fontFamily,
       'font-size': layoutSettings.fontSize + 'px',
       color: layoutSettings.color,
+      padding: layoutSettings.padding + 'px',
     }"
   >
     <OutputElement :formElement="el" v-for="el in elements" :key="el.rowId" />
