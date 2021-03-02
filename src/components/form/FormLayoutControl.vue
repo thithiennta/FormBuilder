@@ -106,12 +106,16 @@ export default {
     handleSaveOk() {
       return new Promise((resolve) => {
         setTimeout(resolve, 1000);
-      }).then(() => {});
+      }).then(() => {
+        message.success("Save form completely");
+      });
     },
     handleLoadOk() {
       return new Promise((resolve) => {
         setTimeout(resolve, 1000);
-      }).then(() => {});
+      }).then(() => {
+        message.success("Load your saved form completely");
+      });
     },
     handleCancel() {},
   },
