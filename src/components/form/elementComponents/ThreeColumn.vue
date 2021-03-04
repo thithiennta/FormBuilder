@@ -16,6 +16,11 @@
       :key="index"
       :style="{
         width: properties.spacing['column' + (index + 1) + 'Width'] + '%',
+        border:
+          (hoverElement.rowId && hoverElement.rowId === rowId) ||
+          activeElement.rowId === rowId
+            ? '1px dashed rgb(113, 203, 244)'
+            : '',
       }"
       :id="rowId + '-col-' + (index + 1)"
     >
@@ -24,12 +29,12 @@
         :class="{ 'empty-nested': isColumnEmpty(nestedElement) }"
       />
       <div
-        @mousedown="handleMouseDown($event, index + 1)"
+        @mousedown="handleMouseDown($event, rowId, index + 1)"
+        @click="handleResizeClick"
+        @mouseup="handleMouseUp"
         :id="rowId + '-col-' + (index + 1) + '-resize'"
         class="resize"
-        v-if="
-          index + 1 !== nestedElements.length && activeElement.rowId === rowId
-        "
+        v-if="index + 1 !== nestedElements.length"
         :style="{
           left: left(index + 1),
         }"
@@ -80,6 +85,11 @@ export default {
     );
   },
   methods: {
+    findRow(rowId) {
+      return this.$store.state.formModule.elements.find(
+        (e) => e.rowId === rowId
+      );
+    },
     left(index) {
       if (index === 1)
         return "calc(" + this.properties.spacing.column1Width + "% - 2px)";
@@ -94,20 +104,40 @@ export default {
     isColumnEmpty(column) {
       return column.length === 0;
     },
-    handleMouseDown(e, index) {
+    handleMouseDown(e, rowId, index) {
       e.preventDefault();
+      if (
+        this.activeElement.rowId === undefined ||
+        this.activeElement.rowId !== rowId
+      ) {
+        let row = this.findRow(rowId);
+        this.$store.dispatch("customizerModule/hoverElement", row);
+      }
       this.currentIndex = index;
       this.m_pos = e.x;
       document.addEventListener("mousemove", this.resize, false);
+    },
+    handleResizeClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    handleMouseUp() {
+      this.$store.dispatch("customizerModule/unhoverElement");
     },
     resize(e) {
       let remainingWidth;
       if (this.currentIndex === 1) {
         remainingWidth =
-          100 - this.activeElement.properties.spacing.column3Width;
+          100 -
+          (this.activeElement.rowId
+            ? this.activeElement.properties.spacing.column3Width
+            : this.hoverElement.properties.spacing.column3Width);
       } else {
         remainingWidth =
-          100 - this.activeElement.properties.spacing.column1Width;
+          100 -
+          (this.activeElement.rowId
+            ? this.activeElement.properties.spacing.column1Width
+            : this.hoverElement.properties.spacing.column1Width);
       }
       const dx = this.m_pos - e.x;
       this.m_pos = e.x;
@@ -127,35 +157,58 @@ export default {
       this["col" + this.currentIndex].style.width = percent + "%";
       this["col" + this.currentIndex + "Width"] = percent;
 
-      this.activeElement.properties.spacing[
-        "column" + this.currentIndex + "Width"
-      ] = percent;
-      this.activeElement.properties.spacing[
-        "column" + (this.currentIndex + 1) + "Width"
-      ] = remainingWidth - percent;
+      if (this.hoverElement.rowId) {
+        this.hoverElement.properties.spacing[
+          "column" + this.currentIndex + "Width"
+        ] = percent;
+        this.hoverElement.properties.spacing[
+          "column" + (this.currentIndex + 1) + "Width"
+        ] = remainingWidth - percent;
+      } else if (this.activeElement.rowId) {
+        this.activeElement.properties.spacing[
+          "column" + this.currentIndex + "Width"
+        ] = percent;
+        this.activeElement.properties.spacing[
+          "column" + (this.currentIndex + 1) + "Width"
+        ] = remainingWidth - percent;
+      }
     },
   },
   watch: {
     col1Width: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
-      // This to UPDATE PROPERTY
-      this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
-      );
+      if (this.hoverElement.rowId) {
+        // This to UPDATE PROPERTY
+        this.$store.dispatch(
+          "customizerModule/changeColumnWidth",
+          this.hoverElement
+        );
+      } else if (this.activeElement.rowId) {
+        this.$store.dispatch(
+          "customizerModule/changePropertyValue",
+          this.activeElement
+        );
+      }
     }, 300),
     col2Width: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
-      // This to UPDATE PROPERTY
-      this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
-      );
+      if (this.hoverElement.rowId) {
+        // This to UPDATE PROPERTY
+        this.$store.dispatch(
+          "customizerModule/changeColumnWidth",
+          this.hoverElement
+        );
+      } else if (this.activeElement.rowId) {
+        this.$store.dispatch(
+          "customizerModule/changePropertyValue",
+          this.activeElement
+        );
+      }
     }, 300),
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
-    ...mapState("customizerModule", ["activeElement"]),
+    ...mapState("customizerModule", ["activeElement", "hoverElement"]),
   },
 };
 </script>
@@ -212,5 +265,9 @@ export default {
   height: calc(100% - 10px);
   opacity: 1;
   z-index: 999;
+  opacity: 0;
+}
+.resize:hover {
+  opacity: 1;
 }
 </style>

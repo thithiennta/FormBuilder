@@ -197,6 +197,8 @@ export default {
         this.addClickOutSideEvent();
         this.$store.dispatch("customizerModule/switchActiveTab", true);
         this.isActive = true;
+      } else {
+        this.$store.dispatch("customizerModule/unhoverElement");
       }
     },
     handleOver(e) {

@@ -16,6 +16,11 @@
       :key="index"
       :style="{
         width: properties.spacing['column' + (index + 1) + 'Width'] + '%',
+        border:
+          (hoverElement.rowId && hoverElement.rowId === rowId) ||
+          activeElement.rowId === rowId
+            ? '1px dashed rgb(113, 203, 244)'
+            : '',
       }"
       :id="rowId + '-col-' + (index + 1)"
     >
@@ -28,7 +33,6 @@
         @mousedown="handleMouseDown($event, rowId)"
         @click="handleResizeClick"
         @mouseup="handleMouseUp"
-        :rowId="rowId"
         v-if="index + 1 !== nestedElements.length"
         :id="rowId + '-col-' + (index + 1) + '-resize'"
         class="resize"
@@ -107,7 +111,9 @@ export default {
       e.preventDefault();
       e.stopPropagation();
     },
-    handleMouseUp() {},
+    handleMouseUp() {
+      this.$store.dispatch("customizerModule/unhoverElement");
+    },
     resize(e) {
       const dx = this.m_pos - e.x;
       this.m_pos = e.x;
@@ -141,7 +147,6 @@ export default {
           "customizerModule/changeColumnWidth",
           this.hoverElement
         );
-        this.$store.dispatch("customizerModule/unhoverElement");
       } else if (this.activeElement.rowId) {
         this.$store.dispatch(
           "customizerModule/changePropertyValue",
