@@ -5,6 +5,12 @@ export default {
   SET_ACTIVE_ELEMENT_STATUS(state, payload) {
     state.haveActiveElement = payload;
   },
+  SET_HOVER_ELEMENT(state, payload) {
+    state.hoverElement = payload;
+  },
+  SET_HOVER_ELEMENT_STATUS(state, payload) {
+    state.haveHoverElement = payload;
+  },
   UPDATE_ELEMENT(state, payload) {
     state.activeElement = payload;
   },

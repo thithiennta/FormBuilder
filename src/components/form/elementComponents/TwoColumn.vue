@@ -25,12 +25,13 @@
         style="z-index: 995"
       />
       <div
-        @mousedown="handleMouseDown"
+        @mousedown="handleMouseDown($event, rowId)"
+        @click="handleResizeClick"
+        @mouseup="handleMouseUp"
+        :rowId="rowId"
+        v-if="index + 1 !== nestedElements.length"
         :id="rowId + '-col-' + (index + 1) + '-resize'"
         class="resize"
-        v-if="
-          index + 1 !== nestedElements.length && activeElement.rowId === rowId
-        "
         :style="{
           left:
             'calc(' +
@@ -85,11 +86,28 @@ export default {
     isColumnEmpty(column) {
       return column.length === 0;
     },
-    handleMouseDown(e) {
+    findRow(rowId) {
+      return this.$store.state.formModule.elements.find(
+        (e) => e.rowId === rowId
+      );
+    },
+    handleMouseDown(e, rowId) {
       e.preventDefault();
+      if (
+        this.activeElement.rowId === undefined ||
+        this.activeElement.rowId !== rowId
+      ) {
+        let row = this.findRow(rowId);
+        this.$store.dispatch("customizerModule/hoverElement", row);
+      }
       this.m_pos = e.x;
       document.addEventListener("mousemove", this.resize, false);
     },
+    handleResizeClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    handleMouseUp() {},
     resize(e) {
       const dx = this.m_pos - e.x;
       this.m_pos = e.x;
@@ -105,23 +123,36 @@ export default {
       }
       this.col1.style.width = percent + "%";
       this.col1Width = percent;
-      this.activeElement.properties.spacing.column1Width = percent;
-      this.activeElement.properties.spacing.column2Width = 100 - percent;
+      if (this.hoverElement.rowId) {
+        this.hoverElement.properties.spacing.column1Width = percent;
+        this.hoverElement.properties.spacing.column2Width = 100 - percent;
+      } else if (this.activeElement.rowId) {
+        this.activeElement.properties.spacing.column1Width = percent;
+        this.activeElement.properties.spacing.column2Width = 100 - percent;
+      }
     },
   },
   watch: {
     col1Width: _debounce(function(newValue, oldValue) {
       if (oldValue === null) return;
-      // This to UPDATE PROPERTY
-      this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
-      );
+      if (this.hoverElement.rowId) {
+        // This to UPDATE PROPERTY
+        this.$store.dispatch(
+          "customizerModule/changeColumnWidth",
+          this.hoverElement
+        );
+        this.$store.dispatch("customizerModule/unhoverElement");
+      } else if (this.activeElement.rowId) {
+        this.$store.dispatch(
+          "customizerModule/changePropertyValue",
+          this.activeElement
+        );
+      }
     }, 300),
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
-    ...mapState("customizerModule", ["activeElement"]),
+    ...mapState("customizerModule", ["activeElement", "hoverElement"]),
   },
 };
 </script>
@@ -176,5 +207,9 @@ export default {
   cursor: col-resize;
   height: calc(100% - 10px);
   z-index: 999;
+  opacity: 0;
+}
+.resize:hover {
+  opacity: 1;
 }
 </style>

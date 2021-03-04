@@ -290,6 +290,7 @@ export default {
             general: {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
+              isRequired: true,
               label: {
                 labelTopMargin: 0,
                 labelRightMargin: 0,
@@ -372,6 +373,7 @@ export default {
             general: {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
+              isRequired: true,
               label: {
                 labelTopMargin: 0,
                 labelRightMargin: 0,
@@ -406,6 +408,7 @@ export default {
             general: {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
+              isRequired: true,
               label: {
                 labelTopMargin: 0,
                 labelRightMargin: 0,

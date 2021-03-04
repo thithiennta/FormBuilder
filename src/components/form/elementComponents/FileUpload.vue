@@ -33,6 +33,7 @@
       "
     >
       {{ properties.text.fieldName }}
+      <span style="color: red" v-if="properties.general.isRequired">*</span>
     </div>
     <div
       class="date-picker-wrapper"
@@ -61,6 +62,7 @@
         "
       >
         {{ properties.text.fieldName }}
+        <span style="color: red" v-if="properties.general.isRequired">*</span>
       </div>
       <input
         type="file"

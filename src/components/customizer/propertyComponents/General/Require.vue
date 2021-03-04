@@ -20,7 +20,7 @@ export default {
     ...mapState("customizerModule", ["activeElement"]),
   },
   watch: {
-    isRequire(newValue, oldValue) {
+    isRequired(newValue, oldValue) {
       if (oldValue === null) return;
       this.activeElement.properties.general.isRequired = this.isRequired;
       this.$store.dispatch(

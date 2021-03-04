@@ -32,6 +32,7 @@
       "
     >
       {{ properties.text.fieldName }}
+      <span style="color: red" v-if="properties.general.isRequired">*</span>
     </div>
     <div
       class="select-wrapper"
@@ -60,6 +61,7 @@
         "
       >
         {{ properties.text.fieldName }}
+        <span style="color: red" v-if="properties.general.isRequired">*</span>
       </div>
       <div
         class="subfield-wrapper"
@@ -105,8 +107,6 @@
         />
         <DateSubField
           :options="years"
-          :textColor="properties.text.color"
-          :textInheritColor="properties.text.inheritColor"
           :style="{
             order: yearOrder,
             'margin-right': yearOrder === 3 ? '' : '20px',

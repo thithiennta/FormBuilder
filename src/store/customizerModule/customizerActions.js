@@ -6,6 +6,14 @@ export default {
     commit("SET_ACTIVE_ELEMENT", payload);
     commit("SET_ACTIVE_ELEMENT_STATUS", true);
   },
+  hoverElement({ commit }, payload) {
+    commit("SET_HOVER_ELEMENT", payload);
+    commit("SET_HOVER_ELEMENT_STATUS", true);
+  },
+  unhoverElement({ commit }) {
+    commit("SET_HOVER_ELEMENT", {});
+    commit("SET_HOVER_ELEMENT_STATUS", false);
+  },
   unselectElement({ commit }) {
     commit("SET_ACTIVE_ELEMENT", {});
     commit("SET_ACTIVE_ELEMENT_STATUS", false);
@@ -13,6 +21,10 @@ export default {
   changePropertyValue({ commit }, payload) {
     commit("formModule/ADD_PREVIOUS_STATE", payload, { root: true });
     commit("UPDATE_ELEMENT", payload);
+    commit("formModule/CLONE_STATE", payload, { root: true });
+  },
+  changeColumnWidth({ commit }, payload) {
+    commit("formModule/ADD_PREVIOUS_STATE", payload, { root: true });
     commit("formModule/CLONE_STATE", payload, { root: true });
   },
   switchActiveTab({ commit }, payload) {

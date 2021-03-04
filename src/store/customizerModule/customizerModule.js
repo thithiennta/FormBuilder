@@ -6,6 +6,8 @@ export default {
     isElementTabActive: true,
     haveActiveElement: false,
     activeElement: {},
+    hoverElement: {},
+    haveHoverElement: false,
   },
   actions: customizerActions,
   mutations: customizerMutations,

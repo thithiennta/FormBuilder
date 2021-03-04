@@ -55,14 +55,6 @@ export default {
       required: true,
       type: Array,
     },
-    textColor: {
-      required: true,
-      type: String,
-    },
-    textInheritColor: {
-      required: true,
-      type: Boolean,
-    },
     showOptions: {
       required: true,
       type: Boolean,

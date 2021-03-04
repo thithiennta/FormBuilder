@@ -109,7 +109,11 @@ export default {
     },
   },
   computed: {
-    ...mapState("customizerModule", ["haveActiveElement", "activeElement"]),
+    ...mapState("customizerModule", [
+      "haveActiveElement",
+      "activeElement",
+      "hoverElement",
+    ]),
     topElementPadding() {
       if (this.formElement.type.indexOf("Column") === -1 && this.isTopElement) {
         return {
@@ -189,9 +193,11 @@ export default {
     },
     handleShowOptions(e) {
       e.stopPropagation();
-      this.addClickOutSideEvent();
-      this.$store.dispatch("customizerModule/switchActiveTab", true);
-      this.isActive = true;
+      if (this.hoverElement.rowId === undefined) {
+        this.addClickOutSideEvent();
+        this.$store.dispatch("customizerModule/switchActiveTab", true);
+        this.isActive = true;
+      }
     },
     handleOver(e) {
       e.stopPropagation();

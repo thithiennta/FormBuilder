@@ -32,6 +32,7 @@
       "
     >
       {{ properties.text.fieldName }}
+      <span style="color: red" v-if="properties.general.isRequired">*</span>
     </div>
     <div
       class="option-container"
@@ -63,6 +64,7 @@
         "
       >
         {{ properties.text.fieldName }}
+        <span style="color: red" v-if="properties.general.isRequired">*</span>
       </div>
       <div
         class="options-wrapper"
