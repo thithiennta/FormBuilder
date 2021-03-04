@@ -6,7 +6,7 @@
     class="element-big-wrapper"
     :class="{
       'active-element': isActive,
-      'hover-element': isHover && !isActive,
+      'hover-element': isHover && !isActive && hoverElement.rowId === undefined,
     }"
     ref="element"
     :id="formElement.rowId"
