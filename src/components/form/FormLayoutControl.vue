@@ -107,6 +107,10 @@ export default {
       return new Promise((resolve) => {
         setTimeout(resolve, 1000);
       }).then(() => {
+        this.$store.dispatch(
+          "formModule/loadSavedForm",
+          basicForms.defaultForm
+        );
         message.success("Save form completely");
       });
     },

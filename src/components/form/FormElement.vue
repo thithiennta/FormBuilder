@@ -69,7 +69,9 @@ import CheckBoxGroup from "./elementComponents/CheckBoxGroup";
 import DropdownList from "./elementComponents/DropdownList";
 import DatePicker from "./elementComponents/DatePicker";
 import GCaptcha from "./elementComponents/GCaptcha";
+import Spacer from "./elementComponents/Spacer";
 import Date from "./elementComponents/Date";
+import FileUpload from "./elementComponents/FileUpload";
 import { Modal, message } from "ant-design-vue";
 export default {
   components: {
@@ -89,6 +91,8 @@ export default {
     DatePicker,
     GCaptcha,
     Date,
+    Spacer,
+    FileUpload,
   },
   props: {
     formElement: {
@@ -252,18 +256,20 @@ export default {
 </script>
 
 <style scoped>
-.sortable-chosen .element-big-wrapper {
+.sortable-chosen.form-element-ghost .element-big-wrapper {
+  height: fit-content;
+  border: 3px solid grey;
 }
-.sortable-chosen.form-element-ghost .element-big-wrapper .form-element-wrapper {
-  opacity: 0;
-  height: 40px;
+.sortable-chosen.form-element-ghost .element-big-wrapper .element-big-wrapper {
+  border: none !important;
+}
+.sortable-chosen.form-element-ghost .element-big-wrapper.hover-element {
+  border: 3px solid grey;
 }
 .sortable-chosen.form-element-ghost
-  .element-big-wrapper
-  .columns-wrapper
-  .column-wrapper {
-  opacity: 0;
-  height: 40px;
+  .element-big-wrapper.hover-element
+  .detect-element {
+  display: none;
 }
 .sortable-chosen .element-big-wrapper .element-more-options {
   opacity: 0;
@@ -274,10 +280,6 @@ export default {
   /* transition: all 0.2s ease-in-out; */
   /* margin: 1px;
   margin-right: 0; */
-}
-.form-content > div > div > .element-big-wrapper {
-  /* margin: 2px;
-  margin-right: 3px; */
 }
 .detect-element {
   display: none;

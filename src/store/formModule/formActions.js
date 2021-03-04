@@ -35,4 +35,8 @@ export default {
     commit("USE_FORM", payload);
     commit("CLONE_STATE");
   },
+  loadSavedForm({ commit }, payload) {
+    commit("USE_FORM", payload);
+    commit("CLONE_STATE");
+  },
 };

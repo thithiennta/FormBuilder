@@ -1,5 +1,7 @@
 <template>
-  <div
+  <form
+    :method="layoutSettings.form.method"
+    :action="layoutSettings.form.action"
     class="form-content"
     :style="{
       'background-color': layoutSettings.backgroundColor,
@@ -10,7 +12,7 @@
     }"
   >
     <OutputElement :formElement="el" v-for="el in elements" :key="el.rowId" />
-  </div>
+  </form>
 </template>
 
 <script>

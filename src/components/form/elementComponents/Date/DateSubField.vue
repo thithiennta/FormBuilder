@@ -13,7 +13,7 @@
       :style="{
         padding: layoutSettings.field.padding + 'px',
         'border-radius': layoutSettings.border.radius + 'px',
-        color: textInheritColor ? layoutSettings.color : textColor,
+        color: layoutSettings.color,
         ...border,
         'font-weight': layoutSettings.weight,
         height: layoutSettings.field.height + 'px',
@@ -27,9 +27,8 @@
       :class="{ show: showOptions }"
       :style="{
         'border-radius': layoutSettings.border.radius + 'px',
-        color: textInheritColor ? layoutSettings.color : textColor,
+        color: layoutSettings.color,
         ...border,
-
         'font-weight': layoutSettings.weight,
       }"
     >
@@ -38,7 +37,6 @@
         v-for="(option, index) in options"
         :key="index"
         :style="{
-          padding: layoutSettings.field.padding + 'px',
           'background-color': layoutSettings.field.backgroundColor,
         }"
         @click="handleChangeOption(option)"

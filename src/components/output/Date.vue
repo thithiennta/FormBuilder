@@ -2,13 +2,7 @@
   <div
     class="form-element-wrapper"
     :style="{
-      'background-color':
-        properties.general.backgroundColor.indexOf('0)') !== -1
-          ? layoutSettings.backgroundColor
-          : properties.general.backgroundColor,
-      'font-size': properties.text.inheritSize
-        ? layoutSettings.fontSize + 'px'
-        : properties.text.size + 'px',
+      'background-color': properties.general.backgroundColor,
       margin:
         properties.spacing.topMargin +
         'px ' +
@@ -167,7 +161,10 @@ export default {
     this.calOrder();
     this.years = this.getYears();
     this.months = this.getMonths();
-    this.days = this.getDays(3, 2021);
+    this.days = this.getDays(new Date().getFullYear(), 1);
+    this.currentYear = new Date().getFullYear();
+    this.currentDay = 1;
+    this.currentMonth = "January";
   },
   watch: {
     activeElement() {
@@ -234,18 +231,21 @@ export default {
       let days = [];
       let day_30 = [];
       let day_31 = [];
+      let day_not_leap = [];
       let day_leap = [];
       for (let i = 1; i <= 31; i++) {
         day_31.push(i);
         if (i <= 30) day_30.push(i);
-        if (i <= 28) day_leap.push(i);
+        if (i <= 29) day_leap.push(i);
+        if (i <= 28) day_not_leap.push(i);
       }
-      if ([1, 3, 5, 7, 8, 10, 12].indexOf(month)) {
+      if ([1, 3, 5, 7, 8, 10, 12].indexOf(month) !== -1) {
         days = day_31;
       } else days = day_30;
       if (month === 2) {
         if (year % 400 === 0) days = day_leap;
-        else if (year % 4 === 0 && year % 100 != 0) days = day_leap;
+        else if (year % 4 === 0 && year % 100 !== 0) days = day_leap;
+        else days = day_not_leap;
       }
       return days;
     },
@@ -275,7 +275,24 @@ export default {
       this.showYearOptions = false;
       this["show" + value + "Options"] = target;
     },
-    handleChangeOption(type) {
+    handleChangeOption(type, value) {
+      this["current" + type] = value;
+      let months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      let month = months.indexOf(this.currentMonth) + 1;
+      this.days = this.getDays(this.currentYear, month);
       this["show" + type + "Options"] = false;
     },
   },

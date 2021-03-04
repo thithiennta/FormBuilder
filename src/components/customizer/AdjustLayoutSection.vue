@@ -18,6 +18,8 @@
           <FontWeight />
           <TextColor />
           <LayoutPadding />
+          <LayoutBorderWidth />
+          <LayoutBorderRadius />
         </a-collapse-panel>
       </a-collapse>
       <a-collapse
@@ -113,6 +115,8 @@ import FontSize from "./propertyComponents/Layout/FontSize";
 import TextColor from "./propertyComponents/Layout/TextColor";
 import FontWeight from "./propertyComponents/Layout/FontWeight";
 import LayoutPadding from "./propertyComponents/Layout/LayoutPadding";
+import LayoutBorderWidth from "./propertyComponents/Layout/LayoutBorderWidth";
+import LayoutBorderRadius from "./propertyComponents/Layout/LayoutBorderRadius";
 import Action from "./propertyComponents/Layout/Action";
 import Method from "./propertyComponents/Layout/Method";
 import Label from "./propertyComponents/Layout/Label/Label";
@@ -138,6 +142,8 @@ export default {
     FontSize,
     TextColor,
     FontWeight,
+    LayoutBorderWidth,
+    LayoutBorderRadius,
     Action,
     Method,
     Label,

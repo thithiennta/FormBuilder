@@ -2,13 +2,7 @@
   <div
     class="form-element-wrapper"
     :style="{
-      'background-color':
-        properties.general.backgroundColor.indexOf('0)') !== -1
-          ? layoutSettings.backgroundColor
-          : properties.general.backgroundColor,
-      'font-size': properties.text.inheritSize
-        ? layoutSettings.fontSize + 'px'
-        : properties.text.size + 'px',
+      'background-color': properties.general.backgroundColor,
       margin:
         properties.spacing.topMargin +
         'px ' +
@@ -27,7 +21,9 @@
         'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
         'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
-        color: layoutSettings.label.labelColor,
+        color: layoutSettings.label.labelInheritColor
+          ? layoutSettings.color
+          : layoutSettings.label.labelColor,
         'margin-bottom': layoutSettings.label.labelBottomMargin + 'px',
       }"
       v-if="
@@ -57,7 +53,9 @@
           'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
           'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
           'min-width': 'fit-content',
-          color: layoutSettings.label.labelColor,
+          color: layoutSettings.label.labelInheritColor
+            ? layoutSettings.color
+            : layoutSettings.label.labelColor,
         }"
         v-if="
           layoutSettings.label.isOutsideLabel &&
@@ -104,12 +102,8 @@
           />
           <span
             :style="{
-              color: properties.text.inheritColor
-                ? layoutSettings.color
-                : properties.text.color,
-              'font-size': properties.text.inheritSize
-                ? layoutSettings.fontSize + 'px'
-                : properties.text.size + 'px',
+              color: layoutSettings.color,
+              'font-size': layoutSettings.fontSize + 'px',
               'font-weight': layoutSettings.weight,
               'font-family': properties.general.fontFamily,
             }"
@@ -147,6 +141,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .form-element-wrapper input {
   margin-right: 5px;

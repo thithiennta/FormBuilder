@@ -4,6 +4,7 @@
       :is="formElement.type"
       :properties="formElement.properties"
       :nestedElements="formElement.elements"
+      :rowId="formElement.rowId"
     ></component>
   </div>
 </template>
@@ -24,7 +25,9 @@ import CheckBoxGroup from "./CheckBoxGroup";
 import RadioGroup from "./RadioGroup";
 import DropdownList from "./DropdownList";
 import DatePicker from "./DatePicker";
+import Divider from "./Divider";
 import Date from "./Date";
+import FileUpload from "./FileUpload";
 export default {
   props: {
     formElement: {
@@ -49,6 +52,8 @@ export default {
     DropdownList,
     DatePicker,
     Date,
+    Divider,
+    FileUpload,
   },
 };
 </script>

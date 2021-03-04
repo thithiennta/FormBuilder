@@ -83,8 +83,7 @@ export default {
 }
 .form-element-ghost .column-wrapper {
   border: 1px solid rgb(162, 162, 162) !important;
-  height: 40px;
-  margin: auto;
+  margin: 0 auto;
   width: calc(100% - 15px);
 }
 .form-element-ghost .element-wrapper p {

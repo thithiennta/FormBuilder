@@ -1,7 +1,7 @@
 <template>
   <div class="property-wrapper">
     <div class="customizer-sub-title">Require</div>
-    <a-checkbox v-model="isRequire"></a-checkbox>
+    <a-checkbox v-model="isRequired"></a-checkbox>
   </div>
 </template>
 
@@ -10,11 +10,11 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      isRequire: null,
+      isRequired: null,
     };
   },
   created() {
-    this.isRequire = this.activeElement.properties.general.isRequire;
+    this.isRequired = this.activeElement.properties.general.isRequired;
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
@@ -22,14 +22,14 @@ export default {
   watch: {
     isRequire(newValue, oldValue) {
       if (oldValue === null) return;
-      this.activeElement.properties.general.isRequire = this.isRequire;
+      this.activeElement.properties.general.isRequired = this.isRequired;
       this.$store.dispatch(
         "customizerModule/changePropertyValue",
         this.activeElement
       );
     },
     activeElement() {
-      this.isRequire = this.activeElement.properties.general.isRequire;
+      this.isRequired = this.activeElement.properties.general.isRequired;
     },
   },
 };

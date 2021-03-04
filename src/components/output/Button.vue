@@ -3,10 +3,7 @@
     class="form-element-wrapper"
     :style="{
       'text-align': properties.spacing.align,
-      'background-color':
-        properties.general.backgroundColor.indexOf('0)') !== -1
-          ? layoutSettings.backgroundColor
-          : properties.general.backgroundColor,
+      'background-color': properties.general.backgroundColor,
       'font-size': properties.text.inheritSize
         ? layoutSettings.fontSize + 'px'
         : properties.text.size + 'px',
@@ -29,15 +26,11 @@
         color: properties.text.inheritColor
           ? layoutSettings.color
           : properties.text.color,
-
-        'font-weight': properties.text.weight,
-        'text-align': properties.text.align,
+        'font-weight': layoutSettings.weight,
+        'text-align': 'center',
         width: properties.spacing.width + '%',
         height: properties.spacing.height + 'px',
-        ...padding,
         'font-family': properties.general.fontFamily,
-        'font-style': properties.text.style,
-        'text-decoration': properties.text.decoration,
       }"
     >
       {{ properties.text.value }}
@@ -74,25 +67,6 @@ export default {
             this.properties.border.style +
             " " +
             this.properties.border.color,
-        };
-      }
-    },
-    padding() {
-      if (this.properties.spacing.fullPadding) {
-        return {
-          padding:
-            this.properties.spacing.topPadding +
-            "px " +
-            this.properties.spacing.rightPadding +
-            "px " +
-            this.properties.spacing.bottomPadding +
-            "px " +
-            this.properties.spacing.leftPadding +
-            "px ",
-        };
-      } else {
-        return {
-          padding: this.properties.spacing.allSidesPadding + "px",
         };
       }
     },

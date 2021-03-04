@@ -2,13 +2,7 @@
   <div
     class="form-element-wrapper"
     :style="{
-      'background-color':
-        properties.general.backgroundColor.indexOf('0)') !== -1
-          ? layoutSettings.backgroundColor
-          : properties.general.backgroundColor,
-      'font-size': properties.text.inheritSize
-        ? layoutSettings.fontSize + 'px'
-        : properties.text.size + 'px',
+      'background-color': properties.general.backgroundColor,
       margin:
         properties.spacing.topMargin +
         'px ' +
@@ -83,9 +77,7 @@
           :style="{
             padding: layoutSettings.field.padding + 'px',
             'border-radius': layoutSettings.border.radius + 'px',
-            color: properties.text.inheritColor
-              ? layoutSettings.color
-              : properties.text.color,
+            color: layoutSettings.color,
             ...border,
             'font-weight': layoutSettings.weight,
             height: layoutSettings.field.height + 'px',
@@ -103,9 +95,8 @@
           :class="{ show: showOptions }"
           :style="{
             'border-radius': layoutSettings.border.radius + 'px',
-            color: properties.text.inheritColor
-              ? layoutSettings.color
-              : properties.text.color,
+            color: layoutSettings.color,
+
             ...border,
             'font-weight': layoutSettings.weight,
           }"

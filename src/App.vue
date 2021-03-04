@@ -71,6 +71,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Reggae+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@400;500;600;700;800&display=swap");
 * {
   margin: 0;
   padding: 0;

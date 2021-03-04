@@ -62,7 +62,8 @@
         {{ properties.text.fieldName }}
       </div>
       <input
-        type="date"
+        type="file"
+        :id="rowId + '-file-upload'"
         :name="properties.text.fieldName"
         :style="{
           width: properties.spacing.width + '%',
@@ -78,6 +79,23 @@
           'font-weight': layoutSettings.weight,
         }"
       />
+      <label
+        :for="rowId + '-file-upload'"
+        :style="{
+          border: '1px dashed ' + layoutSettings.border.color,
+          width: properties.spacing.width + '%',
+          'min-width': 'fit-content',
+          color: layoutSettings.color,
+          ...maxWidth,
+          'background-color': layoutSettings.field.backgroundColor,
+          'font-family': 'inherit',
+          'font-weight': layoutSettings.weight,
+          'text-align': 'center',
+        }"
+      >
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Click here to upload.</p>
+      </label>
     </div>
   </div>
 </template>
@@ -89,6 +107,10 @@ export default {
     properties: {
       required: true,
       type: Object,
+    },
+    rowId: {
+      required: true,
+      type: String,
     },
   },
   computed: {
@@ -138,7 +160,15 @@ export default {
 </script>
 
 <style scoped>
-.form-element-wrapper {
-  user-select: none;
+input {
+  display: none;
+}
+label {
+  cursor: pointer;
+  padding: 20px;
+  display: inline-block;
+}
+label i {
+  margin-bottom: 20px;
 }
 </style>

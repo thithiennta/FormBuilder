@@ -2,10 +2,7 @@
   <div
     class="form-element-wrapper"
     :style="{
-      'background-color':
-        properties.general.backgroundColor.indexOf('0)') !== -1
-          ? layoutSettings.backgroundColor
-          : properties.general.backgroundColor,
+      'background-color': properties.general.backgroundColor,
       margin:
         properties.spacing.topMargin +
         'px ' +

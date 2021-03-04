@@ -2,13 +2,7 @@
   <div
     class="form-element-wrapper"
     :style="{
-      'background-color':
-        properties.general.backgroundColor.indexOf('0)') !== -1
-          ? layoutSettings.backgroundColor
-          : properties.general.backgroundColor,
-      'font-size': properties.text.inheritSize
-        ? layoutSettings.fontSize + 'px'
-        : properties.text.size + 'px',
+      'background-color': properties.general.backgroundColor,
       margin:
         properties.spacing.topMargin +
         'px ' +
@@ -27,7 +21,9 @@
         'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
         'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
         'min-width': 'fit-content',
-        color: layoutSettings.label.labelColor,
+        color: layoutSettings.label.labelInheritColor
+          ? layoutSettings.color
+          : layoutSettings.label.labelColor,
         'margin-bottom': layoutSettings.label.labelBottomMargin + 'px',
       }"
       v-if="
@@ -54,7 +50,9 @@
           'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
           'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
           'min-width': 'fit-content',
-          color: layoutSettings.label.labelColor,
+          color: layoutSettings.label.labelInheritColor
+            ? layoutSettings.color
+            : layoutSettings.label.labelColor,
         }"
         v-if="
           layoutSettings.label.isOutsideLabel &&
@@ -73,11 +71,11 @@
           ...border,
           ...maxWidth,
           'border-radius': layoutSettings.border.radius + 'px',
-          color: properties.text.inheritColor
-            ? layoutSettings.color
-            : properties.text.color,
+          color: layoutSettings.color,
           'background-color': layoutSettings.field.backgroundColor,
           height: layoutSettings.field.height + 'px',
+          'font-family': 'inherit',
+          'font-weight': layoutSettings.weight,
         }"
       />
     </div>

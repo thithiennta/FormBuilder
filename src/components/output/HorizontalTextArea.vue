@@ -2,14 +2,12 @@
   <div
     :style="{
       width: '100%',
-      ['margin' + spacingAlign]: 'auto',
       ...flexDirection,
     }"
   >
     <div
       class="input-field-name"
       :style="{
-        ...labelPosition,
         'font-size': layoutSettings.label.labelSize + 'px',
         'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
         'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
@@ -17,29 +15,29 @@
           ? layoutSettings.label.labelWidth + 'px'
           : properties.general.label.labelRightMargin + 'px',
         'min-width': 'fit-content',
-        color: layoutSettings.label.labelColor,
+        color: layoutSettings.label.labelInheritColor
+          ? layoutSettings.color
+          : layoutSettings.label.labelColor,
       }"
       v-if="properties.general.label.isOutsideLabel"
     >
       {{ properties.text.fieldName }}
+      <span style="color: red" v-if="properties.general.isRequired">*</span>
     </div>
     <textarea
       :style="{
         'background-color': layoutSettings.field.backgroundColor,
         ...border,
-
         'border-radius': layoutSettings.border.radius + 'px',
-        color: properties.text.inheritColor
-          ? layoutSettings.color
-          : properties.text.color,
+        color: layoutSettings.color,
         ...maxWidth,
         width: properties.spacing.width + '%',
         height: properties.spacing.height + 'px',
         'min-height': '50px',
         padding: layoutSettings.field.padding + 'px',
-        'text-align': properties.text.align,
         'font-weight': layoutSettings.weight,
         'font-family': properties.general.fontFamily,
+        'font-size': layoutSettings.fontSize + 'px',
       }"
       :placeholder="properties.text.placeholder"
       :name="properties.text.name"
@@ -59,11 +57,6 @@ export default {
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
-    spacingAlign() {
-      if (this.properties.spacing.align === "left") return "-right";
-      if (this.properties.spacing.align === "right") return "-left";
-      return "";
-    },
     flexDirection() {
       var flex = {
         display: "flex",
@@ -75,16 +68,6 @@ export default {
         flex = { ...flex, "flex-direction": "column" };
       }
       return flex;
-    },
-    labelPosition() {
-      var position = {};
-      if (
-        this.layoutSettings.label.labelPosition === "bottom" ||
-        this.layoutSettings.label.labelPosition === "right"
-      ) {
-        position = { order: 1 };
-      }
-      return position;
     },
     border() {
       if (this.layoutSettings.border.fullWidth) {
@@ -128,3 +111,11 @@ export default {
   },
 };
 </script>
+<style scoped>
+textarea {
+  transition: border-color 0.4s ease-in-out;
+}
+textarea:focus {
+  border-color: #343a40 !important;
+}
+</style>

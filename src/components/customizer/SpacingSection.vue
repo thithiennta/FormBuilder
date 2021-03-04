@@ -121,6 +121,20 @@ export default {
           },
           settings: ["general", "spacing"],
         },
+        {
+          name: "Spacer",
+          icon: "column-height",
+          type: "Spacer",
+          properties: {
+            general: {
+              backgroundColor: "rgba(0,0,0,0)",
+            },
+            spacing: {
+              height: 50,
+            },
+          },
+          settings: ["spacing"],
+        },
       ],
     };
   },

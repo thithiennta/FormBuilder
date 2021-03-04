@@ -53,7 +53,12 @@
             'font-family': layoutSettings.fontFamily,
             'font-size': layoutSettings.fontSize + 'px',
             color: layoutSettings.color,
-            padding: layoutSettings.padding + 'px',
+            ...formPadding,
+            border:
+              layoutSettings.layoutStyles.borderWidth +
+              'px solid ' +
+              layoutSettings.layoutStyles.borderColor,
+            'border-radius': layoutSettings.layoutStyles.borderRadius + 'px',
           }"
         >
           <NestedElement v-model="elements" />
@@ -75,6 +80,25 @@ export default {
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
+    formPadding() {
+      if (this.layoutSettings.layoutStyles.fullPadding) {
+        return {
+          padding:
+            this.layoutSettings.layoutStyles.topPadding +
+            "px " +
+            this.layoutSettings.layoutStyles.rightPadding +
+            "px " +
+            this.layoutSettings.layoutStyles.bottomPadding +
+            "px " +
+            this.layoutSettings.layoutStyles.leftPadding +
+            "px ",
+        };
+      } else {
+        return {
+          padding: this.layoutSettings.layoutStyles.allSidesPadding + "px",
+        };
+      }
+    },
     elements: {
       get() {
         return this.$store.state.formModule.elements;
@@ -256,8 +280,7 @@ export default {
 .empty-nested:empty::after {
   text-align: center;
 }
-.form-content > div > div > .element-big-wrapper {
-  /* padding: 0 15px; */
+.form-content {
 }
 .columns-wrapper {
   padding: 5px 0;

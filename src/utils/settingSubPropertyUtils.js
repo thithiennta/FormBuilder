@@ -25,6 +25,9 @@ const getElementsByName = function(name, type) {
         case "Date":
           result = ["LabelMargin", "Require"];
           break;
+        case "FileUpload":
+          result = ["LabelMargin", "Require"];
+          break;
         case "OneColumn":
         case "TwoColumn":
         case "ThreeColumn":
@@ -57,6 +60,9 @@ const getElementsByName = function(name, type) {
         case "Date":
           result = ["DayWidth", "MonthWidth", "YearWidth"];
           break;
+        case "FileUpload":
+          result = ["Width"];
+          break;
         case "Button":
           result = [
             "Width",
@@ -73,6 +79,9 @@ const getElementsByName = function(name, type) {
           break;
         case "Divider":
           result = ["Width", "SpacingAlign"];
+          break;
+        case "Spacer":
+          result = ["Height"];
           break;
         default:
           break;
@@ -102,6 +111,7 @@ const getElementsByName = function(name, type) {
         case "CheckBoxGroup":
         case "DatePicker":
         case "Date":
+        case "FileUpload":
           result = ["FieldName", "InputName"];
           break;
         default:

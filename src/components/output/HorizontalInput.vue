@@ -1,53 +1,82 @@
 <template>
-  <div
-    :style="{
-      width: '100%',
-      ['margin' + spacingAlign]: 'auto',
-      ...flexDirection,
-      'align-items': layoutSettings.label.labelAlignCenter ? 'center' : '',
-    }"
-  >
+  <div>
     <div
-      class="input-field-name"
       :style="{
-        ...labelPosition,
-        'font-size': layoutSettings.label.labelSize + 'px',
-        'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
-        'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
-        width: properties.general.label.inheritLabelMargin
-          ? layoutSettings.label.labelWidth + 'px'
-          : properties.general.label.labelRightMargin + 'px',
-        'min-width': 'fit-content',
-        color: layoutSettings.label.labelColor,
+        width: '100%',
+        ...flexDirection,
+        'align-items': layoutSettings.label.labelAlignCenter ? 'center' : '',
       }"
-      v-if="properties.general.label.isOutsideLabel"
     >
-      {{ properties.text.fieldName }}
+      <div
+        class="input-field-name"
+        :style="{
+          'font-size': layoutSettings.label.labelSize + 'px',
+          'font-weight': layoutSettings.label.labelBold ? 'bold' : '',
+          'font-style': layoutSettings.label.labelItalic ? 'italic' : '',
+          width: properties.general.label.inheritLabelMargin
+            ? layoutSettings.label.labelWidth + 'px'
+            : properties.general.label.labelRightMargin + 'px',
+          'min-width': 'fit-content',
+          color: layoutSettings.label.labelInheritColor
+            ? layoutSettings.color
+            : layoutSettings.label.labelColor,
+        }"
+        v-if="properties.general.label.isOutsideLabel"
+      >
+        {{ properties.text.fieldName }}
+        <span style="color: red" v-if="properties.general.isRequired">*</span>
+      </div>
+      <input
+        :style="{
+          'background-color': layoutSettings.field.backgroundColor,
+          ...border,
+          'border-radius': layoutSettings.border.radius + 'px',
+          color: layoutSettings.color,
+          height: layoutSettings.field.height + 'px',
+          padding: layoutSettings.field.padding + 'px',
+          width: properties.spacing.width + '%',
+          ...maxWidth,
+          'font-weight': layoutSettings.weight,
+          'font-family': properties.general.fontFamily,
+          'font-size': layoutSettings.fontSize + 'px',
+        }"
+        :placeholder="properties.text.placeholder"
+        :name="properties.text.name"
+        :value="value"
+        :type="properties.general.type"
+        :required="properties.general.isRequired"
+      />
     </div>
-    <input
+    <div
       :style="{
-        'background-color': layoutSettings.field.backgroundColor,
-        ...border,
-        'border-radius': layoutSettings.border.radius + 'px',
-        color: properties.text.inheritColor
-          ? layoutSettings.color
-          : properties.text.color,
-        height: layoutSettings.field.height + 'px',
-        padding: layoutSettings.field.padding + 'px',
-        width: properties.spacing.width + '%',
-        ...maxWidth,
-        'text-align': properties.text.align,
-        'font-weight': layoutSettings.weight,
-        'font-family': properties.general.fontFamily,
+        width: '100%',
+        ...flexDirection,
+        'align-items': layoutSettings.label.labelAlignCenter ? 'center' : '',
       }"
-      :placeholder="properties.text.placeholder"
-      :name="properties.text.name"
-      :type="properties.general.type"
-    />
+    >
+      <div
+        :style="{
+          width: properties.general.label.inheritLabelMargin
+            ? layoutSettings.label.labelWidth + 'px'
+            : properties.general.label.labelRightMargin + 'px',
+          'min-width': 'fit-content',
+        }"
+        v-if="properties.general.label.isOutsideLabel"
+      ></div>
+      <ValidateError
+        :style="{
+          width: properties.spacing.width + '%',
+          ...maxWidth,
+          'margin-top': '10px',
+        }"
+        v-if="false"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import ValidateError from "./ValidateError";
 import { mapState } from "vuex";
 
 export default {
@@ -57,13 +86,16 @@ export default {
       type: Object,
     },
   },
+  data() {
+    return {
+      value: "",
+    };
+  },
+  components: {
+    ValidateError,
+  },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
-    spacingAlign() {
-      if (this.properties.spacing.align === "left") return "-right";
-      if (this.properties.spacing.align === "right") return "-left";
-      return "";
-    },
     flexDirection() {
       var flex = {
         display: "flex",
@@ -75,16 +107,6 @@ export default {
         flex = { ...flex, "flex-direction": "column" };
       }
       return flex;
-    },
-    labelPosition() {
-      var position = {};
-      if (
-        this.layoutSettings.label.labelPosition === "bottom" ||
-        this.layoutSettings.label.labelPosition === "right"
-      ) {
-        position = { order: 1 };
-      }
-      return position;
     },
     border() {
       if (this.layoutSettings.border.fullWidth) {
@@ -129,9 +151,10 @@ export default {
 };
 </script>
 <style scoped>
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+input {
+  transition: border-color 0.4s ease-in-out;
+}
+input:focus {
+  border-color: #343a40 !important;
 }
 </style>
