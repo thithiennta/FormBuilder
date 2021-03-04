@@ -16,7 +16,7 @@
       :key="index"
       :style="{
         width: properties.spacing['column' + (index + 1) + 'Width'] + '%',
-        border:
+        outline:
           (hoverElement.rowId && hoverElement.rowId === rowId) ||
           activeElement.rowId === rowId
             ? '1px dashed rgb(113, 203, 244)'
