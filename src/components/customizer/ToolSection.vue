@@ -20,7 +20,14 @@
           v-for="(customizerTool, index) in customizerTools"
           :key="index"
         >
-          <CustomizerElement :customizerElement="customizerTool" />
+          <CustomizerElement
+            :customizerElement="customizerTool"
+            v-if="
+              (layoutSettings.form.type !== 'multi step' &&
+                customizerTool.type !== 'StepBar') ||
+                layoutSettings.form.type === 'multi step'
+            "
+          />
         </div>
       </Draggable>
     </a-collapse-panel>
@@ -28,6 +35,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { v4 as uuid } from "uuid";
 import Draggable from "vuedraggable";
 import CustomizerElement from "./CustomizerElement";
@@ -44,6 +52,7 @@ export default {
             general: {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
+              isKeepWithStep: false,
             },
             text: {
               value: "SAMPLE FORM",
@@ -74,6 +83,7 @@ export default {
             general: {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
+              isKeepWithStep: false,
             },
             text: {
               value: "Sample Text",
@@ -105,6 +115,7 @@ export default {
             general: {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
+              isKeepWithStep: false,
             },
             border: {
               fullWidth: false,
@@ -146,6 +157,7 @@ export default {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
               isRequired: true,
+              isKeepWithStep: false,
               label: {
                 labelTopMargin: 0,
                 labelRightMargin: 0,
@@ -182,6 +194,7 @@ export default {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
               isRequired: true,
+              isKeepWithStep: false,
               label: {
                 labelTopMargin: 0,
                 labelRightMargin: 0,
@@ -219,6 +232,7 @@ export default {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
               isRequired: true,
+              isKeepWithStep: false,
               label: {
                 labelTopMargin: 0,
                 labelRightMargin: 0,
@@ -255,6 +269,7 @@ export default {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
               isRequired: true,
+              isKeepWithStep: false,
               label: {
                 labelTopMargin: 0,
                 labelRightMargin: 0,
@@ -291,6 +306,7 @@ export default {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
               isRequired: true,
+              isKeepWithStep: false,
               label: {
                 labelTopMargin: 0,
                 labelRightMargin: 0,
@@ -331,6 +347,7 @@ export default {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
               isRequired: true,
+              isKeepWithStep: false,
               label: {
                 labelTopMargin: 0,
                 labelRightMargin: 0,
@@ -374,6 +391,7 @@ export default {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
               isRequired: true,
+              isKeepWithStep: false,
               label: {
                 labelTopMargin: 0,
                 labelRightMargin: 0,
@@ -409,6 +427,7 @@ export default {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
               isRequired: true,
+              isKeepWithStep: false,
               label: {
                 labelTopMargin: 0,
                 labelRightMargin: 0,
@@ -430,12 +449,51 @@ export default {
           },
           settings: ["general", "spacing", "text"],
         },
+        {
+          name: "Step Bar",
+          type: "StepBar",
+          icon: "fund",
+          properties: {
+            general: {
+              backgroundColor: "rgba(0,0,0,0)",
+              fontFamily: "inherit",
+              label: {},
+              isKeepWithStep: true,
+            },
+            border: {},
+            text: {
+              haveTitle: true,
+              titles: ["Title 1", "Title 2", "Title 3"],
+            },
+            step: {
+              type: "normal",
+              finishColor: "rgb(85, 163, 219)",
+              finishNumberColor: "black",
+              finishTitleColor: "black",
+              processColor: "rgb(85, 163, 219)",
+              processNumberColor: "white",
+              processTitleColor: "rgba(25,168, 242, 1)",
+              waitColor: "rgb(222, 223, 224)",
+              waitNumberColor: "black",
+              waitTitleColor: "black",
+            },
+            spacing: {
+              width: 100,
+            },
+            option: {},
+            box: {},
+          },
+          settings: ["general", "spacing", "text"],
+        },
       ],
     };
   },
   components: {
     Draggable,
     CustomizerElement,
+  },
+  computed: {
+    ...mapState("formModule", ["currentStep", "layoutSettings"]),
   },
   methods: {
     handleClone({ type, properties, settings }) {
@@ -445,6 +503,7 @@ export default {
         properties,
         settings,
       };
+      targetItem.properties.general.stepPage = this.currentStep + 1;
       const cloneItem = JSON.parse(JSON.stringify(targetItem));
       return cloneItem;
     },

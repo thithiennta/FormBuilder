@@ -2,7 +2,7 @@
   <div class="adjust-section-wrapper">
     <vuescroll :ops="options" class="customizer-body-scroll">
       <a-collapse
-        default-active-key="1"
+        default-active-key="0"
         :bordered="false"
         expand-icon-position="right"
         class="property-wrapper"
@@ -23,7 +23,7 @@
         </a-collapse-panel>
       </a-collapse>
       <a-collapse
-        default-active-key="0"
+        default-active-key="1"
         :bordered="false"
         expand-icon-position="right"
         class="property-wrapper"
@@ -35,10 +35,14 @@
         >
           <Action />
           <Method />
+          <FormType />
+          <NumberStep />
+          <Step />
+          <StepPage />
         </a-collapse-panel>
       </a-collapse>
       <a-collapse
-        default-active-key="1"
+        default-active-key="0"
         :bordered="false"
         expand-icon-position="right"
         class="property-wrapper"
@@ -118,6 +122,10 @@ import LayoutPadding from "./propertyComponents/Layout/LayoutPadding";
 import LayoutBorderWidth from "./propertyComponents/Layout/LayoutBorderWidth";
 import LayoutBorderRadius from "./propertyComponents/Layout/LayoutBorderRadius";
 import Action from "./propertyComponents/Layout/Action";
+import FormType from "./propertyComponents/Layout/FormType";
+import Step from "./propertyComponents/Layout/Step";
+import NumberStep from "./propertyComponents/Layout/NumberStep";
+import StepPage from "./propertyComponents/Layout/StepPage";
 import Method from "./propertyComponents/Layout/Method";
 import Label from "./propertyComponents/Layout/Label/Label";
 import LabelSize from "./propertyComponents/Layout/Label/LabelSize";
@@ -146,6 +154,10 @@ export default {
     LayoutBorderRadius,
     Action,
     Method,
+    Step,
+    NumberStep,
+    StepPage,
+    FormType,
     Label,
     LabelSize,
     LabelStyle,

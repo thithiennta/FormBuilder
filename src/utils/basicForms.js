@@ -20,6 +20,8 @@ const defaultForm = {
     form: {
       action: "",
       method: "GET",
+      type: "normal",
+      numberStep: 3,
     },
     label: {
       isOutsideLabel: true,
@@ -56,9 +58,14 @@ const defaultForm = {
       name: "Title",
       type: "Title",
       properties: {
-        general: { backgroundColor: "rgba(0,0,0,0)", fontFamily: "Inherit" },
+        general: {
+          backgroundColor: "rgba(0,0,0,0)",
+          fontFamily: "Inherit",
+          isKeepWithStep: true,
+          stepPage: 1,
+        },
         text: {
-          value: "SAMPLE FORM",
+          value: "STEP FORM",
           color: "black",
           size: 40,
           weight: 700,
@@ -80,10 +87,48 @@ const defaultForm = {
     },
     {
       rowId: uuid(),
+      type: "StepBar",
+      properties: {
+        general: {
+          backgroundColor: "rgba(0,0,0,0)",
+          fontFamily: "inherit",
+          label: {},
+          isKeepWithStep: true,
+          stepPage: 1,
+        },
+        border: {},
+        text: {
+          haveTitle: true,
+          titles: ["Contact Information", "Confirm Information", "Finish"],
+        },
+        step: {
+          type: "normal",
+          finishColor: "rgb(85, 163, 219)",
+          finishNumberColor: "black",
+          finishTitleColor: "black",
+          processColor: "rgb(85, 163, 219)",
+          processNumberColor: "white",
+          processTitleColor: "rgba(25,168, 242, 1)",
+          waitColor: "rgb(222, 223, 224)",
+          waitNumberColor: "black",
+          waitTitleColor: "black",
+        },
+        spacing: {
+          width: 100,
+        },
+        option: {},
+        box: {},
+      },
+      settings: ["general", "spacing", "text"],
+    },
+    {
+      rowId: uuid(),
       type: "TwoColumn",
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
+          isKeepWithStep: false,
+          stepPage: 1,
         },
         spacing: {
           column1Width: 50,
@@ -102,6 +147,8 @@ const defaultForm = {
                 fontFamily: "Inherit",
                 type: "text",
                 isRequired: true,
+                isKeepWithStep: false,
+                stepPage: 1,
                 label: {
                   labelTopMargin: 0,
                   labelRightMargin: 0,
@@ -140,6 +187,8 @@ const defaultForm = {
                 fontFamily: "Inherit",
                 type: "text",
                 isRequired: true,
+                isKeepWithStep: false,
+                stepPage: 1,
                 label: {
                   labelTopMargin: 0,
                   labelRightMargin: 0,
@@ -180,6 +229,8 @@ const defaultForm = {
           fontFamily: "Inherit",
           type: "email",
           isRequired: true,
+          isKeepWithStep: false,
+          stepPage: 1,
           label: {
             labelTopMargin: 0,
             labelRightMargin: 0,
@@ -215,6 +266,8 @@ const defaultForm = {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "inherit",
           isRequired: true,
+          isKeepWithStep: false,
+          stepPage: 1,
           label: {
             labelTopMargin: 0,
             labelRightMargin: 0,
@@ -250,6 +303,8 @@ const defaultForm = {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "inherit",
           isRequired: true,
+          isKeepWithStep: false,
+          stepPage: 1,
           label: {
             labelTopMargin: 0,
             labelRightMargin: 0,
@@ -279,6 +334,8 @@ const defaultForm = {
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
+          isKeepWithStep: false,
+          stepPage: 1,
         },
         spacing: {
           column1Width: 50,
@@ -296,6 +353,8 @@ const defaultForm = {
                 backgroundColor: "rgba(0,0,0,0)",
                 fontFamily: "inherit",
                 isRequired: true,
+                isKeepWithStep: false,
+                stepPage: 1,
                 label: {
                   labelTopMargin: 0,
                   labelRightMargin: 0,
@@ -352,6 +411,8 @@ const defaultForm = {
                 backgroundColor: "rgba(0,0,0,0)",
                 fontFamily: "inherit",
                 isRequired: true,
+                isKeepWithStep: false,
+                stepPage: 1,
                 label: {
                   labelTopMargin: 0,
                   labelRightMargin: 43,
@@ -412,6 +473,8 @@ const defaultForm = {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "inherit",
           isRequired: true,
+          isKeepWithStep: false,
+          stepPage: 1,
           label: {
             labelTopMargin: 0,
             labelRightMargin: 0,
@@ -447,6 +510,8 @@ const defaultForm = {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "inherit",
           isRequired: true,
+          isKeepWithStep: false,
+          stepPage: 1,
           label: {
             labelTopMargin: 0,
             labelRightMargin: 0,
@@ -481,6 +546,8 @@ const defaultForm = {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "Inherit",
+          isKeepWithStep: true,
+          stepPage: 1,
         },
         border: {
           fullWidth: false,
@@ -536,6 +603,7 @@ const emptyForm = {
     form: {
       action: "",
       method: "GET",
+      type: "normal",
     },
     label: {
       isOutsideLabel: true,

@@ -28,6 +28,7 @@ import DatePicker from "./DatePicker";
 import Divider from "./Divider";
 import Date from "./Date";
 import FileUpload from "./FileUpload";
+import Spacer from "./Spacer";
 export default {
   props: {
     formElement: {
@@ -54,6 +55,7 @@ export default {
     Date,
     Divider,
     FileUpload,
+    Spacer,
   },
 };
 </script>

@@ -7,6 +7,7 @@ export default {
     elements: [],
     previousStates: [],
     nextStates: [],
+    currentStep: 0,
   },
   actions: formActions,
   mutations: formMutations,

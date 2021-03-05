@@ -23,6 +23,7 @@
       :rowId="formElement.rowId"
       :properties="formElement.properties"
       :nestedElements="formElement.elements"
+      v-if="showWhenStep"
     ></component>
     <a-dropdown
       :trigger="['click']"
@@ -72,6 +73,7 @@ import GCaptcha from "./elementComponents/GCaptcha";
 import Spacer from "./elementComponents/Spacer";
 import Date from "./elementComponents/Date";
 import FileUpload from "./elementComponents/FileUpload";
+import StepBar from "./elementComponents/StepBar";
 import { Modal, message } from "ant-design-vue";
 export default {
   components: {
@@ -93,6 +95,7 @@ export default {
     Date,
     Spacer,
     FileUpload,
+    StepBar,
   },
   props: {
     formElement: {
@@ -114,6 +117,7 @@ export default {
       "activeElement",
       "hoverElement",
     ]),
+    ...mapState("formModule", ["currentStep", "layoutSettings"]),
     topElementPadding() {
       if (this.formElement.type.indexOf("Column") === -1 && this.isTopElement) {
         return {
@@ -122,6 +126,20 @@ export default {
         };
       }
       return {};
+    },
+    showWhenStep() {
+      if (this.layoutSettings.form.type !== "multi step")
+        return (
+          (this.layoutSettings.form.type !== "multi step" &&
+            this.formElement.type !== "StepBar") ||
+          this.layoutSettings.form.type === "multi step"
+        );
+      else {
+        return (
+          this.formElement.properties.general.isKeepWithStep ||
+          this.formElement.properties.general.stepPage === this.currentStep + 1
+        );
+      }
     },
   },
   data() {

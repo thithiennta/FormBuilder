@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { v4 as uuid } from "uuid";
 import Draggable from "vuedraggable";
 import CustomizerElement from "./CustomizerElement";
@@ -47,6 +48,7 @@ export default {
           properties: {
             general: {
               backgroundColor: "rgba(0,0,0,0)",
+              isKeepWithStep: false,
             },
           },
           settings: ["general"],
@@ -59,6 +61,7 @@ export default {
           properties: {
             general: {
               backgroundColor: "rgba(0,0,0,0)",
+              isKeepWithStep: false,
             },
             spacing: {
               column1Width: 50,
@@ -75,6 +78,7 @@ export default {
           properties: {
             general: {
               backgroundColor: "rgba(0,0,0,0)",
+              isKeepWithStep: false,
             },
             spacing: {
               column1Width: 33.3,
@@ -92,6 +96,7 @@ export default {
           properties: {
             general: {
               backgroundColor: "rgba(0,0,0,0)",
+              isKeepWithStep: false,
             },
             spacing: {
               column1Width: 25,
@@ -113,6 +118,7 @@ export default {
               color: "black",
               style: "solid",
               backgroundColor: "rgba(0,0,0,0)",
+              isKeepWithStep: false,
             },
             spacing: {
               width: 100,
@@ -128,6 +134,7 @@ export default {
           properties: {
             general: {
               backgroundColor: "rgba(0,0,0,0)",
+              isKeepWithStep: false,
             },
             spacing: {
               height: 50,
@@ -142,6 +149,9 @@ export default {
     Draggable,
     CustomizerElement,
   },
+  computed: {
+    ...mapState("formModule", ["currentStep"]),
+  },
   methods: {
     handleClone({ type, properties, settings, elements }) {
       const targetItem = {
@@ -151,6 +161,7 @@ export default {
         settings,
         elements,
       };
+      targetItem.properties.general.stepPage = this.currentStep + 1;
       const cloneItem = JSON.parse(JSON.stringify(targetItem));
 
       return cloneItem;

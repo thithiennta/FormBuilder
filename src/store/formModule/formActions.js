@@ -39,4 +39,8 @@ export default {
     commit("USE_FORM", payload);
     commit("CLONE_STATE");
   },
+  changeCurrentStep({ commit }, payload) {
+    commit("CHANGE_CURRENT_STEP", payload);
+    commit("CLONE_STATE");
+  },
 };

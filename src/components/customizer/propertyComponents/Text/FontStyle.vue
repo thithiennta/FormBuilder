@@ -61,9 +61,6 @@ export default {
     italicActive(value) {
       if (value) this.activeElement.properties.text.style = "italic";
       else this.activeElement.properties.text.style = "normal";
-      // This to ADD PREVIOUS STATE and CLONE STATE
-      this.$store.dispatch("formModule/updateProperty");
-      // This to UPDATE PROPERTY
       this.$store.dispatch(
         "customizerModule/changePropertyValue",
         this.activeElement

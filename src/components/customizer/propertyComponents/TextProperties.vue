@@ -27,6 +27,7 @@ import FontStyle from "./Text/FontStyle";
 import InputName from "./Text/InputName";
 import InputPlaceholder from "./Text/InputPlaceholder";
 import FieldName from "./Text/FieldName";
+import StepTitle from "./Text/StepTitle";
 export default {
   components: {
     FontSize,
@@ -38,6 +39,7 @@ export default {
     InputName,
     InputPlaceholder,
     FieldName,
+    StepTitle,
   },
   data() {
     return {

@@ -1,29 +1,18 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">Text Color</div>
+    <div class="customizer-sub-sub-title">Step Title Color</div>
     <div class="property-adjust-wrapper">
-      <div
-        class="show-color-wrapper"
-        @click="handleShowSketch"
-        :class="{ disable: inheritCheck }"
-      >
+      <div class="show-color-wrapper" @click="handleShowSketch">
         <div class="color-block" :style="{ 'background-color': color }"></div>
         <div class="text-block">Choose Color</div>
       </div>
       <Sketch
-        id="text-sketch"
+        id="step-title-sketch"
         v-model="color"
         v-show="showSketch"
         class="sketch-wrapper"
         @input="updateValue"
       />
-      <div class="property-inherit">
-        <a-switch
-          checked-children="Inherit"
-          un-checked-children="Inherit"
-          v-model="inheritCheck"
-        />
-      </div>
     </div>
   </div>
 </template>
@@ -33,6 +22,12 @@ import _debounce from "lodash.debounce";
 import { mapState } from "vuex";
 import { Sketch } from "vue-color";
 export default {
+  props: {
+    type: {
+      required: true,
+      type: String,
+    },
+  },
   components: {
     Sketch,
   },
@@ -40,20 +35,17 @@ export default {
     return {
       color: null,
       showSketch: false,
-      inheritCheck: null,
     };
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
-    ...mapState("formModule", ["layoutSettings"]),
   },
   created() {
-    this.color = this.activeElement.properties.text.color;
-    this.inheritCheck = this.activeElement.properties.text.inheritColor;
+    this.color = this.activeElement.properties.step[this.type + "TitleColor"];
   },
   mounted() {
     document.addEventListener("click", (e) => {
-      var colorPicker = document.getElementById("text-sketch");
+      var colorPicker = document.getElementById("step-title-sketch");
       if (colorPicker === null) return;
       if (!colorPicker.contains(e.target)) {
         this.showSketch = false;
@@ -68,18 +60,11 @@ export default {
         this.activeElement
       );
     }, 200),
-    inheritCheck(newValue, oldValue) {
-      if (oldValue === null) return;
-      this.activeElement.properties.text.inheritColor = this.inheritCheck;
-      // This to UPDATE PROPERTY
-      this.$store.dispatch(
-        "customizerModule/changePropertyValue",
-        this.activeElement
-      );
+    type() {
+      this.color = this.activeElement.properties.step[this.type + "TitleColor"];
     },
     activeElement() {
-      this.color = this.activeElement.properties.text.color;
-      this.inheritCheck = this.activeElement.properties.text.inheritColor;
+      this.color = this.activeElement.properties.step[this.type + "TitleColor"];
     },
   },
   methods: {
@@ -91,9 +76,9 @@ export default {
       });
       this.showSketch = !this.showSketch;
     },
-    updateValue(value) {
-      this.color = value.hex;
-      this.activeElement.properties.text.color = this.color;
+    updateValue({ rgba }) {
+      this.color = `rgba(${rgba.r},${rgba.g}, ${rgba.b}, ${rgba.a})`;
+      this.activeElement.properties.step[this.type + "TitleColor"] = this.color;
     },
   },
 };
@@ -101,10 +86,6 @@ export default {
 
 <style scoped>
 .property-adjust-wrapper {
-  display: flex;
-}
-.property-inherit {
-  margin-left: 10px;
 }
 .show-color-wrapper {
   display: flex;
@@ -113,11 +94,6 @@ export default {
   background-color: white;
   border-radius: 6px;
   cursor: pointer;
-  transition: filter 0.3s ease-in-out;
-}
-.show-color-wrapper.disable {
-  pointer-events: none;
-  filter: contrast(0.4);
 }
 .color-block {
   width: 25px;
@@ -128,8 +104,8 @@ export default {
   padding: 0 15px 0 5px;
 }
 .sketch-wrapper {
+  margin-top: 5px;
   position: absolute;
-  margin-top: 30px;
   z-index: 999;
 }
 </style>

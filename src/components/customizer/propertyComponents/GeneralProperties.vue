@@ -29,6 +29,7 @@ import SubLabel from "./General/SubLabel";
 import OutsideLabel from "./General/OutsideLabel";
 import InputType from "./General/InputType";
 import Require from "./General/Require";
+import StatusSettings from "./General/StatusSettings";
 export default {
   components: {
     BackgroundColor,
@@ -42,6 +43,7 @@ export default {
     OutsideLabel,
     InputType,
     Require,
+    StatusSettings,
   },
   data() {
     return {

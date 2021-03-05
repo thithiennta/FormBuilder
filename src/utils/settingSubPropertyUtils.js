@@ -28,6 +28,9 @@ const getElementsByName = function(name, type) {
         case "FileUpload":
           result = ["LabelMargin", "Require"];
           break;
+        case "StepBar":
+          result = ["StatusSettings"];
+          break;
         case "OneColumn":
         case "TwoColumn":
         case "ThreeColumn":
@@ -113,6 +116,9 @@ const getElementsByName = function(name, type) {
         case "Date":
         case "FileUpload":
           result = ["FieldName", "InputName"];
+          break;
+        case "StepBar":
+          result = ["StepTitle"];
           break;
         default:
           break;

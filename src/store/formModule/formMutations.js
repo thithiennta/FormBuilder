@@ -61,4 +61,7 @@ export default {
   UPDATE_LAYOUT_SETTINGS(state, payload) {
     state.layoutSettings = payload;
   },
+  CHANGE_CURRENT_STEP(state, payload) {
+    state.currentStep = payload;
+  },
 };
