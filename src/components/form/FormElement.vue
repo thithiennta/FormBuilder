@@ -11,6 +11,7 @@
     ref="element"
     :id="formElement.rowId"
     :style="{ ...topElementPadding }"
+    v-show="showWhenStep"
   >
     <div class="detect-element">
       {{ formElement.type.indexOf("Column") !== -1 ? "Row" : "Content" }}
@@ -23,7 +24,6 @@
       :rowId="formElement.rowId"
       :properties="formElement.properties"
       :nestedElements="formElement.elements"
-      v-if="showWhenStep"
     ></component>
     <a-dropdown
       :trigger="['click']"

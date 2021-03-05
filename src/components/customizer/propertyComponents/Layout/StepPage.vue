@@ -41,6 +41,7 @@ export default {
     index(newValue, oldValue) {
       if (oldValue === null) return;
       this.$store.dispatch("formModule/changeCurrentStep", this.index);
+      this.$store.dispatch("customizerModule/unselectElement");
     },
     layoutSettings() {
       this.index = this.currentStep;

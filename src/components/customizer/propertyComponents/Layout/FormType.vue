@@ -45,6 +45,7 @@ export default {
         "formModule/changeLayoutProperty",
         this.layoutSettings
       );
+      this.$store.dispatch("customizerModule/unselectElement");
     },
   },
 };
