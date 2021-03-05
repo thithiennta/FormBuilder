@@ -5,8 +5,10 @@ const getElementsByName = function(name, type) {
       switch (type) {
         case "Title":
         case "CustomText":
+          result = ["StayWithStep"];
+          break;
         case "Button":
-          result = [""];
+          result = ["ButtonPurpose"];
           break;
         case "Input":
           result = ["OutsideLabel", "LabelMargin", "InputType", "Require"];
@@ -29,7 +31,7 @@ const getElementsByName = function(name, type) {
           result = ["LabelMargin", "Require"];
           break;
         case "StepBar":
-          result = ["StatusSettings"];
+          result = ["StayWithStep", "StatusSettings"];
           break;
         case "OneColumn":
         case "TwoColumn":

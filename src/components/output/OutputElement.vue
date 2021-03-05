@@ -29,6 +29,7 @@ import Divider from "./Divider";
 import Date from "./Date";
 import FileUpload from "./FileUpload";
 import Spacer from "./Spacer";
+import StepBar from "./StepBar";
 export default {
   props: {
     formElement: {
@@ -56,6 +57,7 @@ export default {
     Divider,
     FileUpload,
     Spacer,
+    StepBar,
   },
 };
 </script>

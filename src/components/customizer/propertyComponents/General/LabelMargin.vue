@@ -33,7 +33,7 @@
         :tooltip-visible="false"
         :default-value="activeElement.properties.general.label.labelRightMargin"
         @change="handleChange"
-        :max="200"
+        :max="400"
       />
     </div>
   </div>

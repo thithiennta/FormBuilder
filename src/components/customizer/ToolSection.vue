@@ -116,6 +116,7 @@ export default {
               backgroundColor: "rgba(0,0,0,0)",
               fontFamily: "inherit",
               isKeepWithStep: false,
+              purpose: "submit",
             },
             border: {
               fullWidth: false,

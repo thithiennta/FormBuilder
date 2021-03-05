@@ -30,6 +30,8 @@ import OutsideLabel from "./General/OutsideLabel";
 import InputType from "./General/InputType";
 import Require from "./General/Require";
 import StatusSettings from "./General/StatusSettings";
+import StayWithStep from "./General/StayWithStep";
+import ButtonPurpose from "./General/ButtonPurpose";
 export default {
   components: {
     BackgroundColor,
@@ -44,6 +46,8 @@ export default {
     InputType,
     Require,
     StatusSettings,
+    StayWithStep,
+    ButtonPurpose,
   },
   data() {
     return {

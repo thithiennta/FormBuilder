@@ -1,7 +1,7 @@
 <template>
   <div class="property-wrapper">
-    <div class="customizer-sub-title">Require?</div>
-    <a-checkbox v-model="isRequired"></a-checkbox>
+    <div class="customizer-sub-title">Stay With Step?</div>
+    <a-checkbox v-model="isKeepWithStep"></a-checkbox>
   </div>
 </template>
 
@@ -10,26 +10,26 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      isRequired: null,
+      isKeepWithStep: null,
     };
   },
   created() {
-    this.isRequired = this.activeElement.properties.general.isRequired;
+    this.isKeepWithStep = this.activeElement.properties.general.isKeepWithStep;
   },
   computed: {
     ...mapState("customizerModule", ["activeElement"]),
   },
   watch: {
-    isRequired(newValue, oldValue) {
+    isKeepWithStep(newValue, oldValue) {
       if (oldValue === null) return;
-      this.activeElement.properties.general.isRequired = this.isRequired;
+      this.activeElement.properties.general.isKeepWithStep = this.isKeepWithStep;
       this.$store.dispatch(
         "customizerModule/changePropertyValue",
         this.activeElement
       );
     },
     activeElement() {
-      this.isRequired = this.activeElement.properties.general.isRequired;
+      this.isKeepWithStep = this.activeElement.properties.general.isKeepWithStep;
     },
   },
 };

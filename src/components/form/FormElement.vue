@@ -131,7 +131,8 @@ export default {
       if (this.layoutSettings.form.type !== "multi step")
         return (
           (this.layoutSettings.form.type !== "multi step" &&
-            this.formElement.type !== "StepBar") ||
+            this.formElement.type !== "StepBar" &&
+            this.formElement.properties.general.stepPage === 1) ||
           this.layoutSettings.form.type === "multi step"
         );
       else {
