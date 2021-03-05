@@ -20,7 +20,7 @@ const defaultForm = {
     form: {
       action: "",
       method: "GET",
-      type: "normal",
+      type: "multi step",
       numberStep: 3,
     },
     label: {
