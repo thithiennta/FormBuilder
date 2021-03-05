@@ -8,7 +8,7 @@
       'font-family': layoutSettings.fontFamily,
       'font-size': layoutSettings.fontSize + 'px',
       color: layoutSettings.color,
-      padding: layoutSettings.padding + 'px',
+      ...padding,
     }"
   >
     <OutputElement :formElement="el" v-for="el in elements" :key="el.rowId" />
@@ -24,6 +24,25 @@ export default {
   },
   computed: {
     ...mapState("formModule", ["layoutSettings", "elements"]),
+    padding() {
+      if (this.layoutSettings.layoutStyles.fullPadding) {
+        return {
+          padding:
+            this.layoutSettings.layoutStyles.topPadding +
+            "px " +
+            this.layoutSettings.layoutStyles.rightPadding +
+            "px " +
+            this.layoutSettings.layoutStyles.bottomPadding +
+            "px " +
+            this.layoutSettings.layoutStyles.leftPadding +
+            "px ",
+        };
+      } else {
+        return {
+          padding: this.layoutSettings.layoutStyles.allSidesPadding + "px",
+        };
+      }
+    },
   },
 };
 </script>

@@ -16,6 +16,7 @@
           class="step-bar-number"
           :style="{
             ...numberColor(index),
+            'font-weight': currentStep === index ? 'bold' : '',
           }"
         >
           {{ index + 1 }}

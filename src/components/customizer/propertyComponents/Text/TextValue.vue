@@ -2,7 +2,7 @@
   <div class="property-wrapper">
     <div class="customizer-sub-title">{{ activeElement.type }} Text</div>
     <div class="property-adjust-wrapper">
-      <a-input
+      <a-textarea
         ref="placeholder"
         v-model="value"
         :placeholder="'Simple ' + activeElement.type + ' Text'"
@@ -12,7 +12,7 @@
         <a-tooltip slot="suffix" :title="'Text show on ' + activeElement.type">
           <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
         </a-tooltip>
-      </a-input>
+      </a-textarea>
     </div>
   </div>
 </template>

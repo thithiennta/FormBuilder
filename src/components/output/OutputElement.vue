@@ -1,5 +1,5 @@
 <template>
-  <div class="element-big-wrapper" :id="formElement.rowId">
+  <div class="element-big-wrapper" :id="formElement.rowId" v-if="showWhenStep">
     <component
       :is="formElement.type"
       :properties="formElement.properties"
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Button from "./Button";
 import CustomText from "./CustomText";
 import OneColumn from "./OneColumn";
@@ -58,6 +59,24 @@ export default {
     FileUpload,
     Spacer,
     StepBar,
+  },
+  computed: {
+    ...mapState("formModule", ["layoutSettings", "currentStep"]),
+    showWhenStep() {
+      if (this.layoutSettings.form.type !== "multi step")
+        return (
+          (this.layoutSettings.form.type !== "multi step" &&
+            this.formElement.type !== "StepBar" &&
+            this.formElement.properties.general.stepPage === 1) ||
+          this.layoutSettings.form.type === "multi step"
+        );
+      else {
+        return (
+          this.formElement.properties.general.isKeepWithStep ||
+          this.formElement.properties.general.stepPage === this.currentStep + 1
+        );
+      }
+    },
   },
 };
 </script>
