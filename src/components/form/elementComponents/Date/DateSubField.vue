@@ -37,6 +37,7 @@
         v-for="(option, index) in options"
         :key="index"
         :style="{
+          padding: layoutSettings.field.padding + 'px',
           'background-color': layoutSettings.field.backgroundColor,
         }"
         @click="handleChangeOption(option)"

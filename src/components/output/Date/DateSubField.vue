@@ -37,6 +37,7 @@
         v-for="(option, index) in options"
         :key="index"
         :style="{
+          padding: layoutSettings.field.padding + 'px',
           'background-color': layoutSettings.field.backgroundColor,
         }"
         @click="handleChangeOption(option)"
@@ -54,14 +55,6 @@ export default {
     options: {
       required: true,
       type: Array,
-    },
-    textColor: {
-      required: true,
-      type: String,
-    },
-    textInheritColor: {
-      required: true,
-      type: Boolean,
     },
     showOptions: {
       required: true,
