@@ -97,7 +97,7 @@ export default {
   },
   watch: {
     value(newValue, oldValue) {
-      if (oldValue === null && newValue !== "")
+      if ((oldValue === null || oldValue === "") && newValue !== "")
         this.$store.dispatch("formModule/removeUnvalidate");
       if (newValue === "") this.showError = true;
       else {
