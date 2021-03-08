@@ -90,7 +90,7 @@ export default {
   data() {
     return {
       value: null,
-      showError: false,
+      showError: null,
       errorText: "Please enter this field",
     };
   },
@@ -102,14 +102,38 @@ export default {
       if (oldValue === null) {
         this.$store.dispatch("formModule/removeUnvalidate");
         this.showError = false;
-      } else {
-        if (oldValue === "") {
-          this.$store.dispatch("formModule/removeUnvalidate");
-          this.showError = false;
-        }
-        if (oldValue !== "" && newValue === "") {
+        if (this.validate(newValue)) {
           this.$store.dispatch("formModule/addUnvalidate");
           this.showError = true;
+        }
+      } else {
+        if (oldValue === "") {
+          if (this.validate(newValue)) {
+            if (this.properties.general.type === "email") this.showError = true;
+          } else {
+            this.$store.dispatch("formModule/removeUnvalidate");
+            this.showError = false;
+          }
+        }
+        if (oldValue !== "" && newValue === "") {
+          if (this.properties.general.type === "email") {
+            this.$store.dispatch("formModule/removeUnvalidate");
+            this.errorText = "Please enter this field";
+          }
+          this.$store.dispatch("formModule/addUnvalidate");
+          this.showError = true;
+        }
+        if (oldValue !== "" && newValue !== "") {
+          if (this.validate(newValue)) {
+            this.errorText = "Please enter a valid email address";
+            if (this.showError !== true)
+              this.$store.dispatch("formModule/addUnvalidate");
+            this.showError = true;
+          } else {
+            if (this.showError === true)
+              this.$store.dispatch("formModule/removeUnvalidate");
+            this.showError = false;
+          }
         }
       }
     },
