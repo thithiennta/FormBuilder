@@ -52,6 +52,7 @@ export default {
     const step = state.previewCurrentStep - 1;
     commit("CHANGE_PREVIEW_CURRENT_STEP", step);
     commit("CHANGE_SUBMIT_YET", null);
+    commit("REFRESH_UNVALIDATE");
   },
   goSubmit({ state, commit }) {
     const step = state.previewCurrentStep;
@@ -68,8 +69,5 @@ export default {
   },
   checkValidate({ commit }) {
     commit("CHANGE_SUBMIT_YET", true);
-  },
-  changePreviewInput({ commit }) {
-    commit("");
   },
 };

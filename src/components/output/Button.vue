@@ -91,7 +91,6 @@ export default {
         this.$store.dispatch("formModule/checkValidate");
         return false;
       }
-      // this.$store.commit("formModule/CHANGE_SUBMIT_YET", false);
       if (this.properties.general.purpose === "next step") {
         e.preventDefault();
         this.$store.dispatch("formModule/goNextStep");
