@@ -64,4 +64,7 @@ export default {
   CHANGE_CURRENT_STEP(state, payload) {
     state.currentStep = payload;
   },
+  CHANGE_PREVIEW_CURRENT_STEP(state, payload) {
+    state.previewCurrentStep = payload;
+  },
 };

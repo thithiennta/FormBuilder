@@ -99,7 +99,7 @@ const defaultForm = {
         border: {},
         text: {
           haveTitle: true,
-          titles: ["Contact Information", "Confirm Information", "Finish"],
+          titles: ["Step 1", "Step 2", "Step 3"],
         },
         step: {
           type: "normal",
@@ -265,7 +265,7 @@ const defaultForm = {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "inherit",
-          isRequired: true,
+          isRequired: false,
           isKeepWithStep: false,
           stepPage: 1,
           label: {
@@ -302,7 +302,7 @@ const defaultForm = {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "inherit",
-          isRequired: true,
+          isRequired: false,
           isKeepWithStep: false,
           stepPage: 1,
           label: {
@@ -352,7 +352,7 @@ const defaultForm = {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
                 fontFamily: "inherit",
-                isRequired: true,
+                isRequired: false,
                 isKeepWithStep: false,
                 stepPage: 1,
                 label: {
@@ -410,7 +410,7 @@ const defaultForm = {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
                 fontFamily: "inherit",
-                isRequired: true,
+                isRequired: false,
                 isKeepWithStep: false,
                 stepPage: 1,
                 label: {
@@ -472,7 +472,7 @@ const defaultForm = {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "inherit",
-          isRequired: true,
+          isRequired: false,
           isKeepWithStep: false,
           stepPage: 1,
           label: {
@@ -509,7 +509,7 @@ const defaultForm = {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
           fontFamily: "inherit",
-          isRequired: true,
+          isRequired: false,
           isKeepWithStep: false,
           stepPage: 1,
           label: {

@@ -8,6 +8,7 @@ export default {
     previousStates: [],
     nextStates: [],
     currentStep: 0,
+    previewCurrentStep: 0,
   },
   actions: formActions,
   mutations: formMutations,

@@ -33,6 +33,9 @@
           header="FORM SETTINGS"
           class="customizer-container"
         >
+          <a-badge :count="3" slot="extra" class="new-feature">
+            <a href="#" class="head-example" />
+          </a-badge>
           <Action />
           <Method />
           <FormType />
@@ -211,6 +214,10 @@ export default {
 }
 .customizer-container {
   margin-bottom: 10px !important;
+}
+.new-feature {
+  top: -5px;
+  margin-right: 100px;
 }
 </style>
 <style>

@@ -17,8 +17,10 @@
         properties.spacing.leftMargin +
         'px ',
     }"
+    @click="handleClick"
   >
     <button
+      :type="properties.general.purpose === 'submit' ? 'submit' : ''"
       :style="{
         'background-color': properties.spacing.backgroundColor,
         ...border,
@@ -40,6 +42,7 @@
 
 <script>
 import { mapState } from "vuex";
+import { message } from "ant-design-vue";
 export default {
   props: {
     properties: {
@@ -48,7 +51,7 @@ export default {
     },
   },
   computed: {
-    ...mapState("formModule", ["layoutSettings"]),
+    ...mapState("formModule", ["layoutSettings", "previewCurrentStep"]),
     border() {
       if (this.properties.border.fullWidth) {
         return {
@@ -68,6 +71,30 @@ export default {
             " " +
             this.properties.border.color,
         };
+      }
+    },
+  },
+  methods: {
+    handleClick(e) {
+      if (this.properties.general.purpose === "next step") {
+        e.preventDefault();
+        this.$store.dispatch("formModule/goNextStep");
+      }
+      if (this.properties.general.purpose === "previous step") {
+        e.preventDefault();
+        this.$store.dispatch("formModule/goPreviousStep");
+      }
+      if (this.properties.general.purpose === "submit") {
+        e.preventDefault();
+        this.$store.dispatch("formModule/goSubmit");
+        message.loading({ content: "Sending...", key: "updatable" });
+        setTimeout(() => {
+          message.success({
+            content: "Send completely",
+            key: "updatable",
+            duration: 2,
+          });
+        }, 1000);
       }
     },
   },

@@ -43,4 +43,16 @@ export default {
     commit("CHANGE_CURRENT_STEP", payload);
     commit("CLONE_STATE");
   },
+  goNextStep({ state, commit }) {
+    const step = state.previewCurrentStep + 1;
+    commit("CHANGE_PREVIEW_CURRENT_STEP", step);
+  },
+  goPreviousStep({ state, commit }) {
+    const step = state.previewCurrentStep - 1;
+    commit("CHANGE_PREVIEW_CURRENT_STEP", step);
+  },
+  goSubmit({ state, commit }) {
+    const step = state.previewCurrentStep;
+    commit("CHANGE_PREVIEW_CURRENT_STEP", step);
+  },
 };

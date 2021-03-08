@@ -16,7 +16,7 @@
           class="step-bar-number"
           :style="{
             ...numberColor(index),
-            'font-weight': currentStep === index ? 'bold' : '',
+            'font-weight': previewCurrentStep === index ? 'bold' : '',
           }"
         >
           {{ index + 1 }}
@@ -27,7 +27,7 @@
         :style="{
           'font-family': 'inherit',
           ...titleColor(index),
-          'font-weight': currentStep === index ? 'bold' : '',
+          'font-weight': previewCurrentStep === index ? 'bold' : '',
         }"
         v-if="properties.text.haveTitle"
       >
@@ -47,17 +47,17 @@ export default {
     },
   },
   computed: {
-    ...mapState("formModule", ["layoutSettings", "currentStep"]),
+    ...mapState("formModule", ["layoutSettings", "previewCurrentStep"]),
     ...mapState("customizerModule", ["activeElement"]),
   },
   methods: {
     lineColor(index) {
-      if (this.currentStep > index) {
+      if (this.previewCurrentStep > index) {
         return {
           "background-color": this.properties.step.finishColor,
         };
       }
-      if (this.currentStep === index) {
+      if (this.previewCurrentStep === index) {
         return {
           "background-color": this.properties.step.processColor,
         };
@@ -67,14 +67,14 @@ export default {
       };
     },
     numberColor(index) {
-      if (this.currentStep > index) {
+      if (this.previewCurrentStep > index) {
         return {
           border: "1px solid " + this.properties.step.finishColor,
           color: this.properties.step.finishNumberColor,
           "background-color": "white",
         };
       }
-      if (this.currentStep === index) {
+      if (this.previewCurrentStep === index) {
         return {
           "background-color": this.properties.step.processColor,
           color: this.properties.step.processNumberColor,
@@ -86,12 +86,12 @@ export default {
       };
     },
     titleColor(index) {
-      if (this.currentStep > index) {
+      if (this.previewCurrentStep > index) {
         return {
           color: this.properties.step.finishTitleColor,
         };
       }
-      if (this.currentStep === index) {
+      if (this.previewCurrentStep === index) {
         return {
           color: this.properties.step.processTitleColor,
         };

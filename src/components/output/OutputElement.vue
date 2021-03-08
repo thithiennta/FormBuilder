@@ -61,19 +61,20 @@ export default {
     StepBar,
   },
   computed: {
-    ...mapState("formModule", ["layoutSettings", "currentStep"]),
+    ...mapState("formModule", ["layoutSettings", "previewCurrentStep"]),
     showWhenStep() {
-      if (this.layoutSettings.form.type !== "multi step")
+      if (this.layoutSettings.form.type !== "multi step") {
         return (
           (this.layoutSettings.form.type !== "multi step" &&
             this.formElement.type !== "StepBar" &&
             this.formElement.properties.general.stepPage === 1) ||
           this.layoutSettings.form.type === "multi step"
         );
-      else {
+      } else {
         return (
           this.formElement.properties.general.isKeepWithStep ||
-          this.formElement.properties.general.stepPage === this.currentStep + 1
+          this.formElement.properties.general.stepPage ===
+            this.previewCurrentStep + 1
         );
       }
     },

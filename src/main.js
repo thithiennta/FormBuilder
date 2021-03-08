@@ -23,6 +23,7 @@ import {
   message,
   Checkbox,
   Steps,
+  Badge,
 } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 
@@ -48,6 +49,7 @@ Vue.use(Popconfirm);
 Vue.use(message);
 Vue.use(Checkbox);
 Vue.use(Steps);
+Vue.use(Badge);
 new Vue({
   store,
   render: (h) => h(App),
