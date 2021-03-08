@@ -58,6 +58,8 @@ export default {
   },
   methods: {
     handleClick() {
+      this.$store.commit("formModule/REFRESH_UNVALIDATE");
+      this.$store.commit("formModule/CHANGE_SUBMIT_YET", null);
       this.$emit("closePreview");
     },
   },

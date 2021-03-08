@@ -35,10 +35,21 @@ export default {
   },
   created() {
     if (
-      this.properties.text.value === undefined ||
-      this.properties.text.value === ""
+      (this.properties.text.value === undefined ||
+        this.properties.text.value === "") &&
+      this.properties.general.stepPage === this.previewCurrentStep + 1
     )
       this.$store.dispatch("formModule/addUnvalidate");
+  },
+  watch: {
+    previewCurrentStep() {
+      if (
+        (this.properties.text.value === undefined ||
+          this.properties.text.value === "") &&
+        this.properties.general.stepPage === this.previewCurrentStep + 1
+      )
+        this.$store.dispatch("formModule/addUnvalidate");
+    },
   },
   computed: {
     ...mapState("formModule", ["layoutSettings", "previewCurrentStep"]),

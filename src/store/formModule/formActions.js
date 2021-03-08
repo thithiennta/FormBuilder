@@ -46,7 +46,7 @@ export default {
   goNextStep({ state, commit }) {
     const step = state.previewCurrentStep + 1;
     commit("CHANGE_PREVIEW_CURRENT_STEP", step);
-    commit("CHANGE_SUBMIT_YET", false);
+    commit("CHANGE_SUBMIT_YET", null);
   },
   goPreviousStep({ state, commit }) {
     const step = state.previewCurrentStep - 1;

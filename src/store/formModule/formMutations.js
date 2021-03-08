@@ -76,6 +76,9 @@ export default {
   REMOVE_UNVALIDATE(state) {
     state.previewUnvalidate.pop();
   },
+  REFRESH_UNVALIDATE(state) {
+    state.previewUnvalidate = [];
+  },
   CHANGE_SUBMIT_YET(state, payload) {
     state.isSubmitYet = payload;
   },
