@@ -97,11 +97,13 @@ export default {
   },
   watch: {
     value(newValue, oldValue) {
-      if ((oldValue === null || oldValue === "") && newValue !== "")
-        this.$store.dispatch("formModule/removeUnvalidate");
-      if (newValue === "") this.showError = true;
-      else {
-        this.showError = false;
+      if (this.properties.general.isRequired) {
+        if ((oldValue === null || oldValue === "") && newValue !== "")
+          this.$store.dispatch("formModule/removeUnvalidate");
+        if (newValue === "") this.showError = true;
+        else {
+          this.showError = false;
+        }
       }
     },
     showError(newValue) {
@@ -110,9 +112,11 @@ export default {
       }
     },
     isSubmitYet(newValue, oldValue) {
-      if (newValue === true && oldValue === null) {
-        this.$store.dispatch("formModule/removeUnvalidate");
-        if (this.value === null && newValue === true) this.showError = true;
+      if (this.properties.general.isRequired) {
+        if (newValue === true && oldValue === null) {
+          this.$store.dispatch("formModule/removeUnvalidate");
+          if (this.value === null && newValue === true) this.showError = true;
+        }
       }
     },
   },

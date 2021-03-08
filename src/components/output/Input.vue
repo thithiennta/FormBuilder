@@ -37,7 +37,8 @@ export default {
     if (
       (this.properties.text.value === undefined ||
         this.properties.text.value === "") &&
-      this.properties.general.stepPage === this.previewCurrentStep + 1
+      this.properties.general.stepPage === this.previewCurrentStep + 1 &&
+      this.properties.general.isRequired
     )
       this.$store.dispatch("formModule/addUnvalidate");
   },
@@ -47,7 +48,8 @@ export default {
         if (
           (this.properties.text.value === undefined ||
             this.properties.text.value === "") &&
-          this.properties.general.stepPage === this.previewCurrentStep + 1
+          this.properties.general.stepPage === this.previewCurrentStep + 1 &&
+          this.properties.general.isRequired
         )
           this.$store.dispatch("formModule/addUnvalidate");
       }
