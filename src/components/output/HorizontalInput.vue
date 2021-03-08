@@ -138,11 +138,10 @@ export default {
       }
     },
     showError() {},
-    isSubmitYet(newValue, oldValue) {
-      if (newValue === true && oldValue === null) {
-        if (this.value === null) {
-          this.showError = true;
-        }
+    isSubmitYet() {
+      if (this.showError === null || this.showError === true) {
+        this.$refs.input.focus();
+        this.showError = true;
       }
     },
     previewCurrentStep(newValue, oldValue) {

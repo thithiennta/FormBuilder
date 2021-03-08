@@ -68,6 +68,6 @@ export default {
     commit("REMOVE_UNVALIDATE");
   },
   checkValidate({ commit }) {
-    commit("CHANGE_SUBMIT_YET", true);
+    commit("CHANGE_SUBMIT_YET");
   },
 };

@@ -80,6 +80,6 @@ export default {
     state.previewUnvalidate = [];
   },
   CHANGE_SUBMIT_YET(state, payload) {
-    state.isSubmitYet = payload;
+    state.isSubmitYet = payload === null ? null : !state.isSubmitYet;
   },
 };
