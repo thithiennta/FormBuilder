@@ -67,4 +67,16 @@ export default {
   CHANGE_PREVIEW_CURRENT_STEP(state, payload) {
     state.previewCurrentStep = payload;
   },
+  GET_PREVIEW_ELEMENTS(state) {
+    state.previewElements = JSON.parse(JSON.stringify(state.elements));
+  },
+  ADD_UNVALIDATE(state) {
+    state.previewUnvalidate.push(false);
+  },
+  REMOVE_UNVALIDATE(state) {
+    state.previewUnvalidate.pop();
+  },
+  CHANGE_SUBMIT_YET(state, payload) {
+    state.isSubmitYet = payload;
+  },
 };

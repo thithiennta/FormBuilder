@@ -11,7 +11,11 @@
       ...padding,
     }"
   >
-    <OutputElement :formElement="el" v-for="el in elements" :key="el.rowId" />
+    <OutputElement
+      :formElement="el"
+      v-for="el in previewElements"
+      :key="el.rowId"
+    />
   </form>
 </template>
 
@@ -23,7 +27,7 @@ export default {
     OutputElement,
   },
   computed: {
-    ...mapState("formModule", ["layoutSettings", "elements"]),
+    ...mapState("formModule", ["layoutSettings", "previewElements"]),
     padding() {
       if (this.layoutSettings.layoutStyles.fullPadding) {
         return {

@@ -42,9 +42,8 @@
         }"
         :placeholder="properties.text.placeholder"
         :name="properties.text.name"
-        :value="value"
+        v-model="value"
         :type="properties.general.type"
-        :required="properties.general.isRequired"
       />
     </div>
     <div
@@ -69,7 +68,8 @@
           ...maxWidth,
           'margin-top': '10px',
         }"
-        v-if="false"
+        v-if="showError"
+        :text="'Please enter this field'"
       />
     </div>
   </div>
@@ -88,14 +88,41 @@ export default {
   },
   data() {
     return {
-      value: "",
+      value: null,
+      showError: false,
     };
   },
   components: {
     ValidateError,
   },
+  watch: {
+    value(newValue, oldValue) {
+      if (oldValue === null && newValue !== "")
+        this.$store.dispatch("formModule/removeUnvalidate");
+      if (newValue === "") this.showError = true;
+      else {
+        this.showError = false;
+      }
+    },
+    showError(newValue) {
+      if (newValue === true) {
+        this.$store.dispatch("formModule/addUnvalidate");
+      }
+    },
+    isSubmitYet(newValue, oldValue) {
+      if (newValue === true && oldValue === null) {
+        this.$store.dispatch("formModule/removeUnvalidate");
+        if (this.value === null && newValue === true) this.showError = true;
+      }
+    },
+  },
+  methods: {},
   computed: {
-    ...mapState("formModule", ["layoutSettings"]),
+    ...mapState("formModule", [
+      "layoutSettings",
+      "previewUnvalidate",
+      "isSubmitYet",
+    ]),
     flexDirection() {
       var flex = {
         display: "flex",

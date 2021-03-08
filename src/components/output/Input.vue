@@ -33,8 +33,15 @@ export default {
       type: Object,
     },
   },
+  created() {
+    if (
+      this.properties.text.value === undefined ||
+      this.properties.text.value === ""
+    )
+      this.$store.dispatch("formModule/addUnvalidate");
+  },
   computed: {
-    ...mapState("formModule", ["layoutSettings"]),
+    ...mapState("formModule", ["layoutSettings", "previewCurrentStep"]),
     inputComponent() {
       if (!this.layoutSettings.label.isOutsideLabel) {
         return "VerticalInput";
@@ -47,15 +54,6 @@ export default {
         return "HorizontalInput";
       }
     },
-  },
-  created() {
-    console.log("created");
-  },
-  mounted() {
-    console.log("mounted");
-  },
-  updated() {
-    console.log("updated");
   },
 };
 </script>

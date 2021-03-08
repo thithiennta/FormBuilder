@@ -46,6 +46,7 @@ export default {
   goNextStep({ state, commit }) {
     const step = state.previewCurrentStep + 1;
     commit("CHANGE_PREVIEW_CURRENT_STEP", step);
+    commit("CHANGE_SUBMIT_YET", false);
   },
   goPreviousStep({ state, commit }) {
     const step = state.previewCurrentStep - 1;
@@ -54,5 +55,20 @@ export default {
   goSubmit({ state, commit }) {
     const step = state.previewCurrentStep;
     commit("CHANGE_PREVIEW_CURRENT_STEP", step);
+  },
+  previewForm({ commit }) {
+    commit("GET_PREVIEW_ELEMENTS");
+  },
+  addUnvalidate({ commit }) {
+    commit("ADD_UNVALIDATE");
+  },
+  removeUnvalidate({ commit }) {
+    commit("REMOVE_UNVALIDATE");
+  },
+  checkValidate({ commit }) {
+    commit("CHANGE_SUBMIT_YET", true);
+  },
+  changePreviewInput({ commit }) {
+    commit("");
   },
 };

@@ -51,7 +51,12 @@ export default {
     },
   },
   computed: {
-    ...mapState("formModule", ["layoutSettings", "previewCurrentStep"]),
+    ...mapState("formModule", [
+      "layoutSettings",
+      "previewCurrentStep",
+      "previewUnvalidate",
+      "isSubmitYet",
+    ]),
     border() {
       if (this.properties.border.fullWidth) {
         return {
@@ -76,6 +81,13 @@ export default {
   },
   methods: {
     handleClick(e) {
+      if (this.previewUnvalidate.length !== 0) {
+        e.preventDefault();
+        console.log("Not validate");
+        this.$store.dispatch("formModule/checkValidate");
+        return false;
+      }
+      this.$store.commit("formModule/CHANGE_SUBMIT_YET", false);
       if (this.properties.general.purpose === "next step") {
         e.preventDefault();
         this.$store.dispatch("formModule/goNextStep");

@@ -1,5 +1,9 @@
 <template>
-  <div class="element-big-wrapper" :id="formElement.rowId" v-if="showWhenStep">
+  <div
+    class="element-big-wrapper"
+    :id="formElement.rowId"
+    v-show="showWhenStep"
+  >
     <component
       :is="formElement.type"
       :properties="formElement.properties"

@@ -14,7 +14,6 @@
         'px ',
     }"
   >
-    {{ rowId }}
     <div
       class="input-field-name"
       :style="{

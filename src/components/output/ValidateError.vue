@@ -1,11 +1,18 @@
 <template>
   <div class="validate-error-wrapper">
-    <p>Please enter a valid field</p>
+    <p>{{ text }}</p>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    text: {
+      required: true,
+      type: String,
+    },
+  },
+};
 </script>
 
 <style>

@@ -166,6 +166,8 @@ export default {
       }
     },
     handlePreview() {
+      this.$store.dispatch("formModule/previewForm");
+      this.$store.commit("formModule/CHANGE_PREVIEW_CURRENT_STEP", 0);
       this.$emit("showPreview");
     },
     handleStopPro(e) {
