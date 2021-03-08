@@ -81,20 +81,20 @@ export default {
   },
   methods: {
     handleClick(e) {
+      if (this.properties.general.purpose === "previous step") {
+        e.preventDefault();
+        this.$store.dispatch("formModule/goPreviousStep");
+      }
       if (this.previewUnvalidate.length !== 0) {
         e.preventDefault();
         console.log("Not validate");
         this.$store.dispatch("formModule/checkValidate");
         return false;
       }
-      this.$store.commit("formModule/CHANGE_SUBMIT_YET", false);
+      // this.$store.commit("formModule/CHANGE_SUBMIT_YET", false);
       if (this.properties.general.purpose === "next step") {
         e.preventDefault();
         this.$store.dispatch("formModule/goNextStep");
-      }
-      if (this.properties.general.purpose === "previous step") {
-        e.preventDefault();
-        this.$store.dispatch("formModule/goPreviousStep");
       }
       if (this.properties.general.purpose === "submit") {
         e.preventDefault();

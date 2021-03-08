@@ -42,13 +42,15 @@ export default {
       this.$store.dispatch("formModule/addUnvalidate");
   },
   watch: {
-    previewCurrentStep() {
-      if (
-        (this.properties.text.value === undefined ||
-          this.properties.text.value === "") &&
-        this.properties.general.stepPage === this.previewCurrentStep + 1
-      )
-        this.$store.dispatch("formModule/addUnvalidate");
+    previewCurrentStep(newValue, oldValue) {
+      if (newValue > oldValue) {
+        if (
+          (this.properties.text.value === undefined ||
+            this.properties.text.value === "") &&
+          this.properties.general.stepPage === this.previewCurrentStep + 1
+        )
+          this.$store.dispatch("formModule/addUnvalidate");
+      }
     },
   },
   computed: {
