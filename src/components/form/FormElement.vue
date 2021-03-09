@@ -286,7 +286,10 @@ export default {
 .sortable-chosen.form-element-ghost .element-big-wrapper {
   height: 50px;
   width: 100%;
-  background-color: rgb(152, 225, 248);
+  background-color: rgb(219, 220, 220);
+}
+.sortable-chosen.form-element-ghost .element-big-wrapper.active-element {
+  border-color: transparent !important ;
 }
 .sortable-chosen.form-element-ghost .element-big-wrapper > div {
   display: none;
