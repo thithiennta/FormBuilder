@@ -139,11 +139,16 @@ export default {
     },
     showError() {},
     isSubmitYet(newValue) {
-      if (this.showError === null || this.showError === true) {
-        this.$refs.input.focus();
-        this.showError = true;
+      if (
+        this.properties.general.isRequired &&
+        this.properties.general.stepPage === this.previewCurrentStep + 1
+      ) {
+        if (this.showError === null || this.showError === true) {
+          this.$refs.input.focus();
+          this.showError = true;
+        }
+        if (newValue === null) this.showError = null;
       }
-      if (newValue === null) this.showError = false;
     },
     previewCurrentStep(newValue, oldValue) {
       if (newValue > oldValue) {

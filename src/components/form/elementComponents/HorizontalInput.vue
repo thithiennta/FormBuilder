@@ -44,7 +44,6 @@
         :name="properties.text.name"
         :value="value"
         :type="properties.general.type"
-        :required="properties.general.isRequired"
       />
     </div>
     <div

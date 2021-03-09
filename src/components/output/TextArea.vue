@@ -39,8 +39,15 @@ export default {
       type: Object,
     },
   },
+  created() {
+    if (
+      this.properties.general.stepPage === this.previewCurrentStep + 1 &&
+      this.properties.general.isRequired
+    )
+      this.$store.dispatch("formModule/addUnvalidate");
+  },
   computed: {
-    ...mapState("formModule", ["layoutSettings"]),
+    ...mapState("formModule", ["layoutSettings", "previewCurrentStep"]),
     inputComponent() {
       if (!this.layoutSettings.label.isOutsideLabel) {
         return "VerticalTextArea";

@@ -32,6 +32,7 @@
         'font-weight': layoutSettings.weight,
         'font-family': properties.general.fontFamily,
         'font-size': layoutSettings.fontSize + 'px',
+        padding: layoutSettings.field.padding + 'px',
       }"
       :placeholder="properties.text.placeholder"
       :name="properties.text.name"

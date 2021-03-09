@@ -18,7 +18,8 @@
       }"
       v-if="layoutSettings.label.isOutsideLabel"
     >
-      {{ properties.text.fieldName }}
+      {{ properties.text.fieldName
+      }}<span style="color: red" v-if="properties.general.isRequired">*</span>
     </div>
     <textarea
       :style="{
@@ -32,14 +33,26 @@
         'font-weight': layoutSettings.weight,
         'font-family': properties.general.fontFamily,
         'font-size': layoutSettings.fontSize + 'px',
+        padding: layoutSettings.field.padding + 'px',
       }"
       :placeholder="properties.text.placeholder"
       :name="properties.text.name"
+      v-model="value"
+      ref="textarea"
     ></textarea>
+    <ValidateError
+      :style="{
+        width: properties.spacing.width + '%',
+        'margin-top': '10px',
+      }"
+      v-if="showError"
+      :text="errorText"
+    />
   </div>
 </template>
 
 <script>
+import ValidateError from "./ValidateError";
 import { mapState } from "vuex";
 
 export default {
@@ -49,8 +62,72 @@ export default {
       type: Object,
     },
   },
+  components: {
+    ValidateError,
+  },
+  data() {
+    return {
+      value: null,
+      showError: null,
+      errorText: "Please enter this field",
+    };
+  },
+  watch: {
+    value(newValue, oldValue) {
+      if (oldValue === null) {
+        this.$store.dispatch("formModule/removeUnvalidate");
+        this.showError = false;
+      } else {
+        if (oldValue === "") {
+          this.$store.dispatch("formModule/removeUnvalidate");
+          this.showError = false;
+        }
+        if (oldValue !== "" && newValue === "") {
+          this.$store.dispatch("formModule/addUnvalidate");
+          this.showError = true;
+        }
+      }
+    },
+    showError() {},
+    isSubmitYet(newValue) {
+      if (
+        this.properties.general.isRequired &&
+        this.properties.general.stepPage === this.previewCurrentStep + 1
+      ) {
+        if (this.showError === null || this.showError === true) {
+          this.$refs.textarea.focus();
+          this.showError = true;
+        }
+        if (newValue === null) this.showError = null;
+      }
+    },
+    previewCurrentStep(newValue, oldValue) {
+      if (newValue > oldValue) {
+        if (
+          (this.value === "" || this.value === null) &&
+          this.properties.general.stepPage === this.previewCurrentStep + 1 &&
+          this.properties.general.isRequired
+        )
+          this.$store.dispatch("formModule/addUnvalidate");
+      }
+    },
+  },
+  methods: {
+    validate(value) {
+      return this.checkIsEmpty(value);
+    },
+    checkIsEmpty(value) {
+      if (value === "") return true;
+      return false;
+    },
+  },
   computed: {
-    ...mapState("formModule", ["layoutSettings"]),
+    ...mapState("formModule", [
+      "layoutSettings",
+      "previewUnvalidate",
+      "isSubmitYet",
+      "previewCurrentStep",
+    ]),
     flexDirection() {
       var flex = {
         display: "flex",
