@@ -32,10 +32,14 @@
       </template>
       <a-icon type="download" />
     </a-tooltip>
+    <a-badge :count="2" :overflow-count="5" class="new-feature">
+      <a-icon type="notification" @click="showNewFeature" />
+    </a-badge>
   </div>
 </template>
 
 <script>
+import { notification } from "ant-design-vue";
 import basicForms from "../../utils/basicForms.js";
 import { Modal, message } from "ant-design-vue";
 export default {
@@ -122,11 +126,27 @@ export default {
       });
     },
     handleCancel() {},
+    showNewFeature() {
+      notification.open({
+        message: "New Features",
+        description: () => {
+          return (
+            <div>
+              <div>1. Update file upload to show preview image</div>
+              <div>2. Add multi step form and its features</div>
+            </div>
+          );
+        },
+      });
+    },
   },
 };
 </script>
 
 <style scoped>
+.new-feature >>> sup {
+  top: 10px;
+}
 .form-layout-control {
   position: absolute;
   left: 5px;

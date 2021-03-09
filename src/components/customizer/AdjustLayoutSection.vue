@@ -33,9 +33,9 @@
           header="FORM SETTINGS"
           class="customizer-container"
         >
-          <a-badge :count="3" slot="extra" class="new-feature">
+          <!-- <a-badge :count="3" slot="extra" class="new-feature">
             <a href="#" class="head-example" />
-          </a-badge>
+          </a-badge> -->
           <Action />
           <Method />
           <FormType />
