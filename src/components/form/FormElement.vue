@@ -284,10 +284,14 @@ export default {
 
 <style scoped>
 .sortable-chosen.form-element-ghost .element-big-wrapper {
-  height: fit-content;
-  border: 3px solid grey;
+  height: 50px;
+  width: 100%;
+  background-color: rgb(152, 225, 248);
 }
-.sortable-chosen.form-element-ghost .element-big-wrapper .element-big-wrapper {
+.sortable-chosen.form-element-ghost .element-big-wrapper > div {
+  display: none;
+}
+/* .sortable-chosen.form-element-ghost .element-big-wrapper .element-big-wrapper {
   border: none !important;
 }
 .sortable-chosen.form-element-ghost .element-big-wrapper.hover-element {
@@ -300,13 +304,10 @@ export default {
 }
 .sortable-chosen .element-big-wrapper .element-more-options {
   opacity: 0;
-}
+} */
 .element-big-wrapper {
   border: 3px solid transparent;
   position: relative;
-  /* transition: all 0.2s ease-in-out; */
-  /* margin: 1px;
-  margin-right: 0; */
 }
 .detect-element {
   display: none;
