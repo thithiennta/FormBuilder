@@ -35,7 +35,7 @@
       <span style="color: red" v-if="properties.general.isRequired">*</span>
     </div>
     <div
-      class="date-picker-wrapper"
+      class="file-upload-wrapper"
       :style="{
         display: 'flex',
         'align-items': layoutSettings.label.labelAlignCenter ? 'center' : '',
@@ -66,20 +66,7 @@
       <input
         type="file"
         :id="rowId + '-file-upload'"
-        :name="properties.text.fieldName"
-        :style="{
-          width: properties.spacing.width + '%',
-          'min-width': 'fit-content',
-          padding: layoutSettings.field.padding + 'px',
-          ...border,
-          ...maxWidth,
-          'border-radius': layoutSettings.border.radius + 'px',
-          color: layoutSettings.color,
-          'background-color': layoutSettings.field.backgroundColor,
-          height: layoutSettings.field.height + 'px',
-          'font-family': 'inherit',
-          'font-weight': layoutSettings.weight,
-        }"
+        :name="properties.text.name"
       />
       <label
         :for="rowId + '-file-upload'"

@@ -64,27 +64,14 @@
       <input
         type="file"
         :id="rowId + '-file-upload'"
-        :name="properties.text.fieldName"
-        :style="{
-          width: properties.spacing.width + '%',
-          'min-width': 'fit-content',
-          padding: layoutSettings.field.padding + 'px',
-          ...border,
-          ...maxWidth,
-          'border-radius': layoutSettings.border.radius + 'px',
-          color: layoutSettings.color,
-          'background-color': layoutSettings.field.backgroundColor,
-          height: layoutSettings.field.height + 'px',
-          'font-family': 'inherit',
-          'font-weight': layoutSettings.weight,
-        }"
+        :name="properties.text.name"
+        hidden
       />
       <label
         :for="rowId + '-file-upload'"
         :style="{
           border: '1px dashed ' + layoutSettings.border.color,
           width: properties.spacing.width + '%',
-          'min-width': 'fit-content',
           color: layoutSettings.color,
           ...maxWidth,
           'background-color': layoutSettings.field.backgroundColor,
@@ -93,8 +80,19 @@
           'text-align': 'center',
         }"
       >
-        <i class="fas fa-cloud-upload-alt"></i>
-        <p>Click here to upload.</p>
+        <i class="fas fa-cloud-upload-alt" v-if="src === ''"></i>
+        <img
+          :id="rowId + '-file-image'"
+          :src="src"
+          alt=""
+          style="max-width: 100%; max-height: 100px"
+        />
+        <p
+          :id="rowId + '-file-name'"
+          style="max-width: 100%;overflow-wrap: anywhere;"
+        >
+          {{ fileName }}
+        </p>
       </label>
     </div>
   </div>
@@ -113,6 +111,22 @@ export default {
       type: String,
     },
   },
+  data() {
+    return {
+      value: null,
+      src: "",
+      fileName: "Click here to upload",
+    };
+  },
+  mounted() {
+    var btn = document.getElementById(this.rowId + "-file-upload");
+    btn.addEventListener("change", (e) => {
+      let url = URL.createObjectURL(e.target.files[0]);
+      this.fileName = e.target.files[0].name;
+      this.src = url;
+    });
+  },
+  methods: {},
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
     ...mapState("customizerModule", ["activeElement"]),
@@ -160,9 +174,6 @@ export default {
 </script>
 
 <style scoped>
-input {
-  display: none;
-}
 label {
   cursor: pointer;
   padding: 20px;
