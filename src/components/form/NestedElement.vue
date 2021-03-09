@@ -82,6 +82,9 @@ export default {
 };
 </script>
 <style scoped>
+.sortable-chosen.njt-drag .element-big-wrapper {
+  opacity: 0;
+}
 .form-draggable >>> .customizer-tool-wrapper.form-element-ghost {
   opacity: 1 !important;
   width: 100% !important;
