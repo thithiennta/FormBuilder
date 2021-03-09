@@ -5,8 +5,10 @@
     :value="value"
     @input="emitter"
     @change="handleChange"
+    class="form-draggable"
   >
     <div
+      class="nested-element"
       v-for="el in realValue"
       :key="el.rowId"
       @dragstart="handleDragStart"
@@ -80,12 +82,23 @@ export default {
 };
 </script>
 <style scoped>
-.sortable-chosen.njt-drag .element-big-wrapper {
-  opacity: 0;
+.form-draggable >>> .customizer-tool-wrapper.form-element-ghost {
+  opacity: 1 !important;
+  width: 100% !important;
+  padding: 15px 0;
+  background-color: rgb(223, 218, 255) !important;
+}
+.form-draggable
+  >>> .customizer-tool-wrapper.form-element-ghost
+  .element-wrapper {
+  display: none !important;
+}
+.form-draggable >>> .customizer-tool-wrapper.form-element-ghost .clone-article {
+  display: block !important;
 }
 </style>
 <style>
-.form-element-ghost {
+/* .form-element-ghost {
   width: 100%;
 }
 .form-element-ghost .element-wrapper {
@@ -102,5 +115,5 @@ export default {
 }
 .form-element-ghost .element-wrapper p {
   display: none;
-}
+} */
 </style>

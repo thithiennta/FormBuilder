@@ -19,7 +19,13 @@
           :span="12"
           v-for="(customizerTool, index) in customizerTools"
           :key="index"
+          @dragstart="handleDragStart"
+          @dragend="handleDragEnd"
         >
+          <div class="clone-article">
+            <a-icon :type="customizerTool.icon" />
+            <p>{{ customizerTool.name }}</p>
+          </div>
           <CustomizerElement
             :customizerElement="customizerTool"
             v-if="
@@ -511,6 +517,26 @@ export default {
       const cloneItem = JSON.parse(JSON.stringify(targetItem));
       return cloneItem;
     },
+    handleDragStart(e) {
+      e.target.classList.add("njt-drag");
+    },
+    handleDragEnd(e) {
+      e.target.classList.remove("njt-drag");
+    },
   },
 };
 </script>
+<style scoped>
+.customizer-tool-wrapper.njt-drag.sortable-chosen {
+  opacity: 0;
+}
+.customizer-tool-wrapper.customizer-tool-ghost {
+  opacity: 1 !important;
+}
+.clone-article {
+  display: none;
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+}
+</style>

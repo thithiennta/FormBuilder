@@ -23,7 +23,13 @@
           :span="12"
           v-for="(customizerSpacing, index) in customizerSpacings"
           :key="index"
+          @dragstart="handleDragStart"
+          @dragend="handleDragEnd"
         >
+          <div class="clone-article">
+            <a-icon :type="customizerSpacing.icon" />
+            <p>{{ customizerSpacing.name }}</p>
+          </div>
           <CustomizerElement :customizerElement="customizerSpacing" />
         </div>
       </Draggable>
@@ -153,10 +159,12 @@ export default {
     ...mapState("formModule", ["currentStep"]),
   },
   methods: {
-    handleClone({ type, properties, settings, elements }) {
+    handleClone({ type, properties, settings, elements, name, icon }) {
       const targetItem = {
         rowId: uuid(),
         type,
+        name,
+        icon,
         properties,
         settings,
         elements,
@@ -166,6 +174,12 @@ export default {
 
       return cloneItem;
     },
+    handleDragStart(e) {
+      e.target.classList.add("njt-drag");
+    },
+    handleDragEnd(e) {
+      e.target.classList.remove("njt-drag");
+    },
   },
 };
 </script>
@@ -173,5 +187,17 @@ export default {
 <style scoped>
 .customizer-tools-wrapper {
   margin-bottom: 10px !important;
+}
+.customizer-tool-wrapper.njt-drag.sortable-chosen {
+  opacity: 0;
+}
+.customizer-tool-wrapper.customizer-tool-ghost {
+  opacity: 1 !important;
+}
+.clone-article {
+  display: none;
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
 }
 </style>

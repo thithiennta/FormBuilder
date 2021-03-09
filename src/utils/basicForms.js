@@ -215,7 +215,6 @@ const defaultForm = {
               },
               spacing: {
                 width: 100,
-
                 fullMargin: false,
                 allSidesMargin: 0,
                 topMargin: 0,
