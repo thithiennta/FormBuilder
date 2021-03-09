@@ -146,6 +146,7 @@ export default {
 <style scoped>
 .new-feature >>> sup {
   top: 10px;
+  right: 7px;
 }
 .form-layout-control {
   position: absolute;

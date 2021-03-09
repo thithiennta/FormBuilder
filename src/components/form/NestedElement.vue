@@ -92,7 +92,7 @@ export default {
 .form-draggable >>> .customizer-tool-wrapper.form-element-ghost {
   opacity: 1 !important;
   width: 100% !important;
-  /* padding: 15px 0; */
+  padding: 10px 0;
   background-color: rgb(223, 218, 255) !important;
 }
 .form-draggable

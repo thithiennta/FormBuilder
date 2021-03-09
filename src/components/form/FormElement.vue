@@ -286,7 +286,7 @@ export default {
 <style scoped>
 .sortable-chosen.form-element-ghost .element-big-wrapper {
   opacity: 1 !important;
-  /* padding: 15px 0; */
+  padding: 10px 0;
   min-height: fit-content;
   width: 100% !important;
   background-color: rgb(223, 218, 255);
