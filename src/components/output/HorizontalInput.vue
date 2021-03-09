@@ -138,11 +138,12 @@ export default {
       }
     },
     showError() {},
-    isSubmitYet() {
+    isSubmitYet(newValue) {
       if (this.showError === null || this.showError === true) {
         this.$refs.input.focus();
         this.showError = true;
       }
+      if (newValue === null) this.showError = false;
     },
     previewCurrentStep(newValue, oldValue) {
       if (newValue > oldValue) {

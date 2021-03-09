@@ -17,7 +17,6 @@
         properties.spacing.leftMargin +
         'px ',
     }"
-    @click="handleClick"
   >
     <button
       :type="properties.general.purpose === 'submit' ? 'submit' : ''"
@@ -34,6 +33,7 @@
         height: properties.spacing.height + 'px',
         'font-family': properties.general.fontFamily,
       }"
+      @click="handleClick"
     >
       {{ properties.text.value }}
     </button>
