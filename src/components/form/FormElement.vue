@@ -16,9 +16,10 @@
     <div class="detect-element">
       {{ formElement.type.indexOf("Column") !== -1 ? "Row" : "Content" }}
     </div>
-    <!-- <div class="element-moving-options" v-if="isActive">
-      <a-icon type="drag" class="element-moving-handle" />
-    </div> -->
+    <div class="drag-article">
+      <a-icon :type="formElement.icon" />
+      <p>{{ formElement.name }}</p>
+    </div>
     <component
       :is="formElement.type"
       :rowId="formElement.rowId"
@@ -284,9 +285,11 @@ export default {
 
 <style scoped>
 .sortable-chosen.form-element-ghost .element-big-wrapper {
-  height: 50px;
+  opacity: 1 !important;
+  padding: 15px 0;
+  min-height: fit-content;
   width: 100%;
-  background-color: rgb(219, 220, 220);
+  background-color: rgb(223, 218, 255);
 }
 .sortable-chosen.form-element-ghost .element-big-wrapper.active-element {
   border-color: transparent !important ;
@@ -294,20 +297,15 @@ export default {
 .sortable-chosen.form-element-ghost .element-big-wrapper > div {
   display: none;
 }
-/* .sortable-chosen.form-element-ghost .element-big-wrapper .element-big-wrapper {
-  border: none !important;
+.sortable-chosen.form-element-ghost .element-big-wrapper > .drag-article {
+  display: block;
 }
-.sortable-chosen.form-element-ghost .element-big-wrapper.hover-element {
-  border: 3px solid grey;
-}
-.sortable-chosen.form-element-ghost
-  .element-big-wrapper.hover-element
-  .detect-element {
+.drag-article {
   display: none;
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
 }
-.sortable-chosen .element-big-wrapper .element-more-options {
-  opacity: 0;
-} */
 .element-big-wrapper {
   border: 3px solid transparent;
   position: relative;

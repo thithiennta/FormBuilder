@@ -6,7 +6,12 @@
     @input="emitter"
     @change="handleChange"
   >
-    <div v-for="el in realValue" :key="el.rowId">
+    <div
+      v-for="el in realValue"
+      :key="el.rowId"
+      @dragstart="handleDragStart"
+      @dragend="handleDragEnd"
+    >
       <FormElement
         :formElement="el"
         :parentElement="realValue"
@@ -26,6 +31,12 @@ export default {
     FormElement,
   },
   methods: {
+    handleDragStart(e) {
+      e.target.classList.add("njt-drag");
+    },
+    handleDragEnd(e) {
+      e.target.classList.remove("njt-drag");
+    },
     emitter(value) {
       this.$emit("input", value);
     },
@@ -68,12 +79,15 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+.sortable-chosen.njt-drag .element-big-wrapper {
+  opacity: 0;
+}
+</style>
 <style>
 .form-element-ghost {
   width: 100%;
 }
-
 .form-element-ghost .element-wrapper {
   background-color: transparent;
   padding: 0;

@@ -498,10 +498,12 @@ export default {
     ...mapState("formModule", ["currentStep", "layoutSettings"]),
   },
   methods: {
-    handleClone({ type, properties, settings }) {
+    handleClone({ type, properties, settings, icon, name }) {
       const targetItem = {
         rowId: uuid(),
         type,
+        icon,
+        name,
         properties,
         settings,
       };

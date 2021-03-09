@@ -56,6 +56,7 @@ const defaultForm = {
     {
       rowId: uuid(),
       name: "Title",
+      icon: "highlight",
       type: "Title",
       properties: {
         general: {
@@ -88,6 +89,8 @@ const defaultForm = {
     {
       rowId: uuid(),
       type: "StepBar",
+      icon: "fund",
+      name: "Step Bar",
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
@@ -124,6 +127,8 @@ const defaultForm = {
     {
       rowId: uuid(),
       type: "TwoColumn",
+      name: "Two Column",
+      icon: "pause",
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
@@ -141,6 +146,8 @@ const defaultForm = {
           {
             rowId: uuid(),
             type: "Input",
+            name: "Input",
+            icon: "font-colors",
             properties: {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
@@ -181,6 +188,8 @@ const defaultForm = {
           {
             rowId: uuid(),
             type: "Input",
+            name: "Input",
+            icon: "font-colors",
             properties: {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
@@ -223,6 +232,8 @@ const defaultForm = {
     {
       rowId: uuid(),
       type: "Input",
+      name: "Input",
+      icon: "font-colors",
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
@@ -261,6 +272,8 @@ const defaultForm = {
     {
       rowId: uuid(),
       type: "RadioGroup",
+      icon: "check-circle",
+      name: "Radio Group",
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
@@ -298,6 +311,8 @@ const defaultForm = {
     {
       rowId: uuid(),
       type: "DatePicker",
+      name: "Date Picker",
+      icon: "calendar",
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
@@ -331,6 +346,8 @@ const defaultForm = {
     {
       rowId: uuid(),
       type: "TwoColumn",
+      name: "Two Column",
+      icon: "pause",
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
@@ -348,6 +365,8 @@ const defaultForm = {
           {
             rowId: uuid(),
             type: "DropdownList",
+            name: "Dropdown List",
+            icon: "database",
             properties: {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
@@ -406,6 +425,8 @@ const defaultForm = {
           {
             rowId: uuid(),
             type: "DropdownList",
+            name: "Dropdown List",
+            icon: "database",
             properties: {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
@@ -468,6 +489,8 @@ const defaultForm = {
     {
       rowId: uuid(),
       type: "CheckBoxGroup",
+      name: "Check Box Group",
+      icon: "check-square",
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
@@ -505,6 +528,8 @@ const defaultForm = {
     {
       rowId: uuid(),
       type: "TextArea",
+      icon: "bold",
+      name: "Text Area",
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
@@ -542,6 +567,8 @@ const defaultForm = {
     {
       rowId: uuid(),
       type: "Button",
+      icon: "add",
+      name: "Button",
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
@@ -584,6 +611,8 @@ const defaultForm = {
     {
       rowId: uuid(),
       type: "TwoColumn",
+      name: "Two Column",
+      icon: "pause",
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
@@ -601,6 +630,8 @@ const defaultForm = {
           {
             rowId: uuid(),
             type: "Button",
+            icon: "add",
+            name: "Button",
             properties: {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
@@ -645,6 +676,8 @@ const defaultForm = {
           {
             rowId: uuid(),
             type: "Button",
+            icon: "add",
+            name: "Button",
             properties: {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
@@ -690,6 +723,8 @@ const defaultForm = {
     {
       rowId: uuid(),
       type: "TwoColumn",
+      name: "Two Column",
+      icon: "pause",
       properties: {
         general: {
           backgroundColor: "rgba(0,0,0,0)",
@@ -707,6 +742,8 @@ const defaultForm = {
           {
             rowId: uuid(),
             type: "Button",
+            icon: "add",
+            name: "Button",
             properties: {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
@@ -751,6 +788,8 @@ const defaultForm = {
           {
             rowId: uuid(),
             type: "Button",
+            icon: "add",
+            name: "Button",
             properties: {
               general: {
                 backgroundColor: "rgba(0,0,0,0)",
