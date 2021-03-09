@@ -13,6 +13,7 @@
       :key="el.rowId"
       @dragstart="handleDragStart"
       @dragend="handleDragEnd"
+      @dragover="handleDragOver"
     >
       <FormElement
         :formElement="el"
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+import $ from "jquery";
 import Draggable from "vuedraggable";
 import FormElement from "./FormElement";
 export default {
@@ -33,7 +35,11 @@ export default {
     FormElement,
   },
   methods: {
+    handleDragOver() {
+      $(".element-big-wrapper").removeClass("hover-element");
+    },
     handleDragStart(e) {
+      $(".element-big-wrapper").removeClass("hover-element");
       e.target.classList.add("njt-drag");
     },
     handleDragEnd(e) {
