@@ -84,11 +84,15 @@ export default {
 <style scoped>
 .sortable-chosen.njt-drag .element-big-wrapper {
   opacity: 0;
+  width: 100% !important;
+}
+.form-draggable >>> .sortable-chosen.njt-drag.form-element-ghost {
+  width: 100% !important;
 }
 .form-draggable >>> .customizer-tool-wrapper.form-element-ghost {
   opacity: 1 !important;
   width: 100% !important;
-  padding: 15px 0;
+  /* padding: 15px 0; */
   background-color: rgb(223, 218, 255) !important;
 }
 .form-draggable
@@ -99,24 +103,4 @@ export default {
 .form-draggable >>> .customizer-tool-wrapper.form-element-ghost .clone-article {
   display: block !important;
 }
-</style>
-<style>
-/* .form-element-ghost {
-  width: 100%;
-}
-.form-element-ghost .element-wrapper {
-  background-color: transparent;
-  padding: 0;
-}
-.form-element-ghost .element-wrapper i {
-  color: black;
-}
-.form-element-ghost .column-wrapper {
-  border: 1px solid rgb(162, 162, 162) !important;
-  margin: 0 auto;
-  width: calc(100% - 15px);
-}
-.form-element-ghost .element-wrapper p {
-  display: none;
-} */
 </style>
