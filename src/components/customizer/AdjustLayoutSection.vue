@@ -33,15 +33,10 @@
           header="FORM SETTINGS"
           class="customizer-container"
         >
-          <!-- <a-badge :count="3" slot="extra" class="new-feature">
-            <a href="#" class="head-example" />
-          </a-badge> -->
           <Action />
           <Method />
           <FormType />
           <NumberStep />
-          <Step />
-          <StepPage />
         </a-collapse-panel>
       </a-collapse>
       <a-collapse
@@ -126,9 +121,7 @@ import LayoutBorderWidth from "./propertyComponents/Layout/LayoutBorderWidth";
 import LayoutBorderRadius from "./propertyComponents/Layout/LayoutBorderRadius";
 import Action from "./propertyComponents/Layout/Action";
 import FormType from "./propertyComponents/Layout/FormType";
-import Step from "./propertyComponents/Layout/Step";
 import NumberStep from "./propertyComponents/Layout/NumberStep";
-import StepPage from "./propertyComponents/Layout/StepPage";
 import Method from "./propertyComponents/Layout/Method";
 import Label from "./propertyComponents/Layout/Label/Label";
 import LabelSize from "./propertyComponents/Layout/Label/LabelSize";
@@ -157,9 +150,7 @@ export default {
     LayoutBorderRadius,
     Action,
     Method,
-    Step,
     NumberStep,
-    StepPage,
     FormType,
     Label,
     LabelSize,

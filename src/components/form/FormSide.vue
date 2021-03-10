@@ -65,6 +65,8 @@
         </div>
       </div>
     </vuescroll>
+
+    <Pagination />
   </div>
 </template>
 
@@ -72,11 +74,13 @@
 import { mapState } from "vuex";
 import vuescroll from "vuescroll";
 import { message } from "ant-design-vue";
+import Pagination from "./Pagination";
 import FormLayoutControl from "./FormLayoutControl";
 export default {
   components: {
     vuescroll,
     FormLayoutControl,
+    Pagination,
   },
   computed: {
     ...mapState("formModule", ["layoutSettings"]),
