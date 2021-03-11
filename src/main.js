@@ -24,6 +24,7 @@ import {
   Checkbox,
   Steps,
   Badge,
+  Pagination,
 } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 
@@ -50,6 +51,7 @@ Vue.use(message);
 Vue.use(Checkbox);
 Vue.use(Steps);
 Vue.use(Badge);
+Vue.use(Pagination);
 new Vue({
   store,
   render: (h) => h(App),
