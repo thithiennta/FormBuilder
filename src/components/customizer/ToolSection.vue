@@ -9,6 +9,7 @@
       <Draggable
         class="customizer-tools-content"
         ghost-class="customizer-tool-ghost"
+        dragClass="customizer-tool-drag"
         :list="customizerTools"
         :group="{ name: 'form-builder-group', pull: 'clone', put: false }"
         :sort="false"
@@ -527,11 +528,14 @@ export default {
 };
 </script>
 <style scoped>
-.customizer-tool-wrapper.njt-drag.sortable-chosen {
+/* .customizer-tool-wrapper.njt-drag.sortable-chosen {
   opacity: 0;
-}
-.customizer-tool-wrapper.customizer-tool-ghost {
+} */
+/* .customizer-tool-wrapper.customizer-tool-ghost {
   opacity: 1 !important;
+} */
+.customizer-tool-drag {
+  opacity: 1;
 }
 .clone-article {
   display: none;
